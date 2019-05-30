@@ -293,7 +293,5 @@ clear_bash_hash()
     hash -r
 }
 
-#. ~/.bashrc_custom_profile_user_pn
-#. ~/.bashrc_custom_profile_user_fnc
-. ~/.bashrc_custom_profile_user
+. ~/reditor/bash/.bashrc_custom_profile_user
 

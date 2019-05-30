@@ -68,4 +68,4 @@ set tags+=~/.vim/tags/qt4
 "map <M-Down> ]s
 "map <M-Up> [s
 "endif
-source ~/.vimrc_custom
+source ~/reditor/vim/.vimrc_custom

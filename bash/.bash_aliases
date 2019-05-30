@@ -643,11 +643,11 @@ fi
 
 if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting ORG_SETTINGS=$BASH_ORG_SETTINGS ........"; fi
 if [ "$BASH_ORG_SETTINGS" == "brcd" ];then
-source ~/.bashrc_custom_profile_user_brcd
+source ~/reditor/bash/.bashrc_custom_profile_user_brcd
 elif [ "$BASH_ORG_SETTINGS" == "pn" ];then
-source ~/.bashrc_custom_profile_user_pn
+source ~/reditor/bash/.bashrc_custom_profile_user_pn
 elif [ "$BASH_ORG_SETTINGS" == "fnc" ];then
-source ~/.bashrc_custom_profile_user_fnc
+source ~/reditor/bash/.bashrc_custom_profile_user_fnc
 fi
 
 function h_tmux()

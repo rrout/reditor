@@ -9,6 +9,10 @@ esac
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+if [ -f ~/reditor/bash/.bash_aliases ]; then
+    . ~/reditor/bash/.bash_aliases
+fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -19,11 +23,11 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-if [ -f ~/.bash_logo3 ]; then
-    cat .bash_logo
+if [ -f ~/reditor/bash/.bash_logo3 ]; then
+    cat ~/reditor/bash/.bash_logo
 fi
-if [ -f ~/.bash_logo3 ]; then
-    . ~/.bash_logo1
+if [ -f ~/reditor/bash/.bash_logo3 ]; then
+    . ~/reditor/bash/.bash_logo1
 fi
 
 

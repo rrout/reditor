@@ -713,7 +713,7 @@ set nolist
 			"Help document for all
 
 
-source ~/.vimrc_custom_user
+source ~/reditor/vim/.vimrc_custom_user
 
 
 
