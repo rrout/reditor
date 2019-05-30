@@ -9,7 +9,11 @@
 " => Load pathogen paths
 """"""""""""""""""""""""""""""
 let s:vim_runtime = expand('<sfile>:p:h')."/.."
-call pathogen#infect(s:vim_runtime.'/.vim/{}')
-call pathogen#helptags()
+"echo s:vim_runtime
+call pathogen#infect(s:vim_runtime.'/.vim/bundle{}')
+call pathogen#infect(s:vim_runtime.'/.vim/after{}')
+"call  pathogen#infect(s:vim_runtime. '../{}')
+"call  pathogen#infect()
+"call pathogen#helptags()
 
 
