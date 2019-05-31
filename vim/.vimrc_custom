@@ -92,7 +92,10 @@ let g:cmd_dir_compare				= 'cmp'
 
 
 
-
+if $STY
+    "set dark mode in screen sessions
+    let g:vim_background_color_scheme   = 'kdark'
+endif
 
 
 
