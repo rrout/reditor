@@ -1,0 +1,23 @@
+#!/bin/sh
+
+mkdir -p /dev/shm/searchcache/
+
+if [[ $# -le 0 ]]
+then
+        echo "Usage: addcache [<vfolder>]"
+        exit
+fi
+
+if [[ $1 == "vfolder" ]]
+then
+        cview="$(cleartool pwv -short)"
+        if [[ -z $cview ]]
+        then
+                echo "Current view is not set"
+                exit;
+        fi
+        #echo rsync -ru   /view/${cview}/$PWD  /dev/shm/searchcache/${PWD##*/}
+        rsync -ru   /view/${cview}/$PWD  /dev/shm/searchcache/${PWD##*/} &
+fi
+
+

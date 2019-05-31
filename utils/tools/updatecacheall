@@ -1,0 +1,104 @@
+#!/bin/sh
+function rsync_cmd()
+{
+        /bin/echo $1
+        $1
+}
+
+function updatecache()
+{
+
+        PATH=$1
+        CACHE_DIR=$2
+        cd $PATH
+        /bin/echo "CWD:$PWD"
+
+        #removes last slash
+        PATH=${PATH%/}
+
+        #get only dir name
+                #DIR=${PATH##*/}
+                DIR=${PATH}
+
+        if [[ -d $PATH  ]]
+        then
+                /bin/mkdir -p $CACHE_DIR/$DIR/
+                rsync_cmd "/usr/bin/rsync -ru --exclude=G* --exclude=*.tar --exclude=*.gz --exclude=*.bz --exclude=*.bz2 --exclude=lost+found  $PATH/  $CACHE_DIR/$DIR/ "
+
+                /bin/chmod 777 $CACHE_DIR/$DIR/
+
+                #build tags
+                GDIR=${PWD##*pringboard/}
+                GFILES=GTAGS_INUSE
+				/bin/mkdir -p /bldimg/fusion/kvelappa/gtags/$GDIR/
+                if [[ -f $GFILES || ! -d /bldimg/fusion/kvelappa/gtags/$GDIR/ ]]
+                then
+                        /bin/echo "Gtags is already running or Not required"
+                else
+                        /bin/touch $GFILES
+                        /bin/hostname >GRUN
+                        /users/home40/kvelappa/utils/bin/gtags -i
+                        /bin/cp $PATH/G* /bldimg/fusion/kvelappa/gtags/$GDIR/
+                        /bin/rm -rf GRUN
+                        /bin/rm -rf $GFILES
+                fi
+
+        else
+                /bin/echo "Path $DIR not found"
+        fi
+}
+
+if [[ $1 = "RUN" ]]
+then
+        /usr/rational/local/bin/refresh_view -build
+
+        updatecache "/vobs/projects/springboard/linux_plat/linux_2_6_34" "/dev/shm/searchcache"
+        /bin/sleep 10
+
+        updatecache "/vobs/projects/springboard/fabos" "/dev/shm/searchcache"
+        /bin/sleep 10
+
+        updatecache "/vobs/projects/springboard/linux_plat/linux_3_14_17" "/dev/shm/searchcache"
+        /bin/sleep 10
+
+#       /bin/rm -rf /dev/shm/searchcache/tps
+#       updatecache "/vobs/projects/springboard/tps/ZebOS" "/tmp/searchcache"
+#       updatecache "/vobs/projects/springboard/tps/broadcom" "/tmp/searchcache"
+#       updatecache "/vobs/projects/springboard/tps/confd" "/tmp/searchcache"
+#       updatecache "/vobs/projects/springboard/tps/confd-eval" "/tmp/searchcache"
+
+
+#/bin/sleep 1000
+#/usr/bin/killall updatecacheall
+#/bin/sleep 10
+#/usr/bin/killall -9 updatecacheall
+#/bin/ps -elf |/bin/grep updatecacheall |/bin/grep -v grep |/bin/awk '{print "kill "$4 }' |/bin/sh
+#/bin/ps -elf |/bin/grep updatecacheall |/bin/grep -v grep |/bin/awk '{print "kill -9 "$4 }' |/bin/sh
+#/bin/rm -f /vobs/projects/springboard/tps/G*
+#/bin/rm -f /vobs/projects/springboard/fabos/G*
+#/bin/rm -f /vobs/projects/springboard/linux_plat/linux_2_6_34/G*
+#/bin/rm -f /vobs/projects/springboard/linux_plat/linux_3_14_17/G*
+
+
+        /bin/echo "Updated all process"
+
+exit;
+fi
+
+EXE="${0##*/}"
+running="$(/bin/ps -elf |/bin/grep $EXE|/bin/grep -v 'grep'|wc -l)"
+if [[  $running -gt 2 ]]
+then
+    /bin/echo "Already running"
+    exit 0
+fi
+
+
+
+
+
+/users/home40/kvelappa/utils/tools/updatecacheall "RUN"
+
+
+
+

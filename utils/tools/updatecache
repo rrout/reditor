@@ -1,0 +1,58 @@
+function rsync_cmd()
+{
+        echo $1
+        $1
+}
+
+function updatecache()
+{
+
+        PATH=$1
+        CACHE_DIR=$2
+        cd $PATH
+        echo "CWD:$PWD"
+
+        #removes last slash
+        PATH=${PATH%/}
+
+        #get only dir name
+		#DIR=${PATH##*/}
+		DIR=${PATH}
+
+        if [[ -d $PATH  ]]
+        then
+                /bin/mkdir -p $CACHE_DIR/$DIR/
+                rsync_cmd "/usr/bin/rsync -ru --exclude=G* --exclude=*.tar --exclude=*.gz --exclude=*.bz --exclude=*.bz2 --exclude=lost+found  $PATH/  $CACHE_DIR/$DIR/ "
+
+                /bin/chmod 777 $CACHE_DIR/$DIR/
+
+        else
+                echo "Path $DIR not found"
+        fi
+}
+
+
+EXE="${0##*/}"
+#echo $EXE
+running="$(/bin/ps -elf |/bin/grep $EXE|/bin/grep -v 'grep'|wc -l)"
+#echo "[$running]"
+if [[  $running -gt 2 ]]
+then
+    echo "Already running"
+    exit 0
+fi
+
+
+
+if [[ $# -le 0 ]]
+then
+        CACHE_PATH=/tmp/searchcache
+else
+
+        CACHE_PATH=$1
+fi
+
+mkdir -p ${CACHE_PATH}
+
+updatecache ${PWD} ${CACHE_PATH}  1>log.txt
+

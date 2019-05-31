@@ -1,0 +1,94 @@
+#!/bin/sh
+
+function kill_progress
+{
+	kill $1 2>&1 > /dev/null
+}
+function progress
+{
+	sleep 1;
+	while true
+	do
+		echo -n .;
+		sleep 1;
+	done 
+}
+progress &
+progress_id=$!
+trap 'kill_progress $progress_id' SIGINT
+
+
+echo -e "[ Compressing the installation files ... ]"
+TMP_FILE="/tmp/config_$(date +%m%d%y%H%M%S).tar.gz"
+#TMP_DATA="data_$(date +%m%d%y%H%M%S).tar.gz"
+rm -rf  ~/.vim/tmp/*
+cd ~/
+tar -zcf $TMP_FILE .vim* .bash* .net* .screen* .bash*  .global* .input*  utils* .custom* .colormake* \
+	 --exclude=.bash_history --exclude=.vimyankring_history_v2.txt --exclude=.viminfo --exclude=utils/sources
+TMP_DATA="$(cat $TMP_FILE |base64 )"
+
+META_DATA="BIN_DATA_$(date +%m%d%y%H%M%S)"
+
+echo -e "\n[ Creating self installing executable ... ]"
+(
+#Headers
+cat <<EOF >~/sinstall
+#!/bin/sh
+
+
+function kill_progress
+{
+	kill \$1 2>&1 > /dev/null
+}
+function progress
+{
+	sleep 1;
+	while true
+	do
+		echo -n .;
+		sleep 1;
+	done 
+}
+progress &
+progress_id=\$!
+trap 'kill_progress \$progress_id' SIGINT
+
+
+
+echo -e "\n[ Taking backup of existing files and settings ]"
+filename="config_old_\$(date +%m.%d.%y-%H:%M:%S).tar.gz"
+cd ~/
+mkdir -p ~/.backup
+(find .vim* .bash* .net* .screen* .input* .global* .colormak*| xargs tar -zcf ~/.backup/\$filename ) 2>/dev/null 
+EOF
+
+#Content
+cat <<EOF >>~/sinstall
+echo -e "\n[ Installing the binaries ]"
+
+cat<<'$META_DATA' | base64 -d 2>/dev/null | tar -zxf -  
+$TMP_DATA
+$META_DATA
+EOF
+
+#Footer
+cat <<EOF >>~/sinstall
+
+export PATH=\${HOME}/utils/bin:\${HOME}/utils/tools:\$PATH
+export LIBS=-L\${HOME}/utils/lib
+export CPPFLAGS=-I\${HOME}/utils/include
+
+MAKE="\$(gmake -v 1>/dev/null 2>/dev/null &&  echo gmake || echo make) "
+
+
+echo -e "\n[ Installation complete ]"
+kill_progress \$progress_id 2>&1 >/dev/null
+EOF
+
+)
+
+chmod 777 ~/sinstall
+echo -e "\n[ Creating executable completed ]"
+trap '' SIGINT
+kill_progress $progress_id 2>&1 >/dev/null
+

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+DIR=${PWD##*pringboard/}
+
+ln -s /bldimg/fusion/kvelappa/gtags/$DIR/GPATH .
+ln -s /bldimg/fusion/kvelappa/gtags/$DIR/GRTAGS .
+ln -s /bldimg/fusion/kvelappa/gtags/$DIR/GTAGS .
+
+
