@@ -1,0 +1,203 @@
+#!/bin/bash
+
+
+function use()
+{
+    echo "Usage : $0 <install>|<uninstall>|<clean>"
+}
+
+function version {
+    echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }';
+}
+
+#set -x
+#echo $# $1 $2
+
+if [ $# != 1  ]; then
+    echo -e "Error : Should specify argument"
+    use
+    exit
+fi
+if [  "$1" != "install" ] && [ "$1" != "uninstall" ] && [ "$1" != "clean" ]; then
+    use
+    exit
+fi
+
+
+function kill_progress()
+{
+	kill $1 2>&1 > /dev/null
+}
+function progress()
+{
+	sleep 1;
+	while true
+	do
+		echo -n .;
+		sleep 1;
+	done 
+}
+#progress &
+progress_id=$!
+trap 'kill_progress $progress_id' SIGINT
+
+
+#Content
+echo -e "\n[ $0 process invoked to < $1 > ] "
+
+if [  "$1" == "install" ]; then
+    echo -e "\n[ Installing the binaries ]"
+    MAKE="$(gmake -v 1>/dev/null 2>/dev/null &&  echo gmake || echo make) "
+
+
+    echo -e "\n[ Making ctags ]"
+    mkdir -p ${HOME}/reditor/source
+    cd ${HOME}/reditor/source
+    tar -zxf ${HOME}/reditor/utils/sources/ctags-5.8.tar.gz >>vmake.log.txt
+    cd ctags-5.8
+    $MAKE clean >>vmake.log.txt
+    mkdir -p ${HOME}/reditor/utils
+    ./configure --prefix=\${HOME}/reditor/utils --disable-gtagscscope >>vmake.log.txt
+    $MAKE clean >>vmake.log.txt
+    #$MAKE  2>&1 >>vmake.log.txt
+    #$MAKE install >>vmake.log.txt
+
+    echo -e "\n[ Making ncurses ]"
+    cd ${HOME}/reditor/source
+    tar -zxf ${HOME}/reditor/utils/sources/ncurses-5.9.tar.gz >>vmake.log.txt
+    cd ncurses-5.9
+    $MAKE clean >>vmake.log.txt
+    ./configure --prefix=${HOME}/reditor/utils >>vmake.log.txt
+    $MAKE clean >>vmake.log.txt
+    #$MAKE  2>&1 >>vmake.log.txt
+    #$MAKE install >>vmake.log.txt
+
+    echo -e "\n[ Making vim ]"
+    vim_version="$(vim --version | head -1 | cut -d ' ' -f 5)"
+    #if [[ "${vim_version}" < "74" ]]; then
+    if [ $(version ${vim_version}) -ge $(version "7.3") ]; then
+        echo -e "Vim ${vim_version} is up to date "
+    else
+        cd ${HOME}/reditor/source
+        tar -zxf ${HOME}/reditor/utils/sources/vim-7.4.tar.gz >>vmake.log.txt
+        cd vim74
+        $MAKE clean >>vmake.log.txt
+        ./configure --prefix=${HOME}/reditor/utils  --enable-static --disable-shared CFLAGS="-g -O0 --static ${CFLAGS} " LDFLAGS=" --static ${LDFLAGS}"  >>vmake.log.txt
+        $MAKE clean >>vmake.log.txt
+        $MAKE  2>&1 >>vmake.log.txt
+        $MAKE install >>vmake.log.txt
+    fi
+
+    echo -e "\n[ Making gtags ]"
+    gtags_version="$(global --version | head -1 | cut -d ' ' -f 4)"
+    if [ $(version ${gtags_version}) -ge $(version "6.5.5") ]; then
+            echo "Gtags Version ${gtags_version} is up to date"
+    else
+        cd ${HOME}/reditor/source
+        tar -zxf ${HOME}/reditor/utils/sources/global-6.5.6.tar.gz >>vmake.log.txt
+        cd global-6.5.6
+        $MAKE clean >>vmake.log.txt
+        ./configure --prefix=${HOME}/reditor/utils --with-sqlite3 --disable-gtagscscope
+        --with-exuberant-ctags=${HOME}/utils/reditor/bin/ctags  --enable-static --disable-shared CFLAGS="-g -O0 --static ${CFLAGS} " LDFLAGS=" --static ${LDFLAGS}" >>vmake.log.txt
+        $MAKE clean >>vmake.log.txt
+        $MAKE  2>&1 >>vmake.log.txt
+        $MAKE install >>vmake.log.txt
+    fi
+
+    echo -e "\n[ Making bash ]"
+    if [ $(version ${BASH_VERSION}) -ge $(version "4.2.0") ]; then
+        echo "Bash Version ${BASH_VERSION} is up to date"
+    else
+        cd ${HOME}/reditor/source
+        tar -zxf ${HOME}/reditor/utils/sources/bash-4.3.tar.gz >>vmake.log.txt
+        cd bash-4.3
+        $MAKE clean >>vmake.log.txt
+        ./configure --prefix=${HOME}/reditor/utils  --enable-static-link --without-bash-malloc >>vmake.log.txt
+        $MAKE clean >>vmake.log.txt
+        $MAKE  2>&1 >>vmake.log.txt
+        $MAKE install >>vmake.log.txt
+    fi
+        function x()
+        {
+            cat <<EOF
+
+
+        echo -e "\n[ Making pcre search ]"
+        cd ${HOME}/reditor/source
+        tar -zxf ${HOME}/utils/reditor/sources/pcre.tar.gz >>vmake.log.txt
+        cd pcre
+        \$MAKE clean >>vmake.log.txt
+        ./configure --prefix=\${HOME}/reditor/utils --enable-pcre16 --enable-pcre32 --enable-jit --enable-rebuild-chartables --enable-newline-is-cr --enable-newline-is-lf --enable-newline-is-crlf --enable-newline-is-anycrlf --enable-newline-is-any --enable-bsr-anycrlf >>vmake.log.txt
+        \$MAKE clean >>vmake.log.txt
+        \$MAKE 2>&1 >>vmake.log.txt
+        \$MAKE install >>vmake.log.txt
+
+
+        echo -e "\n[ Making pcre2 search ]"
+        cd ${HOME}/reditor/source
+        tar -zxf ${HOME}/reditor/utils/sources/pcre2.tar.gz >>vmake.log.txt
+        cd pcre2-10.00
+        \$MAKE clean >>vmake.log.txt
+        ./configure --prefix=\${HOME}/reditor/utils  --enable-pcre2-16 --enable-pcre2-32 --enable-jit --enable-rebuild-chartables --enable-newline-is-cr --enable-newline-is-lf --enable-newline-is-crlf --enable-newline-is-anycrlf --enable-newline-is-any --enable-bsr-anycrlf  >>vmake.log.txt
+        \$MAKE clean >>vmake.log.txt
+        \$MAKE 2>&1 >>vmake.log.txt
+        \$MAKE install >>vmake.log.txt
+
+
+        echo -e "\n[ Making lzma search ]"
+        cd ${HOME}/reditor/source
+        tar -zxf ${HOME}/reditor/utils/sources/lzma.tar.gz >>vmake.log.txt
+        cd lzma
+        \$MAKE clean >>vmake.log.txt
+        ./configure --prefix=\${HOME}/reditor/utils  
+        \$MAKE clean >>vmake.log.txt
+        \$MAKE 2>&1 >>vmake.log.txt
+        \$MAKE install >>vmake.log.txt
+
+
+
+        echo -e "\n[ Making gold search ]"
+        cd ${HOME}/reditor/source
+        tar -zxf ${HOME}/reditor/utils/sources/kg_searcher.tar.gz >>vmake.log.txt
+        cd kg_searcher
+        \$MAKE clean >>vmake.log.txt
+        ./configure --prefix=\${HOME}/reditor/utils --disable-zlib >>vmake.log.txt
+        \$MAKE clean >>vmake.log.txt
+        \$MAKE 2>&1 >>vmake.log.txt
+        \$MAKE install >>vmake.log.txt
+
+
+        echo -e "\n[ Making vmtouch ]"
+        cd ${HOME}/reditor/source
+        tar -zxf ${HOME}/reditor/utils/sources/vmtouch.tar.gz >>vmake.log.txt
+        cd vmtouch
+        \$MAKE clean >>vmake.log.txt
+        \$MAKE clean >>vmake.log.txt
+        \$MAKE  2>&1 >>vmake.log.txt
+        \$MAKE install >>vmake.log.txt
+
+
+
+
+
+EOF
+    }
+    echo -e "\n[ Creating executable completed ]"
+    echo -e "\n[ Instalation completed ]"
+elif [ "$1" == "uninstall" ]; then
+    echo ""
+elif [ "$1" == "clean" ]; then
+    rm -rf ${HOME}/reditor/source
+    rm -rf ${HOME}/reditor/utils/bin
+    rm -rf ${HOME}/reditor/utils/lib
+    rm -rf ${HOME}/reditor/utils/share
+    rm -rf ${HOME}/reditor/utils/man
+    rm -rf ${HOME}/reditor/utils/include
+else
+    echo ""
+fi
+
+echo -e "\n[ $0 process completed ] "
+trap '' SIGINT
+kill_progress $progress_id 2>&1 >/dev/null
+
