@@ -47,11 +47,17 @@ echo -e "\n[ $0 process invoked to < $1 > ] "
 
 if [  "$1" == "install" ]; then
     echo -e "\n[ Installing the binaries ]"
+
     MAKE="$(gmake -v 1>/dev/null 2>/dev/null &&  echo gmake || echo make) "
 
+    mkdir -p ${HOME}/reditor/source
 
     echo -e "\n[ Making ctags ]"
     mkdir -p ${HOME}/reditor/source
+    ctags_version="$(ctags --version | head -1 | cut -d ' ' -f 3)"
+    if [ $(version ${ctags_version}) -ge $(version "5.7") ]; then
+        echo "Ctags Version ${ctags_version} is up to date"
+    else
     cd ${HOME}/reditor/source
     tar -zxf ${HOME}/reditor/utils/sources/ctags-5.8.tar.gz >>re-make.log.txt
     cd ctags-5.8
@@ -61,7 +67,7 @@ if [  "$1" == "install" ]; then
     $MAKE clean >>re-make.log.txt
     $MAKE  2>&1 >>re-make.log.txt
     $MAKE install >>re-make.log.txt
-
+    fi
     echo -e "\n[ Making ncurses ]"
     cd ${HOME}/reditor/source
     tar -zxf ${HOME}/reditor/utils/sources/ncurses-5.9.tar.gz >>re-make.log.txt
@@ -120,7 +126,7 @@ if [  "$1" == "install" ]; then
 
     echo -e "\n[ Making pcre search ]"
     cd ${HOME}/reditor/source
-    tar -zxf ${HOME}/utils/reditor/sources/pcre.tar.gz >>re-make.log.txt
+    tar -zxf ${HOME}/reditor/utils/sources/pcre.tar.gz >>re-make.log.txt
     cd pcre
     $MAKE clean >>re-make.log.txt
     ./configure --prefix=${HOME}/reditor/utils --enable-pcre16 --enable-pcre32 --enable-jit --enable-rebuild-chartables --enable-newline-is-cr --enable-newline-is-lf --enable-newline-is-crlf --enable-newline-is-anycrlf --enable-newline-is-any --enable-bsr-anycrlf >>re-make.log.txt
