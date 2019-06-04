@@ -489,7 +489,8 @@ fi
 # Control for the working CVS
 if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting CVS_SETTINGS=$BASH_CVS_SETTINGS ........"; fi
 if [ "$BASH_CVS_SETTINGS" == "git" ];then
-    echo ""
+    unset SSH_ASKPASS # https://stackoverflow.com/questions/16077971/git-produces-gtk-warning-cannot-open-display
+                    # Solution to : (gnome-ssh-askpass:29241): Gtk-WARNING **: cannot open display
 elif [ "$BASH_CVS_SETTINGS" == "mercurial" ];then
     alias lsco-a='hg status -m'
     alias lsco-al="hg status"

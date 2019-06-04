@@ -1,0 +1,201 @@
+#!/bin/sh
+
+run_file="run_$$"
+rm -rf input output result $run_file log
+touch input output result 
+echo "RUNNING" > $run_file
+
+let getCmdId=0
+let conSvrId=0
+let recvOpId=0
+function killFunction()
+{
+    kill -9  $conSvrId $recvOpId
+}
+
+
+function getCommands()
+{
+    (
+    while true
+    do
+        if [[  $(cat $run_file |grep "RUNNING" |wc -l 2>/dev/null) -eq 0 ]]; then
+            echo "[getCommands]  killed..............">>log
+            return 
+        fi
+
+        read a
+        if [[ $a == "" ]]; then
+            usleep 30000 2>&1  >/dev/null
+            continue;
+        fi
+        echo  "$a" 
+
+        if [[ $a == "TERMINATE" ]]; then
+            echo "[getCommands]  exiting...............">>log
+            return;
+        fi
+
+
+    done)<input
+}
+
+function connectServer()
+{
+    (getCommands |telnet $1 2>&1) | tee result
+    #(getCommands |telnet $1 2>&1 ) >> result
+    echo "[Sending kill command].............">>log
+    echo "STOPPED" > $run_file
+    echo -e "TERMINATE" >>input
+    echo -e "TERMINATE" >>result
+    echo "[connectServer]  exiting...............">>log
+    exit ;
+}
+
+function receiveOutput()
+{
+    (while true
+    do
+        if [[  $(cat $run_file |grep "RUNNING" |wc -l 2>/dev/null) -eq 0 ]]; then
+            echo "[receiveOutput]  killed..............">>log
+            return 
+        fi
+
+        read a 
+        if [[ $a == "" ]]; then
+            usleep 30000 2>&1  >/dev/null
+            continue;
+        fi
+
+        #echo -e "{$a}" >&2
+        echo -e "$a" >>output
+
+        if [[ $a == "TERMINATE" ]]; then
+            echo "[receiveOutput]  exiting..............." >>log
+            exit;
+        fi
+
+
+    done) <result
+}
+
+function receive()
+{
+    let count=0
+    (while true
+    do
+        if [[  $(cat $run_file |grep "RUNNING" |wc -l 2>/dev/null) -eq 0 ]]; then
+            echo "[receive]  killed..............">>log
+            return 
+        fi
+
+        let count=count+1;
+        read a 
+
+        if [[ $count -ge 50000 ]];then
+            echo "TIMEOUT." >&2
+            echo "TERMINATE" >> input
+            #echo "TERMINATE" >> output
+            return 
+        fi
+
+        echo "countr:$count| MATCH:$a == $1" >>log
+        if [[ $a == "" ]]; then
+            usleep 30000 2>&1  >/dev/null
+            continue;
+        fi
+        #echo "[$a]" >&2
+        #echo "MATCH = $a == $1">&2
+        let count=0
+        if [[ $(echo "$a" | grep -E "$1"| wc -l) -eq 1 ]]; then
+            echo "$a"
+            return 
+        fi
+
+    done)<output
+
+}
+function send()
+{
+    #echo "CLEAR-OUTPUT" >>result
+    echo -e "$@" >>input
+
+}
+function send_receive()
+{
+    :>output
+    send $1
+    receive $2 2>&1 >/dev/null
+}
+
+function check_more()
+{
+    #echo "[$2|$3]"
+    next=$(receive "$2|$3|'y' or 'n'" 2>&1) 
+    #echo "====================START-OUTPUT===================" >&2
+    #cat output >&2
+    #echo "====================END-OUTPUT===================" >&2
+    echo "[CHECK MORE $next => $2|$3]" >>log
+    if [[ $(echo "$next" | grep -E "'y' or 'n'"| wc -l) -eq 1 ]]; then
+        #echo "Sending Yes[y] to target" >>log
+        send "y"
+        next=$(check_more "$1" "$2" "$3")
+    elif [[ $(echo "$next" | grep -E "$2"| wc -l) -eq 1 ]]; then
+        send ""
+        next=$(check_more "$1" "$2" "$3")
+    fi
+
+    echo $next
+    return 
+}
+
+function send_check_receive()
+{
+    :>output
+    send "$1"
+    #echo "check_more $1 $2 $3"
+    next=$(check_more "$1" "$2" "$3")
+    #echo "[NEXT=$next]"
+    if [[ $(echo "$next" | grep -E "$3"| wc -l) -eq 1 ]]; then
+        return;
+    fi
+    echo "Waiting for $3 ............" >>log
+    #receive "$3" 2>&1 >/dev/null
+}
+function clearAll()
+{
+    #echo "please wait.... closing....."
+    send_receive "TERMINATE" "TERMINATE"
+    #killFunction 
+    #echo -e "TERMINATE" >>input
+    #echo -e "TERMINATE" >>result
+    #echo -e "TERMINATE" >>output
+    rm -rf /tmp/run
+    echo "STOPPED" >$run_file
+}
+trap 'clearAll' ERR  INT HUP QUIT TERM
+connectServer $1 &
+conSvrId=$!
+receiveOutput & 
+recvOpId=$!
+
+getCmdId=$$
+
+
+#echo " conSvrId = $conSvrId, recvOpId=$recvOpId, self=$getCmdId"; 
+shift
+
+
+send_receive "" "telnet"
+send_receive "ena" "telnet@"
+for cmd in "$@"
+do
+    #echo "CMD=>[$cmd]"
+    send_check_receive "$cmd" "More" "telnet@|t@"
+done
+
+#send_check_receive "show spann" "More" "telnet@"
+send_receive "TERMINATE" "TERMINATE"
+
+
+rm -rf $run_file

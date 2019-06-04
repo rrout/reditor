@@ -1,0 +1,13 @@
+#!/bin/sh
+ftp -n -i  10.70.41.223<<END
+user kvelappa kvelappa
+mkdir  $1
+cd $1
+prompt
+bi
+ha
+$2 $3 $4 $5
+!ls -l $3 $4 $5
+ls  $3 $4 $5
+bye
+END

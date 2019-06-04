@@ -1,0 +1,16 @@
+#!/bin/sh
+
+while true
+do
+        mkdir -p /dev/shm/searchcache/
+        echo "[ LINUX ] running rsync" >>/tmp/log.txt
+        rsync -ru /view/kvelappa_nos_fusion_x86_int_01/vobs/projects/springboard/linux_plat/linux_2_6_34/ /dev/shm/searchcache/linux_2_6_34
+        echo "[ FABOS ] running rsync" >>/tmp/log.txt
+        rsync -ru  /view/kvelappa_nos_fusion_x86_int_01/vobs/projects/springboard/fabos/ /dev/shm/searchcache/fabos
+        sleep 1
+        cd /dev/shm/searchcache/linux_2_6_34
+        gtags -i
+        cd /dev/shm/searchcache/fabos
+        gtags -i
+        sleep 1000
+done
