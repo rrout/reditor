@@ -18,7 +18,7 @@ function! UpdateGtags()
     let path = FindGtagsPath()
     let file = substitute(expand("%:p"), path, "", "g")
 
-    let cmd = "~/utils/tools/gupdate \"".path."\" \"gtags --single-update ". file ."\" &"
+    let cmd = "$HOME/reditor/utils/tools/gupdate \"".path."\" \"gtags --single-update ". file ."\" &"
             "echoerr cmd
     :silent call system(cmd)
 endfunction

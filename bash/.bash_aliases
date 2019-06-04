@@ -107,8 +107,8 @@ if [ "$BASH_LOCALUSERPATH_SETTINGS" == "yes" ];then
 if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting LOCALUSERPATH_SETTINGS=$BASH_LOCALUSERPATH_SETTINGS ........"; fi
 # Add local tools to main path
 #export PATH="$PATH:~/utils/bin:~/utils/tools"
-pathappend ~/utils/bin
-pathappend ~/utils/tools
+pathappend ~/reditor/utils/bin
+pathappend ~/reditor/utils/tools
 #export MANPATH=${MANPATH}:/usr/local/man
 #export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:${HOME}/utils/lib
 fi
@@ -147,7 +147,7 @@ fi
 if [ "$BASH_USERBASH_SETTINGS" == "yes" ];then
 if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting USERBASH_SETTINGS=$BASH_USERBASH_SETTINGS ........"; fi
 if [ ! -f "/bin/bash" ]; then
-    export SHELL=~/utils/bin/bash
+    export SHELL=~/reditor/utils/bin/bash
 fi
 fi
 

@@ -46,6 +46,11 @@ trap 'kill_progress $progress_id' SIGINT
 echo -e "\n[ $0 process invoked to < $1 > ] "
 
 if [  "$1" == "install" ]; then
+    export PATH=${HOME}/reditor/utils/bin:${HOME}/reditor/utils/tools:$PATH
+    export LIBS=-L${HOME}/reditor/utils/lib
+    export CPPFLAGS=-I${HOME}/reditor/utils/include
+    #export CFLAGS=" --static -I${HOME}/reditor/utils/include "
+    #export LDFLAGS=" --static -L${HOME}/reditor/utils/lib "
     echo -e "\n[ Installing the binaries ]"
 
     MAKE="$(gmake -v 1>/dev/null 2>/dev/null &&  echo gmake || echo make) "
@@ -69,15 +74,24 @@ if [  "$1" == "install" ]; then
     $MAKE install >>re-make.log.txt
     fi
     echo -e "\n[ Making ncurses ]"
-    cd ${HOME}/reditor/source
-    tar -zxf ${HOME}/reditor/utils/sources/ncurses-5.9.tar.gz >>re-make.log.txt
-    cd ncurses-5.9
-    $MAKE clean >>re-make.log.txt
-    ./configure --prefix=${HOME}/reditor/utils >>re-make.log.txt
-    $MAKE clean >>re-make.log.txt
-    $MAKE  2>&1 >>re-make.log.txt
-    $MAKE install >>re-make.log.txt
-
+    ncurse_version=0
+    if [ -x "$(command -v ncurses5-config)" ]; then
+        ncurse_version="$(ncurses5-config --version | head -1 | cut -d ' ' -f 1)"
+    fi
+    if [ $ncurse_version ]  && [ $(version ${ncurse_version}) -ge $(version "5.9.20130511") ]; then
+        echo "ncurse Version ${ncurse_version} is up to date"
+    else
+exit
+        cd ${HOME}/reditor/source
+        tar -zxf ${HOME}/reditor/utils/sources/ncurses-5.9.tar.gz >>re-make.log.txt
+        cd ncurses-5.9
+        $MAKE clean >>re-make.log.txt
+        ./configure --prefix=${HOME}/reditor/utils >>re-make.log.txt
+        $MAKE clean >>re-make.log.txt
+        $MAKE  2>&1 >>re-make.log.txt
+        $MAKE install >>re-make.log.txt
+    fi
+exit
     echo -e "\n[ Making vim ]"
     vim_version="$(vim --version | head -1 | cut -d ' ' -f 5)"
     #if [[ "${vim_version}" < "74" ]]; then
@@ -147,14 +161,22 @@ if [  "$1" == "install" ]; then
 
 
     echo -e "\n[ Making lzma search ]"
-    cd ${HOME}/reditor/source
-    tar -zxf ${HOME}/reditor/utils/sources/lzma.tar.gz >>re-make.log.txt
-    cd lzma
-    $MAKE clean >>re-make.log.txt
-    ./configure --prefix=\${HOME}/reditor/utils
-    $MAKE clean >>re-make.log.txt
-    $MAKE 2>&1 >>re-make.log.txt
-    $MAKE install >>re-make.log.txt
+    lzmadec_version=0
+    if [ -x "$(command -v lzmadec)" ]; then
+        lzmadec_version="$(lzmadec --version | head -1 | cut -d ' ' -f 4)"
+    fi
+    if [ $lzmadec_version ]  && [ $(version ${lzmadec_version}) -ge $(version "5.2.2") ]; then
+        echo "lzmadec Version ${lzmadec_version} is up to date"
+    else
+        cd ${HOME}/reditor/source
+        tar -zxf ${HOME}/reditor/utils/sources/lzma.tar.gz >>re-make.log.txt
+        cd lzma
+        $MAKE clean >>re-make.log.txt
+        ./configure --prefix=\${HOME}/reditor/utils
+        $MAKE clean >>re-make.log.txt
+        $MAKE 2>&1 >>re-make.log.txt
+        $MAKE install >>re-make.log.txt
+    fi
 
     echo -e "\n[ Making gold search ]"
     cd ${HOME}/reditor/source
