@@ -19,16 +19,6 @@ syn match	cFunction	"\<[a-zA-Z_][a-zA-Z_0-9]*\>\s*("me=e-1
 
 " shankar's _end_
 
-"https://stackoverflow.com/questions/736701/class-function-names-highlighting-in-vim
-syn match    cCustomParen    "(" contains=cParen contains=cCppParen
-"syn match    cCustomParenR    ")" contains=cParen contains=cCppParen
-"syn match    cCustomParen    "?=(" contains=cParen contains=cCppParen
-"syn match    cCustomFunc     "\w\+\s*(\@=" contains=cCustomParen
-syn match    cCustomScope    "::"
-syn match    cCustomClass    "\w\+\s*::" contains=cCustomScope
-"hi def cCustomFunc  gui=bold guifg=yellowgreen
-"hi def link cCustomClass Function
-
 
 " A bunch of useful C keywords
 syn keyword	cStatement	goto break return continue asm

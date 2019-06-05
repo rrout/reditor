@@ -142,6 +142,13 @@ hi Typedef          guifg=#93e690                                   gui=none
 hi Typedef          ctermfg=114                                     cterm=none
 
 
+" C++ Group
+"hi cCustomFunc  gui=bold guifg=yellowgreen
+hi cCustomScope     ctermfg=4                                   cterm=bold
+hi cCustomClass     ctermfg=10                                  cterm=bold
+hi cCustomParen     ctermfg=9                                   cterm=none
+
+
 " Special Group
 " -------------
 " any special symbol

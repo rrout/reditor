@@ -15,4 +15,26 @@ VimBuffer Programming reference:1
 2. https://github.com/vim-scripts/multiwindow-source-code-browsing/blob/master/ftplugin/gtags_mwin.vim
 3. https://www.vim.org/scripts/script.php?script_id=3868
 4. 
-5. 
+5
+
+
+
+
+
+
+
+
+
+Have a look
+
+
+http://www.gnu.org/software/global/links.html
+https://github.com/hewes/unite-gtags
+
+
+Issues:
+1. reditor is not doing proper syntax from .vim/syntax folder
+    vimdoc.sourceforge.net/htmldoc/syntax.html
+
+
+search : General - Color syntax for local variables and user defined

@@ -1,6 +1,10 @@
 
 set ic
+set smartcase
+
 set wrap
+
+set expandtab
 
 execute pathogen#infect()
 "enable pathogen plugin manager
