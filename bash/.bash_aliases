@@ -491,6 +491,12 @@ if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting CVS_SETTINGS=$BASH_CVS
 if [ "$BASH_CVS_SETTINGS" == "git" ];then
     unset SSH_ASKPASS # https://stackoverflow.com/questions/16077971/git-produces-gtk-warning-cannot-open-display
                     # Solution to : (gnome-ssh-askpass:29241): Gtk-WARNING **: cannot open display
+    alias lsco-a='git status -s'
+    alias lsco-al="git status"
+    alias vdiff='git difftool --tool=vimdiff --no-prompt'
+    alias cdiff='git diff'
+    alias gdlist='git diff --name-status' #'git diff --name-only'
+    alias cpatch='git apply -v'
 elif [ "$BASH_CVS_SETTINGS" == "mercurial" ];then
     alias lsco-a='hg status -m'
     alias lsco-al="hg status"
@@ -925,3 +931,14 @@ cat<<-EOF
 	hg update tip          Update work to match tip
 EOF
 }
+
+function h_git() {
+cat<<-EOF
+    Command                                           Descreption
+    ------------------------------------------------- ------------------------------------------
+    git log                                           Show list of changesets
+    git rebase -i HEAD~4 + git push --force           Squash : merge multiple commit to one (git push origin branch-name --force)
+    git diff  --name-status --oneline HEAD~5 HEAD     Show diff between commits  git diff  --name-status --oneline <changeset> <changeset>
+EOF
+}
+

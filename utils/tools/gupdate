@@ -1,5 +1,11 @@
 #!/bin/bash
 #echo "$1, $2"
+#Check if project is under Gtagging System
+if [[ ! -f $1/GTAGS ]]; then
+    echo "GTAGS does not exist" 2>/dev/null
+    exit 0
+fi
+
 if [[ $(cat $1/GFILES |grep -i "$2" | wc -l) -eq 1  ]]; then
 	echo "Same file Exists: $2" >> $1/GLOG 
 	exit 0

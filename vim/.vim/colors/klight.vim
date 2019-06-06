@@ -144,7 +144,7 @@ hi Typedef          ctermfg=4                                     cterm=none
 " C++ Group
 "hi cCustomFunc  gui=bold guifg=yellowgreen
 hi cCustomScope     ctermfg=9                                   cterm=bold
-hi cCustomClass     ctermfg=4                                   cterm=none
+hi cCustomClass     ctermfg=4                                   cterm=bold
 hi cCustomParen     ctermfg=10                                  cterm=none
 
 " Special Group
