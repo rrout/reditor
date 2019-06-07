@@ -56,7 +56,7 @@ alias vi="vim"
 alias vd="vimdiff"
 
 # grep settings
-alias grep='grep -sE '
+alias grep='grep -sE --color=auto'
 alias grepc='grep -sE --color=always '
 #alias xgrep='parallel -j4 grep -sE --color=always '
 alias xgrep='xargs grep -sE '
