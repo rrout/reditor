@@ -107,6 +107,7 @@ fi
 echo -e "\n=====> Checking Jupyter In path ${HOME}"
 if  [ -x "$(command -v jupyter)" ]; then
     echo 'jupyter is installed.' >&2
+    cd /data/users/rrout/
     echo 'Starting Jupyter......' >&2
     jupyter lab --ip=0.0.0.0 --no-browser &
     echo -e "\n=====> Jupyter is Started: You can log in to: http://$HN.$DN:3001" >&2
