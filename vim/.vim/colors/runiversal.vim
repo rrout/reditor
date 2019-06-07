@@ -146,6 +146,8 @@ hi Typedef          ctermfg=4                                     cterm=none
 hi cCustomScope     ctermfg=9                                   cterm=bold
 hi cCustomClass     ctermfg=4                                   cterm=bold
 hi cCustomParen     ctermfg=10                                  cterm=none
+hi STL              ctermfg=13                                  cterm=bold
+hi cppSTLconstant   ctermfg=141                                  cterm=bold
 
 " Special Group
 " -------------
