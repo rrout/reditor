@@ -26,6 +26,8 @@ syn match    cCustomParen    "(" contains=cParen contains=cCppParen
 "syn match    cCustomFunc     "\w\+\s*(\@=" contains=cCustomParen
 syn match    cCustomScope    "::"
 syn match    cCustomClass    "\w\+\s*::" contains=cCustomScope
+syn match    STL             /std::\w\+/
+syn match    cppSTLconstant  /std::cout/
 "hi def cCustomFunc  gui=bold guifg=yellowgreen
 "hi def link cCustomClass Function
 
