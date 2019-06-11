@@ -933,6 +933,7 @@ EOF
 }
 
 function h_git() {
+    cat ~/reditor/bash/bash_help/bash_git_help.txt
 cat<<-EOF
     Command                                           Descreption
     ------------------------------------------------- ------------------------------------------

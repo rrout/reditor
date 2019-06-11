@@ -16,7 +16,9 @@ nnoremap <F11> <ESC>:TlistToggle<CR>
 " Only works if you only diff with vimdiff (and not fugitive...)
 if &diff
     "go to next diff
-    map <F9> ]c
+    "map <F9> ]c
+    noremap ) ]c
+    noremap ( [c
     "put the diff
     map <F10> dp
 endif

@@ -603,6 +603,7 @@ set complete+=k
 if &term =~ "xterm"
 	let &t_SI = "\<Esc>]12;purple\x7"
 	let &t_EI = "\<Esc>]12;blue\x7"
+    autocmd VimLeave * silent !echo -ne "\033]112\007"
 endif
 
 			":autocmd InsertEnter,InsertLeave * set cul
