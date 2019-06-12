@@ -1,0 +1,40 @@
+    ------------------------------
+    MY VIM BINDINGS
+    ------------------------------
+    Command    Descreption
+    ---------- --------------------------------------------------------------------
+    <F1>       Save File
+    <F2>       Quit
+    <F3>       Update Gtags DataBase
+    <F4>       Toggle Paste Mode
+    <F5>       Clearcase Checkout
+    <F6>       Toggle Tab and Space Marking(:ToggleSpaceHi)
+    <F7>       Clearcsse Update
+    <F8>       Clearcase Undo Checkout
+    <F9>       Go To Next Diff (In Diff Mode)
+    <F10>      Paste Diff in Other Window (In Diff Mode)
+    <F11>      Toggle TagList
+    <C-F><C-H> Insert .c File Header
+    <C-F><C-U> Insert Function Header
+    <C-F><C-E> Align Equal
+    <C-J>      Full Find And Replace
+    <C-K>      Line Find and Replace
+    <C-L>      Select Find And Replace
+    <C-@>      Highlight Word
+    <C-_>      Highlight Word Alt
+    <C-N>      Paste Cycle Next
+    <C-P>      Paste Cycle Previous
+    <C-F>      Load Current Words Find
+    <C-D>      Load Current Words Gtags
+    <C-C>      Add Comment
+    <C-X>      Remove Comment
+
+    :StripWhitespace Strip The ending White Spaces
+
+    :SignifyToggle   Toggle Mercurial Diff Bar
+    :SignifyToggleHighlight  Toggle Better Mercurial Highlights
+    :SignifyDiff     Open Mercurial Diff in a Tab (tabedit window)
+
+    :tabedit         Edit In Diffrent Tab
+
+

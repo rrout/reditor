@@ -1,0 +1,12 @@
+    Command                Descreption
+    ---------------------- ------------------------------------------
+    hg log | more          Show list of changesets
+    hg log -v -r <change>  Show changeset descreption
+    hg id -i               Show current version of the branch(hg log -v -r "hg id -i")
+    hg log -p -r <change>  Get the changeset code diff (hg log -p -r 1)
+    hg summary             Show summery of current view
+    hg update -r <change>  Get the view to the change set (hg update -r 1)
+    hg diff -r <ch> -r <ch>Get diff between two changeset
+    hg diff -c <change>    Get the changeset code diff in a patch format
+    hg update --clean      Cancel an uncommitted merge and lose changes
+    hg update tip          Update work to match tip

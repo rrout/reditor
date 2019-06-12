@@ -265,7 +265,7 @@ hi NonText          guifg=#444444                                   gui=none
 hi NonText          ctermfg=234                                     cterm=none
 " the hit-enter prompt (show more output) and yes/no questions
 hi Question         guifg=7                                       gui=none
-hi Question         ctermfg=7                                      cterm=none
+hi Question         ctermfg=0                                      cterm=none
 " meta and special keys used with map, unprintable characters
 hi SpecialKey       guifg=#505050
 hi SpecialKey       ctermfg=234
@@ -315,7 +315,7 @@ hi FoldColumn       ctermfg=152             ctermbg=103              cterm=none
 " ------
 " highlight incremental search text; also highlight text replaced with :s///c
 hi IncSearch        guifg=#66ffff                                   gui=reverse
-hi IncSearch        ctermbg=0              ctermbg=110            cterm=none
+hi IncSearch        ctermfg=0              ctermbg=135            cterm=none
 " hlsearch (last search pattern), also used for quickfix
 hi Search                                    guibg=#ffaa33          gui=none
 hi Search                                    ctermbg=110            cterm=none

@@ -1,0 +1,25 @@
+        https://danielmiessler.com/study/tcpdump/
+        tcpdump -i eth0
+        tcpdump -ttttnnvvS
+        tcpdump host 1.2.3.4
+        tcpdump -nnvXSs 0 -c1 icmp
+        tcpdump src 2.3.4.5
+        tcpdump dst 3.4.5.6
+        tcpdump net 1.2.3.0/24
+        tcpdump port 3389
+        tcpdump src port 1025
+        tcpdump icmp
+        tcpdump ip6
+        tcpdump portrange 21-23
+        tcpdump less 32
+        tcpdump greater 64
+        tcpdump <= 128
+        tcpdump port 80 -w capture_file
+        tcpdump -r capture_file
+        tcpdump -nnvvS src 10.5.2.3 and dst port 3389
+        tcpdump -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/16
+        tcpdump dst 192.168.0.2 and src net and not icmp
+        tcpdump -vv src mars and not dst port 22
+        tcpdump 'src 10.0.2.4 and (dst port 3389 or 22)'
+        tcpdump 'tcp[tcpflags] == tcp-syn'
+        tcpdump 'ip[8] < 10' :- PACKETS WITH A TTL LESS THAN 10

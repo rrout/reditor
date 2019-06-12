@@ -1,0 +1,13 @@
+        gdb -q -ex "set height 0" -ex "info sources" -ex quit /usr/sbin/pim-sm-d
+        (gdb) set substitute-path /build/rrout/ /media/cartman/
+        (gdb)
+        +CFLAGS         += -fno-inline-small-functions
+        -----------------
+        Run gdb cmdline : gdb --args executablename arg1 arg2 arg3
+        -----------------
+        Run gdb nvOS fron begin:
+        #gdb /usr/sbin/nvOSd
+        #(gdb) run -l /var/nvOS/log/nvOSd.log -d 2
+        --- "-b" detaches it and runs it in the background hence exclude -b
+        ------------------
+

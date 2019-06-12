@@ -1,0 +1,4 @@
+
+
+
+Core File Location in Linux                 : cat /proc/sys/kernel/core_pattern

@@ -1,0 +1,34 @@
+        ----------------------
+        GTAGS COMMANDS
+        ----------------------
+        Command    Descreption
+        ---------- --------------------------------------------------------------------
+        gtags      Create GRATS Database in current Directory
+
+        ----------------------
+        GTAGS VIM COMMANDS
+        ----------------------
+        Command    Descreption
+        ---------- --------------------------------------------------------------------
+        <C-|>      Go to Defination
+        <C-R>      Lookup Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference
+        <C-X><C-X> Search Parten Reference

@@ -1,0 +1,31 @@
+        ----------------------
+        GTAGS COMMANDS
+        ----------------------
+        Command    Descreption
+        ---------- --------------------------------------------------------------------
+        gtags      Create GRATS Database in current Directory
+
+        ----------------------
+        GTAGS VIM COMMANDS
+        ----------------------
+        Command    Descreption
+        ---------- --------------------------------------------------------------------
+        <C-|>      Go to Defination
+        <C-R>      Lookup Reference
+        <C-E>      Go to Defination in left hand
+        <C-S>      Local symbol reference
+        <C-G>      Gtags raw string search [STRING-PATTERN]
+        <C-D>      Open Navigation Path
+        <C-T>      Return to previous tag
+        <C-X><C-X> Open reference          [X-PARTEEN]
+        <C-F><C-F> kg search               [K-PATTERN]
+        <C-Y><C-Y> Ack search              [ACK-PATTREN]
+        <C-LMouse> Mouse open Defination
+        <C-R><C-R> Open Reference          [R-PATTERN}
+        <C-G><C-G> Gtags grep search       [G-PARTTEN]
+        <C-P><C-P> Open File Path
+        <C-S><C-S> Searc sub string        [SUB-PATTERN]
+        <C-F><C-R> Gtags search and replace
+        <C-F><C-L> Gtags view cursor file
+        <C-X><C-X> Search Parten Reference
+

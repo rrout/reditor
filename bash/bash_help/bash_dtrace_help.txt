@@ -1,0 +1,10 @@
+                dtrace -F -n 'pid6120:a.out::entry/tid == 6978/{}'
+                dtrace -Z -F -n 'fbt::port_show*:entry/execname == "nvOSd"/{}'
+                dtrace -F -n 'pid6120:a.out:nvOS_count_command:entry/tid == 6978/{ustack();}'
+
+                dtrace -n 'syscall:::entry {@[probefunc]=count();}'
+                dtrace -n 'syscall::ioctl:entry {@[execname]=count();}'
+                dtrace -n 'syscall::ioctl:entry /execname =="nvOSd"/ {@[ustack()]=count();}'
+                /opt/DTT/Bin/iotop
+                /opt/DTT/Bin/iosnoop -Deg
+

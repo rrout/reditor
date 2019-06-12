@@ -734,6 +734,7 @@ EOF
 }
 
 function h_gdb(){
+    cat ~/reditor/bash/bash_help/bash_gdb_help.txt
 cat <<-EOF
         gdb -q -ex "set height 0" -ex "info sources" -ex quit /usr/sbin/pim-sm-d
         (gdb) set substitute-path /build/rrout/ /media/cartman/
@@ -751,6 +752,7 @@ EOF
 }
 
 function h_tcpdump() {
+    cat ~/reditor/bash/bash_help/bash_tcpdump_help.txt
 cat<<-EOF
         https://danielmiessler.com/study/tcpdump/
         tcpdump -i eth0
@@ -783,6 +785,7 @@ EOF
 
 
 function h_dtrace() {
+    cat ~/reditor/bash/bash_help/bash_dtrace_help.txt
 cat<<-EOF
                 dtrace -F -n 'pid6120:a.out::entry/tid == 6978/{}'
                 dtrace -Z -F -n 'fbt::port_show*:entry/execname == "nvOSd"/{}'
@@ -798,6 +801,7 @@ EOF
 
 
 function h_gtags() {
+    cat ~/reditor/bash/bash_help/bash_gtags_help.txt
 cat<<-EOF
         ----------------------
         GTAGS COMMANDS
@@ -833,6 +837,7 @@ EOF
 }
 
 function h_ctags() {
+    cat ~/reditor/bash/bash_help/bash_ctags_help.txt
 cat<<-EOF
         ----------------------
         GTAGS COMMANDS
@@ -872,6 +877,7 @@ EOF
 }
 
 function h_myvim() {
+    cat ~/reditor/bash/bash_help/bash_vim_help.txt
 cat<<-EOF
 	------------------------------
 	MY VIM BINDINGS
@@ -916,6 +922,7 @@ EOF
 }
 
 function h_hg() {
+    cat ~/reditor/bash/bash_help/bash_hg_help.txt
 cat<<-EOF
 	Command                Descreption
 	---------------------- ------------------------------------------
