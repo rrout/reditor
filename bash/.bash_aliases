@@ -491,8 +491,8 @@ if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting CVS_SETTINGS=$BASH_CVS
 if [ "$BASH_CVS_SETTINGS" == "git" ];then
     unset SSH_ASKPASS # https://stackoverflow.com/questions/16077971/git-produces-gtk-warning-cannot-open-display
                     # Solution to : (gnome-ssh-askpass:29241): Gtk-WARNING **: cannot open display
-    alias lsco-a='git status -s'
-    alias lsco-al="git status"
+    alias lsco-a='git status -s --untracked-files=no'
+    alias lsco-al="git status -s --untracked-files=all"
     alias vdiff='git difftool --tool=vimdiff --no-prompt'
     alias cdiff='git diff'
     alias gdlist='git diff --name-status' #'git diff --name-only'

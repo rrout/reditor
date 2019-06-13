@@ -1,0 +1,7 @@
+https://unix.stackexchange.com/questions/32678/how-can-i-list-subdirectories-recursively
+
+tree -d
+ls -lDR | grep ':$' | head | sed -e 's/:$//' | awk '{printf("%-92s \n",$0)}'
+
+ls -R | grep "^[.]/" | sed -e "s/:$//" -e "s/[^/]*[/]/--/g" -e "s/^/ |/"
+
