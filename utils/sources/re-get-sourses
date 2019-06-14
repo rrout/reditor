@@ -1,0 +1,66 @@
+#!/bin/bash
+#set -x
+
+PROG=`basename "$0"`
+function usage {
+    echo "Usage : $PROG option < -get | -del >"
+}
+
+#https://jdhao.github.io/2018/10/16/tmux_build_without_root_priviledge/
+#http://jhshi.me/2016/07/08/installing-tmux-from-source-non-root/index.html#.XQNe8IgzaUk
+#https://liyang85.github.io/how-to-install-the-latest-stable-tmux-on-centos7.html
+
+NCURSES_SRC="http://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.1.tar.gz"
+NCURSES_DIR=`echo "$NCURSES_SRC" | sed -e 's/^.*\///g' | sed -e 's/\.tar.gz$//g'`
+NCURSES_GZ=`echo "$NCURSES_SRC" | sed -e 's/^.*\///g'`
+
+LIBEVENT_SRC="https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz"
+LIBEVENT_DIR=`echo "$LIBEVENT_SRC" | sed -e 's/^.*\///g' | sed -e 's/\.tar.gz$//g'`
+LIBEVENT_GZ=`echo "$LIBEVENT_SRC" | sed -e 's/^.*\///g'`
+
+TMUX_SRC="https://github.com/tmux/tmux/releases/download/3.0/tmux-3.0-rc2.tar.gz"
+TMUX_DIR=`echo "$TMUX_SRC" | sed -e 's/^.*\///g' | sed -e 's/\.tar.gz$//g'`
+TMUX_GZ=`echo "$TMUX_SRC" | sed -e 's/^.*\///g'`
+
+
+
+if [ $# != 1 ]; then
+    usage
+    exit 0
+fi
+
+if [ "$1" == "-get" ] || [ "$1" == "-del" ]; then
+    echo $1
+else
+    echo "Unknown option --- $1"
+    usage
+fi
+
+
+#echo $NCURSES_DEL $LIBEVENT_DEL $TMUX_DEL
+
+if [ "$1" == "-get" ];then
+    #ncurses
+    echo "Downloading  : $NCURSES_SRC"
+    wget $NCURSES_SRC
+
+    #libevent
+    echo "Downloading  : $LIBEVENT_SRC"
+    wget $LIBEVENT_SRC
+
+    #tmux-3.0
+    echo "Downloading  : $TMUX_SRC"
+    wget $TMUX_SRC
+fi
+
+if [ "$1" == "-del" ];then
+    echo "Deleting : $NCURSES_GZ"
+    rm -rf $NCURSES_GZ
+
+    echo "Deleting : $LIBEVENT_GZ"
+    rm -rf $LIBEVENT_GZ
+
+    echo "Deleting : $TMUX_GZ"
+    rm -rf $TMUX_GZ
+fi
+
