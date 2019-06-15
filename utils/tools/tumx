@@ -1,0 +1,15 @@
+#!/bin/bash
+#Alias for tmux to use the local tmux if available
+if [ ! -d ${HOME}/reditor/utils/bin ];then
+    echo "No Directory called ${HOME}/reditor/utils/bin "
+    exit 0
+fi
+
+if [ ! -f ${HOME}/reditor/utils/bin/tmux ];then
+    echo "tmux execuitable is not available ${HOME}/reditor/utils/bin , Loot at global patha and use tmux insteed of tumx (TUMX)"
+    exit 0
+fi
+
+${HOME}/reditor/utils/bin/tmux $1a
+
+#Error: protocol version mismatch (client 8, server 6) . This basically tells you, that you already have an (old) tmux-server running and the new tmux can't connect to it because they don't understand each other anymore. Exit all your existing tmux sessions and start a fresh one using the new version and everything should be fine.

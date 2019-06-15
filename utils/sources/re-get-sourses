@@ -29,11 +29,12 @@ if [ $# != 1 ]; then
     exit 0
 fi
 
-if [ "$1" == "-get" ] || [ "$1" == "-del" ] || [ "$1" == "-install" ] || [ "$1" == "-uninstall" ]; then
+if [ "$1" == "-get" ] || [ "$1" == "-del" ] || [ "$1" == "-install" ] || [ "$1" == "-uninstall" ] || [ "$1" == "-clean" ]; then
     echo $1
 else
     echo "Unknown option --- $1"
     usage
+    exit 0
 fi
 
 
@@ -121,6 +122,21 @@ elif [ "$1" == "-uninstall" ];then
     cd $TMUX_DIR
     # the CPPFLAGS and LDFLAGS are important, make sure you have written them correctly, or the build will fail
     make uninstall
+elif [ "$1" == "-clean" ];then
+
+    echo "Cleaning : $NCURSES_GZ"
+    cd $NCURSES_DIR
+    make clean
+
+    echo "Cleaning : $LIBEVENT_GZ"
+    cd -
+    cd $LIBEVENT_DIR
+    make clean
+
+    echo "Cleaning : $TMUX_GZ"
+    cd -
+    cd $TMUX_DIR
+    make clean
 else
     echo "Unknown Command --- $1"
 fi
