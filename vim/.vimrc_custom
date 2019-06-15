@@ -604,6 +604,10 @@ if &term =~ "xterm"
 	let &t_SI = "\<Esc>]12;purple\x7"
 	let &t_EI = "\<Esc>]12;blue\x7"
     autocmd VimLeave * silent !echo -ne "\033]112\007"
+    "Reset cursor on VimLeave
+    "autocmd VimLeave * silent !echo -ne '\033]12;green\007'
+    "autocmd VimLeave * silent !echo -ne "\e]12;green\a"
+    "autocmd VimLeave * silent !printf '%b' '\e]12;green\a'
 endif
 
 			":autocmd InsertEnter,InsertLeave * set cul

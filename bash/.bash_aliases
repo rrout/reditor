@@ -150,7 +150,8 @@ shopt -s histappend
 #PROMPT_COMMAND="$PROMPT_COMMAND history -a; history -c; history -r"
 #PROMPT_COMMAND="$PROMPT_COMMAND history -a"
 #export PROMPT_COMMAND='history -a; history -r'
-PROMPT_COMMAND='history -a'
+#PROMPT_COMMAND='history -a'
+PROMPT_COMMAND='echo -ne "\033]12;green\007"; history -a'
 # Have lots of history
 HISTSIZE=100000         # remember the last 100000 commands
 HISTFILESIZE=100000     # start truncating commands after 100000 lines
