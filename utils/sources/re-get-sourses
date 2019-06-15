@@ -3,7 +3,7 @@
 
 PROG=`basename "$0"`
 function usage {
-    echo "Usage : $PROG option < -get | -del >"
+    echo "Usage : $PROG option < -get | -del | -install>"
 }
 
 #https://jdhao.github.io/2018/10/16/tmux_build_without_root_priviledge/
@@ -29,7 +29,7 @@ if [ $# != 1 ]; then
     exit 0
 fi
 
-if [ "$1" == "-get" ] || [ "$1" == "-del" ]; then
+if [ "$1" == "-get" ] || [ "$1" == "-del" ] || [ "$1" == "-install" ] || [ "$1" == "-uninstall" ]; then
     echo $1
 else
     echo "Unknown option --- $1"
@@ -51,16 +51,77 @@ if [ "$1" == "-get" ];then
     #tmux-3.0
     echo "Downloading  : $TMUX_SRC"
     wget $TMUX_SRC
-fi
 
-if [ "$1" == "-del" ];then
+elif [ "$1" == "-del" ];then
+
     echo "Deleting : $NCURSES_GZ"
     rm -rf $NCURSES_GZ
+    rm -rf $NCURSES_DIR
 
     echo "Deleting : $LIBEVENT_GZ"
     rm -rf $LIBEVENT_GZ
+    rm -rf $LIBEVENT_DIR
 
     echo "Deleting : $TMUX_GZ"
     rm -rf $TMUX_GZ
+    rm -rf $TMUX_DIR
+
+elif [ "$1" == "-install" ];then
+
+    export INSTALL_DIR="$HOME/reditor/utils"
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$INSTALL_DIR/lib
+
+    echo "Installing : $NCURSES_GZ"
+    tar zxvf $NCURSES_GZ
+    cd $NCURSES_DIR
+    #./configure --prefix="$HOME/reditor/utils"
+    ./configure --prefix=$INSTALL_DIR
+    make -j
+    make install
+
+    echo "Installing : $LIBEVENT_GZ"
+    cd -
+    tar zxvf $LIBEVENT_GZ
+    cd $LIBEVENT_DIR
+    # install libevent under $HOME/local
+    #./configure --prefix="$HOME/reditor/utils"a
+    ./configure --prefix=$INSTALL_DIR
+    make -j
+    make install
+
+    echo "Installing : $TMUX_GZ"
+    cd -
+    tar zxvf $TMUX_GZ
+    cd $TMUX_DIR
+    # the CPPFLAGS and LDFLAGS are important, make sure you have written them correctly, or the build will fail
+    #./configure --prefix="$HOME/reditor/utils" CPPFLAGS="-I$HOME/reditor/utils/include -I$HOME/reditor/utils/include/ncurses" LDFLAGS="-L$HOME/reditor/utils/lib"
+
+    ./configure --prefix=$INSTALL_DIR CPPFLAGS="-I$INSTALL_DIR/include -I$INSTALL_DIR/include/ncurses" LDFLAGS="-L$INSTALL_DIR/lib" CFLAGS="-I$INSTALL_DIR/include"
+
+    #./configure --prefix=$HOME/reditor/utils \
+    #CPPFLAGS="-I$HOME/reditor/utils/include -I$HOME/reditor/utils/include/ncurses" \
+    #LDFLAGS="-L$HOME/reditor/utils/lib" \
+    #CFLAGS="-I$HOME/reditor/utils/include"
+    make -j
+    make install
+elif [ "$1" == "-uninstall" ];then
+
+    echo "Uninstalling : $NCURSES_GZ"
+    cd $NCURSES_DIR
+    make uninstall
+
+    echo "Uninstalling : $LIBEVENT_GZ"
+    cd -
+    cd $LIBEVENT_DIR
+    # install libevent under $HOME/local
+    make uninstall
+
+    echo "Uninstalling : $TMUX_GZ"
+    cd -
+    cd $TMUX_DIR
+    # the CPPFLAGS and LDFLAGS are important, make sure you have written them correctly, or the build will fail
+    make uninstall
+else
+    echo "Unknown Command --- $1"
 fi
 

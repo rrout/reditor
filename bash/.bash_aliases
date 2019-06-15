@@ -107,10 +107,33 @@ if [ "$BASH_LOCALUSERPATH_SETTINGS" == "yes" ];then
 if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting LOCALUSERPATH_SETTINGS=$BASH_LOCALUSERPATH_SETTINGS ........"; fi
 # Add local tools to main path
 #export PATH="$PATH:~/utils/bin:~/utils/tools"
+pathappend ${HOME}/.local/bin
+#export MANPATH=${MANPATH}:/usr/local/man
+#export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:${HOME}/utils/lib
+fi
+
+
+if [ "$BASH_REDITOR_USE_BIN_RPATH_SETTINGS" == "yes" ];then
+if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting REDITOR_USERPATH_SETTINGS=$BASH_REDITOR_USE_BIN_RPATH_SETTINGS ........"; fi
+# Add reditor tools to main path
 pathappend ~/reditor/utils/bin
 pathappend ~/reditor/utils/tools
 #export MANPATH=${MANPATH}:/usr/local/man
 #export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:${HOME}/utils/lib
+fi
+
+if [ "$BASH_REDITOR_USER_MAN_PATH_SETTINGS" == "yes" ];then
+if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting REDITOR_MAN_PATH_SETTINGS=$BASH_REDITOR_USER_MAN_PATH_SETTINGS ........"; fi
+# Add reditor Manual  to main Mamual path
+#export MANPATH=${MANPATH}:/usr/local/man
+export MANPATH=${MANPATH}:${HOME}/reditor/utils/man
+fi
+
+if [ "$BASH_REDITOR_USER_LD_LIB_PATH_SETTINGS" == "yes" ];then
+if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting REDITOR_LD_LIB_PATH_SETTINGS=$BASH_REDITOR_USER_LD_LIB_PATH_SETTINGS ........"; fi
+# Add reditor LD_LIB to main LD_LIB path
+#export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:${HOME}/utils/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${HOME}/reditor/utils/lib
 fi
 
 if [ "$BASH_HISTORY_SETTINGS" == "yes" ];then
