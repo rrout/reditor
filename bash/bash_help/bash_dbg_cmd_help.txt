@@ -1,0 +1,24 @@
+    Command                         Descreption
+    ------------------------------- ------------------------------------------
+    prtstat <pid>                   Statistics of a process. "prtstat" shows the CPU affinity,
+                                    threads, state, process, group and sessions ID, page faults,
+                                    CPU times, memory and scheduling information of a process.
+    lsof -a -p <pid>                Files opened by a process : lsof will show all the files a
+                                    running process has opened. That includes regular files, directories,
+                                    block special files, character special files, executing text references,
+                                    libraries, stream or network files (Internet socket, NFS file or UNIX domain socket).
+    pstack pid                      PID Process stack : GDB Impl , < gdb --q --n --ex bt --batch --pid PID >
+    strace -c -p pid                Print just in time systemcall statistics : type strace -c -p pid.
+                                    After a second or two, press Ctrl-C and see output statistics
+                                    strace ls
+                                    strace -e open ls
+                                    strace -e trace=open,read ls /home
+    nm                              nm -guA *.o | grep foo
+                                    nm -gA /usr/lib/* | grep foo
+                                    nm -guC *.o
+    objdump                         objdump --demangle --source myobject.oa
+                                    READ: https://www.linuxjournal.com/article/7330
+    ldd
+    readelf
+
+

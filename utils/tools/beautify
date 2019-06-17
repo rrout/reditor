@@ -35,10 +35,11 @@ while(<STDIN>) {
         s/Info/\e[0;32m$&\e[0m/gi;                          #info replacement in green
         s/Warning|Warn/\e[1;33m$&\e[0m/gi;                  #warning replacement in yellow
         s/Cleaning|Clean/\e[1;33m$&\e[0m/gi;                #warning replacement in yellow
-        s/Log|Logfile|Logging|Syslog/\e[1;33m$&\e[0m/gi;           #warning replacement in yellow
+        s/Log|Logfile|Logging|Syslog/\e[1;33m$&\e[0m/gi;    #warning replacement in yellow
         s/Package|Packages/\e[1;33m$&\e[0m/gi;              #warning replacement in green bold
         s/Collect/\e[0;35m$&\e[0m/gi;                       #info replacement in magnenta normal
-        s/git|rm|grep|cat|mkdir/\e[0;31m$&\e[0m/gi;                   #info replacement in magnenta normal
+        s/\bgit\b|\brm\b|\bgrep\b/\e[0;31m$&\e[0m/gi;       #info replacement in magnenta normal
+        s/\bcat\b|\bmkdir\b/\e[0;31m$&\e[0m/gi;             #info replacement in magnenta normal
         s/Success|Succeeded|Succeed/\e[1;32m$&\e[0m/gi;     #info replacement in green bold
         s/Failed|Fail/\e[1;31m$&\e[0m/gi;                   #info replacement in red bold
         s/Compiling|Compile/\e[1;35m$&\e[0m/gi;             #info replacement in magnenta bold
@@ -47,8 +48,8 @@ while(<STDIN>) {
         s/gcc/\e[1;35m$&\e[0m/gi;                           #info replacement in magnenta bold
         s/'g++'/\e[1;35m$&\e[0m/gi;                         #info replacement in magnenta bold
         s/Makefile|Make/\e[0;35m$&\e[0m/gi;                 #info replacement in magnenta normal
-        s/Building|Build/\e[0;35m$&\e[0m/gi;                #info replacement in magnenta normal
-        s/Error/\e[1;31m$&\e[0m/gi;                         #info replacement in red bold
+        s/\bBuilding\b|\bBuild\b/\e[0;35m$&\e[0m/gi;        #info replacement in magnenta normal
+        s/Error|Errors/\e[1;31m$&\e[0m/gi;                  #info replacement in red bold
         s/Summary/\e[1;34m$&\e[0m/gi;                       #info replacement in blue bold
         # s/Succ.*/\e[1;32m$&\e[0m/gi;                        #info replacement in green bold (COLOR entire line after .*)
         # s/\bError\b/\e[1;31m$&\e[0m/gi;                     #info replacement in red bold (word bound - only specific word match)a

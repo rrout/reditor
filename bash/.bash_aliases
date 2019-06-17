@@ -113,11 +113,11 @@ pathappend ${HOME}/.local/bin
 fi
 
 
-if [ "$BASH_REDITOR_USE_BIN_RPATH_SETTINGS" == "yes" ];then
+if [ "$BASH_REDITOR_USER_BIN_PATH_SETTINGS" == "yes" ];then
 if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting REDITOR_USERPATH_SETTINGS=$BASH_REDITOR_USE_BIN_RPATH_SETTINGS ........"; fi
 # Add reditor tools to main path
-pathappend ~/reditor/utils/bin
-pathappend ~/reditor/utils/tools
+pathappend ${HOME}/reditor/utils/bin
+pathappend ${HOME}/reditor/utils/tools
 #export MANPATH=${MANPATH}:/usr/local/man
 #export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:${HOME}/utils/lib
 fi
@@ -674,11 +674,11 @@ fi
 
 if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting ORG_SETTINGS=$BASH_ORG_SETTINGS ........"; fi
 if [ "$BASH_ORG_SETTINGS" == "brcd" ];then
-source ~/reditor/bash/.bashrc_custom_profile_user_brcd
+source ${HOME}/reditor/bash/.bashrc_custom_profile_user_brcd
 elif [ "$BASH_ORG_SETTINGS" == "pn" ];then
-source ~/reditor/bash/.bashrc_custom_profile_user_pn
+source ${HOME}/reditor/bash/.bashrc_custom_profile_user_pn
 elif [ "$BASH_ORG_SETTINGS" == "fnc" ];then
-source ~/reditor/bash/.bashrc_custom_profile_user_fnc
+source ${HOME}/reditor/bash/.bashrc_custom_profile_user_fnc
 fi
 
 function h_tmux()
@@ -758,7 +758,7 @@ EOF
 }
 
 function h_gdb(){
-    cat ~/reditor/bash/bash_help/bash_gdb_help.txt
+    cat ${HOME}/reditor/bash/bash_help/bash_gdb_help.txt
 cat <<-EOF
         gdb -q -ex "set height 0" -ex "info sources" -ex quit /usr/sbin/pim-sm-d
         (gdb) set substitute-path /build/rrout/ /media/cartman/
@@ -776,7 +776,7 @@ EOF
 }
 
 function h_tcpdump() {
-    cat ~/reditor/bash/bash_help/bash_tcpdump_help.txt
+    cat ${HOME}/reditor/bash/bash_help/bash_tcpdump_help.txt
 cat<<-EOF
         https://danielmiessler.com/study/tcpdump/
         tcpdump -i eth0
@@ -809,7 +809,7 @@ EOF
 
 
 function h_dtrace() {
-    cat ~/reditor/bash/bash_help/bash_dtrace_help.txt
+    cat ${HOME}/reditor/bash/bash_help/bash_dtrace_help.txt
 cat<<-EOF
                 dtrace -F -n 'pid6120:a.out::entry/tid == 6978/{}'
                 dtrace -Z -F -n 'fbt::port_show*:entry/execname == "nvOSd"/{}'
@@ -825,7 +825,7 @@ EOF
 
 
 function h_gtags() {
-    cat ~/reditor/bash/bash_help/bash_gtags_help.txt
+    cat ${HOME}/reditor/bash/bash_help/bash_gtags_help.txt
 cat<<-EOF
         ----------------------
         GTAGS COMMANDS
@@ -861,7 +861,7 @@ EOF
 }
 
 function h_ctags() {
-    cat ~/reditor/bash/bash_help/bash_ctags_help.txt
+    cat ${HOME}/reditor/bash/bash_help/bash_ctags_help.txt
 cat<<-EOF
         ----------------------
         GTAGS COMMANDS
@@ -901,7 +901,7 @@ EOF
 }
 
 function h_myvim() {
-    cat ~/reditor/bash/bash_help/bash_vim_help.txt
+    cat ${HOME}/reditor/bash/bash_help/bash_vim_help.txt
 cat<<-EOF
 	------------------------------
 	MY VIM BINDINGS
@@ -946,7 +946,7 @@ EOF
 }
 
 function h_hg() {
-    cat ~/reditor/bash/bash_help/bash_hg_help.txt
+    cat ${HOME}/reditor/bash/bash_help/bash_hg_help.txt
 cat<<-EOF
 	Command                Descreption
 	---------------------- ------------------------------------------
@@ -964,7 +964,7 @@ EOF
 }
 
 function h_git() {
-    cat ~/reditor/bash/bash_help/bash_git_help.txt
+    cat ${HOME}/reditor/bash/bash_help/bash_git_help.txt
 cat<<-EOF
     Command                                           Descreption
     ------------------------------------------------- ------------------------------------------

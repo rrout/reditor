@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#On most unix systems, you can use GDB.
+#https://unix.stackexchange.com/questions/166541/how-to-know-where-a-program-is-stuck-in-linux
+PROG=`basename "$0"`
+function usage {
+    echo "Usage : $PROG <pid>"
+}
+
+
+if [ $# == 0 ]; then
+    usage
+    exit 0
+fi
+
+gdb -batch -ex bt -p $1
+
+
+#-----------------
+
+#The following script works for me on linux Please note that it first finds out the directory of the executable and changes to that directory (because executable can have shared libraries with relative path by using -Wl,-rpath,$dir specified during linking, and you would like gdb to find the symbols for these shared libraries for the stack trace). It also assumes that gdb is present on the system.
+
+#    #!/bin/bash
+#    pid=$1
+#    EXE=`readlink -f /proc/$pid/exe`
+#    DIR=`dirname $EXE`
+#    cd $DIR
+#    gdb $EXE --batch -ex "attach $pid" -ex "thread apply all bt"
+
+#---------------------

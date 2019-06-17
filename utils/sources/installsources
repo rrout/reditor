@@ -1,0 +1,153 @@
+#!/bin/bash
+#set -x
+
+DBG=yes
+
+PROG=`basename "$0"`
+function usage {
+    echo "Usage : $PROG option < -get | -del | -install | -uninstall | -clean>"
+}
+
+function exicute_cmd {
+    if [ "$DBG" == "yes" ];then
+        echo "DBG=$DBG [cmd] : $@"
+        return
+    fi
+    $@
+}
+
+#https://jdhao.github.io/2018/10/16/tmux_build_without_root_priviledge/
+#http://jhshi.me/2016/07/08/installing-tmux-from-source-non-root/index.html#.XQNe8IgzaUk
+#https://liyang85.github.io/how-to-install-the-latest-stable-tmux-on-centos7.html
+
+NCURSES_SRC="http://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.1.tar.gz"
+NCURSES_DIR=`echo "$NCURSES_SRC" | sed -e 's/^.*\///g' | sed -e 's/\.tar.gz$//g'`
+NCURSES_GZ=`echo "$NCURSES_SRC" | sed -e 's/^.*\///g'`
+
+LIBEVENT_SRC="https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz"
+LIBEVENT_DIR=`echo "$LIBEVENT_SRC" | sed -e 's/^.*\///g' | sed -e 's/\.tar.gz$//g'`
+LIBEVENT_GZ=`echo "$LIBEVENT_SRC" | sed -e 's/^.*\///g'`
+
+TMUX_SRC="https://github.com/tmux/tmux/releases/download/3.0/tmux-3.0-rc2.tar.gz"
+TMUX_DIR=`echo "$TMUX_SRC" | sed -e 's/^.*\///g' | sed -e 's/\.tar.gz$//g'`
+TMUX_GZ=`echo "$TMUX_SRC" | sed -e 's/^.*\///g'`
+
+
+
+if [ $# != 1 ]; then
+    usage
+    exit 0
+fi
+
+if [ "$1" == "-get" ] || [ "$1" == "-del" ] || [ "$1" == "-install" ] || [ "$1" == "-uninstall" ] || [ "$1" == "-clean" ]; then
+    echo $1
+else
+    echo "Unknown option --- $1"
+    usage
+    exit 0
+fi
+
+
+#echo $NCURSES_DEL $LIBEVENT_DEL $TMUX_DEL
+
+if [ "$1" == "-get" ];then
+    #ncurses
+    exicute_cmd echo "Downloading  : $NCURSES_SRC"
+    exicute_cmd wget $NCURSES_SRC
+
+    #libevent
+    exicute_cmd echo "Downloading  : $LIBEVENT_SRC"
+    exicute_cmd wget $LIBEVENT_SRC
+
+    #tmux-3.0
+    exicute_cmd echo "Downloading  : $TMUX_SRC"
+    exicute_cmd wget $TMUX_SRC
+
+elif [ "$1" == "-del" ];then
+
+    exicute_cmd echo "Deleting : $NCURSES_GZ $NCURSES_DIR"
+    exicute_cmd rm -rf $NCURSES_GZ
+    exicute_cmd rm -rf $NCURSES_DIR
+
+    exicute_cmd echo "Deleting : $LIBEVENT_GZ $LIBEVENT_DIR"
+    exicute_cmd rm -rf $LIBEVENT_GZ
+    exicute_cmd rm -rf $LIBEVENT_DIR
+
+    exicute_cmd echo "Deleting : $TMUX_GZ $TMUX_DIR"
+    exicute_cmd rm -rf $TMUX_GZ
+    exicute_cmd rm -rf $TMUX_DIR
+
+elif [ "$1" == "-install" ];then
+
+    exicute_cmd export INSTALL_DIR="$HOME/reditor/utils"
+    exicute_cmd export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$INSTALL_DIR/lib
+
+    exicute_cmd echo "Installing : $NCURSES_GZ"
+    exicute_cmd tar zxvf $NCURSES_GZ
+    exicute_cmd cd $NCURSES_DIR
+    #./configure --prefix="$HOME/reditor/utils"
+    exicute_cmd ./configure --prefix=$INSTALL_DIR
+    exicute_cmd make -j
+    exicute_cmd make install
+
+    exicute_cmd echo "Installing : $LIBEVENT_GZ"
+    exicute_cmd cd -
+    exicute_cmd tar zxvf $LIBEVENT_GZ
+    exicute_cmd cd $LIBEVENT_DIR
+    # install libevent under $HOME/local
+    #./configure --prefix="$HOME/reditor/utils"
+    exicute_cmd ./configure --prefix=$INSTALL_DIR
+    exicute_cmd make -j
+    exicute_cmd make install
+
+    exicute_cmd echo "Installing : $TMUX_GZ"
+    exicute_cmd cd -
+    exicute_cmd tar zxvf $TMUX_GZ
+    exicute_cmd cd $TMUX_DIR
+    # the CPPFLAGS and LDFLAGS are important, make sure you have written them correctly, or the build will fail
+    #./configure --prefix="$HOME/reditor/utils" CPPFLAGS="-I$HOME/reditor/utils/include -I$HOME/reditor/utils/include/ncurses" LDFLAGS="-L$HOME/reditor/utils/lib"
+
+    exicute_cmd ./configure --prefix=$INSTALL_DIR CPPFLAGS="-I$INSTALL_DIR/include -I$INSTALL_DIR/include/ncurses" LDFLAGS="-L$INSTALL_DIR/lib" CFLAGS="-I$INSTALL_DIR/include"
+
+    #./configure --prefix=$HOME/reditor/utils \
+    #CPPFLAGS="-I$HOME/reditor/utils/include -I$HOME/reditor/utils/include/ncurses" \
+    #LDFLAGS="-L$HOME/reditor/utils/lib" \
+    #CFLAGS="-I$HOME/reditor/utils/include"
+    exicute_cmd make -j
+    exicute_cmd make install
+elif [ "$1" == "-uninstall" ];then
+
+    exicute_cmd echo "Uninstalling : $NCURSES_GZ"
+    exicute_cmd cd $NCURSES_DIR
+    exicute_cmd make uninstall
+
+    exicute_cmd echo "Uninstalling : $LIBEVENT_GZ"
+    exicute_cmd cd -
+    exicute_cmd cd $LIBEVENT_DIR
+    # install libevent under $HOME/local
+    exicute_cmd make uninstall
+
+    exicute_cmd echo "Uninstalling : $TMUX_GZ"
+    exicute_cmd cd -
+    exicute_cmd cd $TMUX_DIR
+    # the CPPFLAGS and LDFLAGS are important, exicute_cmd make sure you have written them correctly, or the build will fail
+    exicute_cmd make uninstall
+elif [ "$1" == "-clean" ];then
+
+    exicute_cmd echo "Cleaning : $NCURSES_GZ"
+    exicute_cmd cd $NCURSES_DIR
+    exicute_cmd make clean
+
+    exicute_cmd echo "Cleaning : $LIBEVENT_GZ"
+    exicute_cmd cd -
+    exicute_cmd cd $LIBEVENT_DIR
+    exicute_cmd make clean
+
+    exicute_cmd echo "Cleaning : $TMUX_GZ"
+    exicute_cmd cd -
+    exicute_cmd cd $TMUX_DIR
+    exicute_cmd make clean
+else
+    exicute_cmd echo "Unknown Command --- $1"
+fi
+
