@@ -3,7 +3,7 @@
 
 PROG=`basename "$0"`
 function usage {
-    echo "Usage : $PROG option < -get | -del | -install>"
+    echo "Usage : $PROG option < -get | -del | -install | -uninstall | -clean>"
 }
 
 #https://jdhao.github.io/2018/10/16/tmux_build_without_root_priviledge/
@@ -55,15 +55,15 @@ if [ "$1" == "-get" ];then
 
 elif [ "$1" == "-del" ];then
 
-    echo "Deleting : $NCURSES_GZ"
+    echo "Deleting : $NCURSES_GZ $NCURSES_DIR"
     rm -rf $NCURSES_GZ
     rm -rf $NCURSES_DIR
 
-    echo "Deleting : $LIBEVENT_GZ"
+    echo "Deleting : $LIBEVENT_GZ $LIBEVENT_DIR"
     rm -rf $LIBEVENT_GZ
     rm -rf $LIBEVENT_DIR
 
-    echo "Deleting : $TMUX_GZ"
+    echo "Deleting : $TMUX_GZ $TMUX_DIR"
     rm -rf $TMUX_GZ
     rm -rf $TMUX_DIR
 
