@@ -1,8 +1,8 @@
-#NCURSES        wget    http://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.1.tar.gz
-LIBEVENT       wget    https://github.com/libevent/libevent/releases/donload/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz
+NCURSES        wget    http://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.1.tar.gz
+LIBEVENT       wget    https://github.com/libevent/libevent/releases/download/release-2.1.10-stable/libevent-2.1.10-stable.tar.gz
 
-#TMUX           wget    https://github.com/tmux/tmux/releases/download/3.0/tmux-3.0-rc2.tar.gz
-AG              git     https://github.com/ggreer/the_silver_searcher.git
+TMUX           wget    https://github.com/tmux/tmux/releases/download/3.0/tmux-3.0-rc3.tar.gz
+AG             git     https://github.com/ggreer/the_silver_searcher.git
 
 
 

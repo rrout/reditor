@@ -1,7 +1,9 @@
 #!/bin/bash
 #set -x
 
-DBG=yes
+DBG=no               # [ yes | no ]
+LOGFILE=
+LOGFILE="buildlog.log"
 
 PROG=`basename "$0"`
 function usage {
@@ -11,6 +13,11 @@ function usage {
 function exicute_cmd {
     if [ "$DBG" == "yes" ];then
         echo "DBG=$DBG [cmd] : $@"
+        return
+    fi
+    echo "Execute     : $@"
+    if [ "${LOGFILE}" != "" ];then
+        $@ >>$LOGFILE
         return
     fi
     $@
@@ -45,9 +52,8 @@ do
     DWNLD_CMD=`echo $LINE|awk '{print $2}'`
     DWNLD_URL=`echo $LINE|awk '{print $3}'`
     echo $DWNLD_SCRIPT $DWNLD_CMD $DWNLD_URL
-    echo "READ LINE : $line"
+    echo "READ LINE    : $line"
     exicute_cmd bash $DWNLD_SCRIPT.sh $1 $DWNLD_CMD $DWNLD_URL
-    bash $DWNLD_SCRIPT.sh $1 $DWNLD_CMD $DWNLD_URL
 done < "$input"
 
 

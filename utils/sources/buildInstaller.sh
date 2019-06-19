@@ -1,7 +1,10 @@
 #!/bin/bash
 #set -x
+#set -f
+DBG=no
+LOGFILE=
+LOGFILE="buildlog.log"
 
-DBG=yes
 
 PROG=`basename "$0"`
 function usage {
@@ -11,6 +14,11 @@ function usage {
 function exicute_cmd {
     if [ "$DBG" == "yes" ];then
         echo "DBG=$DBG [cmd] : $@"
+        return
+    fi
+    echo "Execute   : $@"
+    if [ "${LOGFILE}" != "" ];then
+        $@ >>$LOGFILE
         return
     fi
     $@
@@ -28,6 +36,10 @@ else
     echo "Unknown option --- $1"
     usage
     exit 0
+fi
+
+if [ "$2" == "-dbg" ];then
+    DBG=yes
 fi
 
 input="${HOME}/reditor/utils/sources/DownloadUrlList.txt"
