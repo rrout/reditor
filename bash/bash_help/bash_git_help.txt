@@ -3,15 +3,26 @@
     git log <-Num>                                      Show list of changesets
     git log  origin/<branch-name>..HEAD                 Show logs (changesets) between remote branch and HEAD (do git fetch)
     git log  HEAD..origin/<branch-name>                 Show logs (changesets)  HEAD and remote branch (do git fetch)
-    -----
+    git remote -v
+    git log -p
+    REBASE----------------------------------------------
     git rebase -i HEAD~4 + git push --force             Squash : merge multiple commit to one (git push origin branch-name --force)
-    git diff  --name-status --oneline HEAD~5 HEAD       Show diff between commits  git diff  --name-status --oneline <changeset> <changeset>
-    -----
     git remote -v                                       Print Remote name and URL
-    git rebase origin/<BRANCH>                          Rebase HEAD from BRANCH 
+    git rebase origin/<BRANCH>                          Rebase HEAD from BRANCH
+    INCOMING/OUTGOING-----------------------------------
     git fetch && git log  origin/<BRANCH>..HEAD         Out Going changes to BRANCH from HEAD
     git fetch && git log  HEAD..origin/<BRANCH>         Incoming changes from BRANCH to HEAD
-    -----
     git out                                             git log @{u}.. OR git log @{upstream}..
     git out                                             git log --pretty=oneline --abbrev-commit --graph @{u}..
     git in                                              git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}
+    DIFF-------------------------------------------------------------------
+    git diff --name-status [SHA1 [SHA2]]                Show files modified in or between the commit
+    git diff  --name-status --oneline HEAD~5 HEAD       Show diff between commits  git diff  --name-status --oneline <changeset> <changeset>
+    TEMPORARY COMMITS----------------------------------
+    ---------Temporarily store modified, tracked files in order to change branches---------------------
+    git stash                                           Save modified and staged changes
+    git stash list                                      list stack-order of stashed file changes
+    git stash pop                                       write working from top of stash stack
+    git stash drop                                      discard the changes from top of stash stack
+    COLORFUL------------------------------------------
+    git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit

@@ -965,12 +965,5 @@ EOF
 
 function h_git() {
     cat ${HOME}/reditor/bash/bash_help/bash_git_help.txt
-cat<<-EOF
-    Command                                           Descreption
-    ------------------------------------------------- ------------------------------------------
-    git log                                           Show list of changesets
-    git rebase -i HEAD~4 + git push --force           Squash : merge multiple commit to one (git push origin branch-name --force)
-    git diff  --name-status --oneline HEAD~5 HEAD     Show diff between commits  git diff  --name-status --oneline <changeset> <changeset>
-EOF
 }
 

@@ -659,7 +659,7 @@ set guifont=Monospace\ 12
 			"match ErrorMsg '\%#'
 
 "kg program
-let g:kgprg=$HOME."/utils/bin/kg --column"
+let g:kgprg=$HOME."/reditor/utils/bin/kg --column"
 "ack search program - install ack
 let g:akprg="/usr/bin/ack --column"
 
