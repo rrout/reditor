@@ -563,16 +563,18 @@ exec "colorscheme  ".g:vim_background_color_scheme
 			" Odds n Ends
 			"set ttymouse=xterm2 " makes it work in everything
 
-
-
-let Tlist_Ctags_Cmd='~/utils/bin/ctags'
-let g:ctags_path='~/utils/bin/ctags'
-let g:ctags_args='-I __declspec+'
+"------------------------------------------------------------
+"ctags.vim Configuration if you enable ctags status line and ctags is not in your path
+"Uncomment below 4 lines touching left
+"------------------------------------------------------------
+"let Tlist_Ctags_Cmd='~/utils/bin/ctags'
+"let g:ctags_path='~/utils/bin/ctags'
+"let g:ctags_args='-I __declspec+'
 			""   (or whatever other additional arguments you want to pass to ctags)
 			"let g:ctags_statusline=2    " To show tag name in status line.
-let generate_tags=1 " To start automatically when a supported  file is opened.
+"let generate_tags=1 " To start automatically when a supported  file is opened.
 
-
+"-------------------------------------------------------------
 
 
 
