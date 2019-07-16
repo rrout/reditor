@@ -41,8 +41,9 @@ alias tmux="tmux -2"
 alias ts="tmux new -s"
 alias ta="tmux a -t"
 alias t-ls="tmux ls"
-alias th="tmux_help"
+alias th="h_tmux"
 
+alias t2s="tumx new -s"
 fi
 
 if [ "$BASH_USERALIAS_SETTINGS" == "yes" ];then

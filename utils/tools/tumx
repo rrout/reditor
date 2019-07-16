@@ -12,6 +12,6 @@ fi
 
 #${HOME}/reditor/utils/bin/tmux  $1
 
-${HOME}/reditor/utils/bin/tmux  $@
+${HOME}/reditor/utils/bin/tmux  -2 $@
 
 #Error: protocol version mismatch (client 8, server 6) . This basically tells you, that you already have an (old) tmux-server running and the new tmux can't connect to it because they don't understand each other anymore. Exit all your existing tmux sessions and start a fresh one using the new version and everything should be fine.
