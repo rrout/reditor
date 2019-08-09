@@ -35,3 +35,15 @@ PS1=$GITPS
 
 source /proj/common/tools/repo/etc/profile.d/repo.sh
 
+if [ -f /proj/common/tools/repo/etc/profile.d/repo.sh ]; then
+    source /proj/common/tools/repo/etc/profile.d/repo.sh
+fi
+
+if [ -f /opt/iprepo/repo/etc/profile.d/repo.sh ]; then
+    source /opt/iprepo/repo/etc/profile.d/repo.sh
+fi
+
+if [ -f ~/bin/git-proxy ]; then
+    export GIT_PROXY_COMMAND=~/bin/git-proxy
+fi
+

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+PROG=`basename "$0"`
+function usage {
+    echo "Usage : $PROG <Project Name>"
+    echo "Example"
+    echo "        : $PROG Project1"
+    echo "        : $PROG Project2"
+
+}
+
+function go {
+    echo "Now Set the mechiene type"
+    echo "  source poky/xxx-init-build-env –m <mechiene>"
+    echo "============ MACHENE TYPES =========="
+    repoListmachenies
+    echo "Build"
+    echo "      bitbake -vf image-minimal"
+    echo "      bitbake image-full-prod"
+    echo "      bitbake -c compile component -fv"
+    echo "      bitbake -f -c cleanall component"
+    echo "============TARGETS=================="
+    repoListTargets
+}
+
+if [ $# != 1 ]; then
+    usage
+    exit 0
+fi
+
+if [ -f /opt/iprepo/repo/etc/profile.d/repo.sh ]; then
+    source /proj/common/tools/repo/etc/profile.d/repo.sh
+fi
+if [ -f /proj/common/tools/repo/etc/profile.d/repo.sh ]; then
+    source /proj/common/tools/repo/etc/profile.d/repo.sh
+fi
+repo project init $1
+repo project sync
+cd poky
+go
+
+

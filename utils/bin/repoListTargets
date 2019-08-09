@@ -1,0 +1,35 @@
+#!/bin/bash
+
+PROG=`basename "$0"`
+
+if [ $# != 0 ]; then
+    echo "Should not specify argument"
+    exit 0
+fi
+
+#https://stackoverflow.com/questions/37742243/bitbake-list-of-targets
+#To list the pre-defined Yocto images, run the following command from your poky directory
+#ls meta*/recipes*/images/*.bb
+#ls meta*/recipes*/images/*.bb | sed -e 's,^\(.*\)\.bb,\1,'
+
+POKYROOTDIR=`basename "$PWD"`
+#echo $POKYROOTDIR
+if [[ $POKYROOTDIR != "poky" ]];then
+    echo "You are not on poky (Poky) Directory"
+    exit 0
+fi
+POKYROOTDIR=$PWD
+#echo $POKYROOTDIR
+
+function showAllTargets {
+    echo "Images:"
+    for i in `ls $POKYROOTDIR/meta*/recipes-*/images/*.bb 2>/dev/null`;do
+        i=`basename $i`;i=`echo $i |sed -e 's,^\(.*\)\.bb,\1,'`
+        echo "    $i";
+    done
+}
+
+echo "All Possible Targets"
+ls meta*/recipes*/images/*.bb | sed -e 's/^.*\///g' | sed -e 's/\.bb$//g' | awk '// {print "           " $0}'
+
+
