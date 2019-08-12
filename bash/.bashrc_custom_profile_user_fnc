@@ -31,6 +31,8 @@ GREY="\[\033[0;37m\]"
 WHITE="\[\033[1;37m\]"
 
 GITPS="$BGREEN[\u@\h ${BBLUE}\w${GREEN}"'$(__git_ps1 " (%s)")'"${BGREEN}]${NORMAL}\\n$ "
+GITPS3="${BGREEN}\u@\h\${BBLUE} \w$(__git_ps1) \$\[\033[00m\]"
+GITBASHPS="\[\033[32m\]\u@\h \[\033[35m\]`uname` \[\033[33m\]\w\[\033[36m\]$(__git_ps1)\[\033[0m\]\n$ "
 PS1=$GITPS
 
 source /proj/common/tools/repo/etc/profile.d/repo.sh
@@ -41,6 +43,7 @@ fi
 
 if [ -f /opt/iprepo/repo/etc/profile.d/repo.sh ]; then
     source /opt/iprepo/repo/etc/profile.d/repo.sh
+    PS1=$GITPS3
 fi
 
 if [ -f ~/bin/git-proxy ]; then
