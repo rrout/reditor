@@ -175,7 +175,7 @@ hi Debug            ctermfg=4             ctermbg=NONE            cterm=none
 " Underlined Group
 " ----------------
 " text that stands out, html links
-hi Underlined       guifg=7                                        gui=underline
+hi Underlined       guifg=#e4e4e4                                  gui=underline
 hi Underlined       ctermfg=7                                      cterm=underline
 
 
@@ -219,10 +219,10 @@ hi Todo             ctermfg=1             ctermbg=NONE            cterm=underlin
 " Cursor
 " ------
 " character under the cursor
-hi Cursor           guifg=7                guibg=#8ac6f2
+hi Cursor           guifg=#e4e4e4             guibg=#8ac6f2
 hi Cursor           ctermfg=none              ctermbg=117
 " like cursor, but used when in IME mode
-hi CursorIM         guifg=7                guibg=#96cdcd
+hi CursorIM         guifg=#e4e4e4             guibg=#96cdcd
 hi CursorIM         ctermfg=none              ctermbg=116
 " cursor column
 hi CursorColumn                             guibg=#3d3d4d
@@ -264,7 +264,7 @@ hi ModeMsg          ctermfg=1		       ctermbg=NONE            cterm=none
 hi NonText          guifg=#444444                                   gui=none
 hi NonText          ctermfg=234                                     cterm=none
 " the hit-enter prompt (show more output) and yes/no questions
-hi Question         guifg=7                                       gui=none
+hi Question         guifg=#e4e4e4                                  gui=none
 hi Question         ctermfg=0                                      cterm=none
 " meta and special keys used with map, unprintable characters
 hi SpecialKey       guifg=#505050
@@ -365,7 +365,7 @@ hi Visual           guifg=NONE              guibg=#445566
 "hi Visual           ctermfg=NONE            ctermbg=60
 hi Visual           ctermfg=NONE            ctermbg=152
 " visual mode selection when vim is 'not owning the selection' (x11 only)
-hi VisualNOS        guifg=7                                        gui=underline
+hi VisualNOS        guifg=#e4e4e4                                  gui=underline
 hi VisualNOS        ctermfg=7                                      cterm=underline
 
 
