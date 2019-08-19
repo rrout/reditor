@@ -35,7 +35,6 @@ nmap <C-R> <plug>(quickr_cscope_symbols)
 "let g:cscope_open_reference               = '<C-R>'
 nmap <C-S> <plug>(quickr_cscope_callers)
 "let g:cscope_find_caller                  = '<C-S>'
-
 nmap <C-G> <plug>(quickr_cscope_pattern)
 "let g:cscope_cmd_open_reference           = '<C-G>'
 nmap <C-G><C-G> <plug>(quickr_cscope_iegrep_pattern)
@@ -112,7 +111,12 @@ endif
 :set path=.,~/utils/bin
 :set ts=8
 
-exe "set tags=".findfile('atags', ".;").",atags"
+"Default ctags path - enable only if it is not there by default
+"exe "set tags+="./tags,./TAGS,tags,TAGS
+
+"Custom atags path - ctags aliased to atags(Look bashrc)
+"exe "set tags=".findfile('atags', ".;").",atags"
+exe "set tags+=".findfile('atags', ".;").",atags"
 exe "set tags+=". expand("%:p:h").'/tags,'. expand("%:p:h"). '/atags'
 exe "set tags+=". './atags'
 
