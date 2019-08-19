@@ -182,7 +182,7 @@ hi Underlined       ctermfg=7                                      cterm=underli
 " Ignore Group
 " ------------
 " left blank, hidden
-hi Ignore           guifg=1
+hi Ignore           guifg=#e4e4e4
 hi Ignore           ctermfg=1
 
 
