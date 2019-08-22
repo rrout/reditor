@@ -53,7 +53,7 @@ let loaded_spacehi=1
 " Section: Default Global Vars {{{1
 if !exists("g:spacehi_tabcolor")
     " highlight tabs with red underline
-    let g:spacehi_tabcolor="ctermfg=White ctermbg=Red guifg=White guibg=Red"
+    let g:spacehi_tabcolor="ctermfg=White ctermbg=Green guifg=White guibg=Red"
 endif
 if !exists("g:spacehi_spacecolor")
     " highlight trailing spaces in blue underline
@@ -73,11 +73,13 @@ function! s:SpaceHi()
     execute("highlight spacehiTab " . g:spacehi_tabcolor)
 
     " highlight trailing spaces
-    syntax match spacehiTrailingSpace /\s\+$/ containedin=ALL
+    "syntax match spacehiTrailingSpace /\s\+$/ containedin=ALL
+	syntax match spacehiTrailingSpace /\s/ containedin=ALL
     execute("highlight spacehiTrailingSpace " . g:spacehi_spacecolor)
 
     " highlight nbsps
-    syntax match spacehiNbsp /\%d160/ containedin=ALL
+    "syntax match spacehiNbsp /\%d160/ containedin=ALL
+	syntax match spacehiNbsp /U+202F/ containedin=ALL
     execute("highlight spacehiNbsp " . g:spacehi_nbspcolor)
 
     let b:spacehi = 1
@@ -112,6 +114,6 @@ com! ToggleSpaceHi call s:ToggleSpaceHi()
 " Section: Default mappings {{{1
 " Only insert a map to ToggleSpaceHi if they don't already have a map to
 " the function and don't have something bound to F3
-if !hasmapto('ToggleSpaceHi') && maparg("<F3>") == ""
-  map <silent> <unique> <F3> :ToggleSpaceHi<CR>
+if !hasmapto('ToggleSpaceHi') && maparg("<F6>") == ""
+  map <silent> <unique> <F6> :ToggleSpaceHi<CR>
 endif
