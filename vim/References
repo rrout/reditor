@@ -38,3 +38,34 @@ Issues:
 
 
 search : General - Color syntax for local variables and user defined
+
+
+
+Install Ctags/Cscope in ubuntu:
+https://superuser.com/questions/66367/is-it-possible-to-install-ctags-without-root-privs
+
+cd
+mkdir tmp
+cd tmp 
+wget http://mirrors.kernel.org/ubuntu/pool/main/e/exuberant-ctags/exuberant-ctags_5.5.4-1_i386.deb
+dpkg -x exuberant-ctags_5.5.4-1_i386.deb .
+mkdir ~/bin
+cp usr/bin/ctags-exuberant ~/bin
+cd ~/bin
+ln -sf ctags-exuberant ctags
+export PATH=$PATH:$HOME/bin
+
+Cscope:
+https://ubuntu.pkgs.org/18.04/ubuntu-universe-i386/cscope_15.8b-3_i386.deb.html
+http://archive.ubuntu.com/ubuntu/pool/universe/c/cscope/cscope_15.8b-3_amd64.deb
+http://mirrors.kernel.org/ubuntu/pool/universe/c/cscope/cscope_15.8b-3_amd64.deb
+
+
+Install Global in Ubuntu
+$ wget http://tamacom.com/global/global-6.6.3.tar.gz 
+$ ./configure --prefix=$HOME --with-sqlite3 --disable-gtagscscope --with-exuberant-ctags=/usr/bin/ctags
+$ make
+$ make install
+
+
+
