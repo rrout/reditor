@@ -35,7 +35,7 @@ GITPS3="${BGREEN}\u@\h${BBLUE} \w${PURPLE}"'$(__git_ps1)'" ${NORMAL}\$ \[\033[00
 GITBASHPS="\[\033[32m\]\u@\h \[\033[35m\]`uname` \[\033[33m\]\w\[\033[36m\]"'$(__git_ps1)'"\[\033[0m\]\n$ "
 PS1=$GITPS
 
-source /proj/common/tools/repo/etc/profile.d/repo.sh
+#source /proj/common/tools/repo/etc/profile.d/repo.sh
 
 if [ -f /proj/common/tools/repo/etc/profile.d/repo.sh ]; then
     source /proj/common/tools/repo/etc/profile.d/repo.sh
