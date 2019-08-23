@@ -75,7 +75,7 @@ hi Identifier       guifg=#fcb666                                   gui=none
 hi Identifier       ctermfg=215                                     cterm=none
 " function, method, class
 hi Function         guifg=#fcb666                                   gui=none
-hi Function         ctermfg=173                                     cterm=none
+hi Function         ctermfg=173                                     cterm=bold
 " Standard functions
 hi StdFunction		guifg=#fcb666									gui=none
 hi StdFunction		ctermfg=70									   cterm=none
