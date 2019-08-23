@@ -411,6 +411,9 @@ shopt -s histappend
 #shopt -s failglob
 #shopt -s nullglob
 #shopt -s direxpand
+#
+## Expand aliases defined in the shell ~/.bashrc
+#shopt -s expand_aliases
 fi
 
 if [ "$BASH_COLOR_SETTINGS" == "yes" ];then
@@ -658,7 +661,33 @@ fi
 
 if [ "$BASH_SCREEN_SETTINGS" == "yes" ];then
 if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting SCREEN_SETTINGS=$BASH_SCREEN_SETTINGS ........"; fi
-echo "${PWD}" > ${HOME}/.screen_pwd_${STY#*.}
+#echo "${PWD}" > ${HOME}/.screen_pwd_${STY#*.}
+alias scrn-ls="screen -ls"
+
+function scrn-a()
+{
+    count=$(screen -ls | grep -c -w $1)
+    if [ $# == 0  ]; then
+        if [ $count -gt 0 ];then
+            screen -ls
+            return
+        fi
+    fi
+    screen -x $1
+}
+
+function scrn-creat()
+{
+    echo $1
+    count=$(screen -ls | grep -c -w $1)
+    echo $count
+    if [ $count -gt 0 ];then
+        screen -ls
+    else
+        screen -S $1
+    fi
+
+}
 fi
 
 if [ "$BASH_LANG_SETTINGS" == "yes" ];then
@@ -968,3 +997,6 @@ function h_git() {
     cat ${HOME}/reditor/bash/bash_help/bash_git_help.txt
 }
 
+function h_screen() {
+    cat ${HOME}/reditor/bash/bash_help/bash_screen_help.txt
+}

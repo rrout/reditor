@@ -1,0 +1,14 @@
+    ------------------------------
+    Command     Descreption
+    ----------  --------------------------------------------------------------------
+    scrn-ls     List screen sessions
+    scrn-create Create New session Usage: scrn-create <Session Name>
+    scrn-a      Attach to a screen Usage: scrn-a <Name of session FULL/PARTIAL>
+    C-a k       Kill window
+    C-a d       Detach session
+    C-a |       Spilt windows
+    C-a TAB     Goto next spilt screen window
+    C-a X       Remove spilt Window
+    C-a a       Toggle Windows
+    C-a z       Suspend Session
+    C-a H       Log screen Sessions
