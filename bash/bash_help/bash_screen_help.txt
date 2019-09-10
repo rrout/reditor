@@ -12,3 +12,5 @@
     C-a a       Toggle Windows
     C-a z       Suspend Session
     C-a H       Log screen Sessions
+    C-a A       Rename windows title
+

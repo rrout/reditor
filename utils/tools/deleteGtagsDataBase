@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -f GTAGS ];then
+    echo "Deleting Gtags Databases from  path ${pwd}"
+    echo "Deleting GTAGS"
+    echo "Deleting GRTAGS"
+    echo "Deleting GPATH"
+    echo "Deleting GRPATH"
+else
+    echo "No GTAGS in the current path ${pwd}"
+fi
+
