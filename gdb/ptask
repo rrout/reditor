@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#On most unix systems, you can use GDB.
+#https://unix.stackexchange.com/questions/166541/how-to-know-where-a-program-is-stuck-in-linux
+PROG=`basename "$0"`
+function usage {
+    echo "Usage : $PROG <pid>"
+    echo "Usage : $PROG <pid> [-v --Vervose]"
+}
+
+
+if [ $# == 0 ]; then
+    usage
+    exit 0
+fi
+
+if [ "$2" == "-v" ];then
+    ps -To pid,tid,tgid,tty,time,comm -p $1
+else
+    ps -T -p $1
+fi

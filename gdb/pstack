@@ -13,7 +13,12 @@ if [ $# == 0 ]; then
     exit 0
 fi
 
-gdb -batch -ex bt -p $1
+#gdb -batch -ex bt -p $1
+gdb --quiet -batch \
+        -ex "echo \n===========BT===========\n" -ex bt \
+        -ex "echo \n======INFO THREADS======\n" -ex "info threads" \
+        -ex "echo \n=======THREAD BT========\n" -ex "thread apply all bt" \
+        -p $1
 
 
 #-----------------
