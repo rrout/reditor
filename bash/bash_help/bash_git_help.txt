@@ -29,6 +29,16 @@
     git diff --name-status [SHA1 [SHA2]]                Show files modified in or between the commit
     git diff  --name-status --oneline HEAD~5 HEAD       Show diff between commits  git diff  --name-status --oneline <changeset> <changeset>
 
+    SHOW-------------------------------------------------------------------
+    git show --name-status [ | <SHA> | <SHA>..<SHA> ]  List all files in a commit
+    git show --stat [ | <SHA> | <SHA>..<SHA> ]         List all files in a commit with statistics
+    git log --name-status --oneline  <SHA>             List all files in a commit (ADD/MOD/DEL)
+    git ls-files --deleted                             List all deleted files
+
+    REVERT-----------------------------------------------------------------
+    git checkout HEAD -- <filename>                    Recover single file that was deleted during a merge
+    git checkout <sha> -- <filename>                   Recover single file that was deleted
+
     TEMPORARY COMMITS----------------------------------
     ---------Temporarily store modified, tracked files in order to change branches---------------------
     git stash                                           Save modified and staged changes

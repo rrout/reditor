@@ -1000,3 +1000,7 @@ function h_git() {
 function h_screen() {
     cat ${HOME}/reditor/bash/bash_help/bash_screen_help.txt
 }
+
+function h_linux_cmd() {
+    cat ${HOME}/reditor/bash/bash_help/bash_linux_cmd_help.txt
+}

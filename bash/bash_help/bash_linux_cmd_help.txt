@@ -1,0 +1,4 @@
+    Command                                             Descreption
+    --------------------------------------------------- ------------------------------------------
+    du -sh [du -sh <dir-name> ]                         Size of Directory
+    df -Th                                              Size of disk
