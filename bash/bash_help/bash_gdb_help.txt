@@ -11,3 +11,19 @@
         --- "-b" detaches it and runs it in the background hence exclude -b
         ------------------
 
+        ---
+        Print pstack
+        ---
+        gdb --quiet -batch \
+            -ex "echo \n===========BT===========\n" -ex bt \
+            -ex "echo \n======INFO THREADS======\n" -ex "info threads" \
+            -ex "echo \n=======THREAD BT========\n" -ex "thread apply all bt" \
+            -p <PID>
+
+        ---
+        ---
+
+        ---
+        ---
+
+

@@ -2,3 +2,22 @@
     --------------------------------------------------- ------------------------------------------
     du -sh [du -sh <dir-name> ]                         Size of Directory
     df -Th                                              Size of disk
+    --------------------------------------------------- ------------------------------------------
+    = PROCESS AND THREADS =
+    --------------------------------------------------- ------------------------------------------
+    ps -T -p <PID>                                      Print process thread info (reditor: ptask)
+    ps -To pid,tid,tgid,tty,time,comm -p <PID>          Print process thread info Vorbose ((reditor: ptask -v)
+    --------------------------------------------------- ------------------------------------------
+    = DISK UTILS =
+    --------------------------------------------------- ------------------------------------------
+    df -h                                               Print all mounted device
+    lsblk                                               List block devices attached to your system (USB/DISK etc..)
+    fdisk -l                                            List partition table on all your block devices, a USB drive inclusive
+    lsusb                                               List all the connected USB devices in Linux
+    usb-devices                                         List Details of all USB devices in Linux
+                                    - https://docs.kali.org/faq/how-do-i-tell-what-drive-path-my-usb-drive-is-on
+                                    - https://simpleit.rocks/linux/detect-mount-usb-devices-in-linux-console-terminal/
+                                    - https://linuxconfig.org/howto-mount-usb-drive-in-linux
+    --------------------------------------------------- ------------------------------------------
+    =  =
+    --------------------------------------------------- ------------------------------------------
