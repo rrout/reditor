@@ -13,4 +13,21 @@
     C-a z       Suspend Session
     C-a H       Log screen Sessions
     C-a A       Rename windows title
-
+    Ctrl+a ”    List all sessions
+    Ctrl+a 0    Switch to session number 0
+    Ctrl+a n    Switch to next session
+    Ctrl+a p    Switch to the previous session
+    Ctrl+a S    Split current region horizontally into two regions
+    Ctrl+a l    Split current region vertically into two regions
+    Ctrl+a Q    Close all sessions except the current one
+    Ctrl+a X    Close the current session
+    Ctrl+a \    Kill all sessions and terminate Screen
+    Ctrl+a ?    Show keybindings. To quit this, press ENTER
+    --------------------------------------------------------------------------------
+                                COMMAND LINE
+    --------------------------------------------------------------------------------
+    screen -L           Start logging session (log at ${HOME}/screenlog)
+    screen -S <name>    Create screen session
+    screen -r <name>    Resume session
+    screen -d <name>    Detach session
+    screen -d -r <name> Detach from all existing and reattach to current

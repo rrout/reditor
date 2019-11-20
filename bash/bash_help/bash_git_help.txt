@@ -31,7 +31,8 @@
 
     SHOW-------------------------------------------------------------------
     git show --name-status [ | <SHA> | <SHA>..<SHA> ]  List all files in a commit
-    git show --stat [ | <SHA> | <SHA>..<SHA> ]         List all files in a commit with statistics
+    git show --stat [ | <SHA> | <SHA>..<SHA> ]         List all files in a commit with statisticsa
+    git show <SHA>                                     Print diff of a commit
     git log --name-status --oneline  <SHA>             List all files in a commit (ADD/MOD/DEL)
     git ls-files --deleted                             List all deleted files
 

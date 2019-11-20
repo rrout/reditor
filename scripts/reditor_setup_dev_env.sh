@@ -20,7 +20,7 @@ if [ $# != 1 ]; then
     exit 0
 fi
 
-if [ "$1" == "-vnc" ] || [ "$1" == "-wetty" ] || [ "$1" == "-novnc" ]
+if [ "$1" == "-vnc" ] || [ "$1" == "-wetty" ] || [ "$1" == "-novnc" ] ||
     [ "$1" == "-jupyter" ]  || [ "$1" == "-all" ]; then
     echo $1
 else
