@@ -103,6 +103,12 @@ ucd(){
     echo "${PWD}" > ${HOME}/.screen_pwd_${STY#*.}
 }
 
+# display numbers in a human readable format
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
+
+
 fi
 
 if [ "$BASH_LOCALUSERPATH_SETTINGS" == "yes" ];then
@@ -706,6 +712,179 @@ fi
 if [ "$BASH_BITBAKE_SETTINGS" == "yes" ];then
 if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting LANG_SETTINGS=$BASH_LANG_SETTINGS ........"; fi
     source ${HOME}/reditor/bash/.bashrc_bitbake_autocomplete
+fi
+
+if [ "$BASH_USER_EXTENDED_ALIAS_SETTINGS" == "yes" ];then
+if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting USERALIAS_SETTINGS=$BASH_USERALIAS_SETTINGS ........"; fi
+
+alias resource='source ~/.bashrc && echo "✅ Done"'
+## pass options to free ##
+alias meminfo='free -m -l -t'
+## get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+## get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+## Get server cpu info ##
+alias cpuinfo='lscpu'
+
+
+alias disksize="df -Th --total"
+#copy with progress bar
+alias cpv='rsync -ah --info=progress2'
+#mounted points
+alias mntpt='mount | grep -E ^/dev | column -t'
+#list size of directory content
+alias listdir='du -sh * | sort -h'
+alias diruse="du -sh"
+
+# list the name of the process matched with pgrep
+alias pgrep='pgrep -l'
+# print the path with each directory separated by a newline
+alias path='echo -e ${PATH//:/\\n}'
+
+# FIND: quickly find files and directory
+alias ff='find . -type f -name'
+alias fd='find . -type d -name'
+
+function srch {
+    if [ -z "$1" ]; then
+        echo "Usage : srch <string|regx>"
+        return 1;
+    fi
+    echo "Searching $1 in [${PWD}]"
+    echo "------------------------------------------------------------------"
+    find . -name $1 -print
+    echo "------------------------------------------------------------------"
+    echo "✅ Done"
+}
+
+function srchstr {
+    if [ -z "$1" ]; then
+        echo "Usage : srchstr <file type(Ex.*.cc)> <string|regx>"
+        return 1;
+    fi
+    echo "Searching string $1 in [${PWD}]"
+    echo "------------------------------------------------------------------"
+    find . -name "$1" | xargs grep -li $2;
+    echo "------------------------------------------------------------------"
+    echo "✅ Done"
+}
+
+function cdir () {
+    mkdir -p $1
+    cd $1
+}
+
+function extract {
+ if [ -z "$1" ]; then
+    # display usage if no parameters given
+    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+    echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
+    return 1
+ else
+    for n in $@
+    do
+      if [ -f "$n" ] ; then
+          case "${n%,}" in
+            *.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar) 
+                         tar xvf "$n"       ;;
+            *.lzma)      unlzma ./"$n"      ;;
+            *.bz2)       bunzip2 ./"$n"     ;;
+            *.rar)       unrar x -ad ./"$n" ;;
+            *.gz)        gunzip ./"$n"      ;;
+            *.zip)       unzip ./"$n"       ;;
+            *.z)         uncompress ./"$n"  ;;
+            *.7z|*.arj|*.cab|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.rpm|*.udf|*.wim|*.xar)
+                         7z x ./"$n"        ;;
+            *.xz)        unxz ./"$n"        ;;
+            *.exe)       cabextract ./"$n"  ;;
+            *)
+                         echo "extract: '$n' - unknown archive method"
+                         return 1
+                         ;;
+          esac
+      else
+          echo "'$n' - file does not exist"
+          return 1
+      fi
+    done
+ fi
+}
+
+function extract1 () {
+      if [ -f $1 ] ; then
+          case $1 in
+              *.tar.xz)    tar xvJf $1    ;;
+              *.tar.bz2)   tar xvjf $1    ;;
+              *.tar.gz)    tar xvzf $1    ;;
+              *.bz2)       bunzip2 $1     ;;
+              *.rar)       unrar e $1     ;;
+              *.gz)        gunzip $1      ;;
+              *.tar)       tar xvf $1     ;;
+              *.tbz2)      tar xvjf $1    ;;
+              *.tgz)       tar xvzf $1    ;;
+              *.apk)       unzip $1       ;;
+              *.epub)      unzip $1       ;;
+              *.xpi)       unzip $1       ;;
+              *.zip)       unzip $1       ;;
+              *.war)       unzip $1       ;;
+              *.jar)       unzip $1       ;;
+              *.Z)         uncompress $1  ;;
+              *.7z)        7z x $1        ;;
+              *)           echo "don't know how to extract '$1'..." ;;
+          esac
+      else
+          echo "'$1' is not a valid file!"
+      fi
+}
+
+function repeat()
+{
+    if [ -z "$1" ]; then
+        echo "Usage: repeat <number of time> <command>"
+        return 1
+    fi
+    echo "$@"
+    local i max
+    max=$1; shift;
+    for ((i=1; i <= max ; i++)); do  # --> C-like syntax
+        echo "----------------------------------------------------------"
+        eval "$@";
+        sleep 1
+    done
+}
+
+# print the last ten modified files in the specified directory
+function last {
+    ls -lt $1 | head
+}
+# shortcut for recursively grepping
+function gr {
+    grep -r $1 .
+}
+
+function myip()
+{
+    extIp=$(dig +short myip.opendns.com @resolver1.opendns.com)
+
+    printf "Wireless IP: "
+    MY_IP=$(/sbin/ifconfig wlp4s0 | awk '/inet/ { print $2 } ' |
+      sed -e s/addr://)
+    echo ${MY_IP:-"Not connected"}
+
+
+    printf "Wired IP: "
+    MY_IP=$(/sbin/ifconfig enp0s25 | awk '/inet/ { print $2 } ' |
+      sed -e s/addr://)
+    echo ${MY_IP:-"Not connected"}
+
+    echo ""
+    echo "WAN IP: $extIp"
+
+}
+
 fi
 
 if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting ORG_SETTINGS=$BASH_ORG_SETTINGS ........"; fi
