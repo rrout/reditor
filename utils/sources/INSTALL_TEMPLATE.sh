@@ -91,8 +91,14 @@ elif [ "$1" == "-install" ];then
     if [ "$DIR" = "AG" ];then
         ./autogen.sh
     fi
+    if [ "$DIR" = "UCTAGS" ];then
+        ./autogen.sh
+    fi
     if [ "$DIR" = "TMUX" ];then
         exicute_cmd ./configure --prefix=$INSTALL_DIR CPPFLAGS="-I$INSTALL_DIR/include-I$INSTALL_DIR/include/ncurses" LDFLAGS="-L$INSTALL_DIR/lib" CFLAGS="-I$INSTALL_DIR/include"
+    elif [ "$DIR" = "GLOBAL" ];then
+        #exicute_cmd ./configure --prefix=$INSTALL_DIR --with-sqlite3 --disable-gtagscscope --with-exuberant-ctags=${HOME}/utils/reditor/bin/ctags --enable-static --disable-shared CFLAGS="-g -O0 --static ${CFLAGS} " LDFLAGS=" --static ${LDFLAGS}
+        exicute_cmd ./configure --prefix=$INSTALL_DIR --disable-gtagscscope
     else
         exicute_cmd ./configure --prefix=$INSTALL_DIR
     fi

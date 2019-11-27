@@ -1,3 +1,4 @@
+#!/bin/bash
 # .bash_aliases
 
 if [[ $- != *i* ]];then return; fi
@@ -700,6 +701,11 @@ export LC_CTYPE="en_US.UTF-8"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
+fi
+
+if [ "$BASH_BITBAKE_SETTINGS" == "yes" ];then
+if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting LANG_SETTINGS=$BASH_LANG_SETTINGS ........"; fi
+    source ${HOME}/reditor/bash/.bashrc_bitbake_autocomplete
 fi
 
 if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting ORG_SETTINGS=$BASH_ORG_SETTINGS ........"; fi

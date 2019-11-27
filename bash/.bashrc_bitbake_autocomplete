@@ -1,0 +1,28 @@
+#!/bin/bash
+#### Clone https://github.com/lukaszgard/bitbake-completion.git
+if [ -d ${HOME}/BITBAKE/bitbake-completion ]; then
+    if [ -f ${HOME}/BITBAKE/bitbake-completion/bitbake_completion ]; then
+        source ${HOME}/BITBAKE/bitbake-completion/bitbake_completion
+    fi
+    if [ -f ${HOME}/BITBAKE/bitbake-completion/bitbake_dumpsig_completion ]; then
+        source ${HOME}/BITBAKE/bitbake-completion/bitbake_dumpsig_completion
+    fi
+    if [ -f ${HOME}/BITBAKE/bitbake-completion/bitbake_prserv_completion ]; then
+        source ${HOME}/BITBAKE/bitbake-completion/bitbake_prserv_completion
+    fi
+    if [ -f ${HOME}/BITBAKE/bitbake-completion/devtool_completion ]; then
+        source ${HOME}/BITBAKE/bitbake-completion/devtool_completion
+    fi
+    if [ -f ${HOME}/BITBAKE/bitbake-completion/bitbake_diffsigs_completion ]; then
+        source ${HOME}/BITBAKE/bitbake-completion/bitbake_diffsigs_completion
+    fi
+    if [ -f ${HOME}/BITBAKE/bitbake-completion/bitbake_layers_completion ]; then
+        source ${HOME}/BITBAKE/bitbake-completion/bitbake_layers_completion
+    fi
+    if [ -f ${HOME}/BITBAKE/bitbake-completion/bitbake_selftest_completion ]; then
+        source ${HOME}/BITBAKE/bitbake-completion/bitbake_selftest_completion
+    fi
+else
+    echo "Clone https://github.com/lukaszgard/bitbake-completion.git in your home @ /home/<>/BITBAKE"
+fi
+
