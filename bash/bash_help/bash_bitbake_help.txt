@@ -1,0 +1,13 @@
+    ------------------------------
+    Command             Descreption
+    ------------------- ------------------------------------------------------------
+    bitbake -s          Create bitbake command auto complete file (.bb_recipes,.bb_layers_conf.md5)
+    bitbake-layers <>   Show information about layers and recipes
+    bitbake-env         Show invidividual bitbake variable values
+    bitbake -g          Show dependency information
+    bitbake -g <recipe> Show dependency information for a recipe
+                            bitbake -g <package-name|recipe-name> && less task-depends.dot
+    bitbake -g -u taskexp <recipe-or-image-name> Show dependency information in a graphical interface
+                            bitbake -g <package-name|recipe-name> -u taskexp
+
+

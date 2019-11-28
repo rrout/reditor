@@ -1,0 +1,29 @@
+    Command                                             Descreption
+    --------------------------------------------------- ------------------------------------------
+    alias resource='source ~/.bashrc && echo "✅ Done"'
+    alias meminfo='free -m -l -t'                       pass options to free
+    alias psmem='ps auxf | sort -nr -k 4'               get top process eating memory
+    alias psmem10='ps auxf | sort -nr -k 4 | head -10'  get top process eating memory
+    alias pscpu='ps auxf | sort -nr -k 3'               get top process eating cpu
+    alias pscpu10='ps auxf | sort -nr -k 3 | head -10'  get top process eating cpu
+    alias cpuinfo='lscpu'                               Get server cpu info
+    alias disksize="df -Th --total"                     Disk Size
+    alias cpv='rsync -ah --info=progress2'              copy with progress bar
+    alias mntpt='mount | grep -E ^/dev | column -t'     mounted points
+    alias listdir='du -sh * | sort -h'                  list size of directory content
+    alias diruse="du -sh"                               Directory size
+    alias pgrep='pgrep -l'                              list the name of the process matched with pgrep
+    alias path='echo -e ${PATH//:/\\n}'                 Print PATH
+    alias ff='find . -type f -name'                     FIND: quickly find files
+    alias fd='find . -type d -name'                     FIND: quickly find directory
+
+    --------------------------------------------------- -----------------------------------------
+    srch                                                FIND: quickly find files
+    srchstr                                             FIND: quickly find STRING in files
+    cdir                                                Create Directory and enter into it
+    extract                                             Extract compressed file
+    extract1                                            Extract compressed file
+    repeat                                              Repeat a command once in 1 second
+    last                                                print the last ten modified files in the specified directory
+    gr                                                  shortcut for recursively grepping
+    myip                                                Print my ip address

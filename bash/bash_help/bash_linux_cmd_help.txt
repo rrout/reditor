@@ -2,11 +2,13 @@
     --------------------------------------------------- ------------------------------------------
     du -sh [du -sh <dir-name> ]                         Size of Directory
     df -Th                                              Size of disk
-    --------------------------------------------------- ------------------------------------------
     = PROCESS AND THREADS =
     --------------------------------------------------- ------------------------------------------
     ps -T -p <PID>                                      Print process thread info (reditor: ptask)
-    ps -To pid,tid,tgid,tty,time,comm -p <PID>          Print process thread info Vorbose ((reditor: ptask -v)
+    ps -To pid,ppid,tid,tgid,tty,time,pcpu,comm -p <PID>Print process thread info Vorbose ((reditor: ptask -v)
+    = TOP =
+    --------------------------------------------------- ------------------------------------------
+    top -n 1 -H -p  <PID>                               Print process thread info (reditor: rptop)
     --------------------------------------------------- ------------------------------------------
     = DISK UTILS =
     --------------------------------------------------- ------------------------------------------

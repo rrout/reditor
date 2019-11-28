@@ -1,0 +1,20 @@
+ Command                         Descreption
+ ------------------------------- ------------------------------------------
+ = Scrpts =
+ In: ~/reditor/gdb
+ mkgdbinit.sh
+ gstack
+ ptask
+ pstack
+
+ ------------------------------- ------------------------------------------
+ source dbgenv.sh
+ ------------------------------- ------------------------------------------
+ rphelp
+ rpstack
+ rptask
+ rpram
+ rpmap
+ rpstrace
+ rptop
+ rpread

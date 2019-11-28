@@ -1189,3 +1189,23 @@ function h_screen() {
 function h_linux_cmd() {
     cat ${HOME}/reditor/bash/bash_help/bash_linux_cmd_help.txt
 }
+
+function h_bitbake() {
+    cat ${HOME}/reditor/bash/bash_help/bash_bitbake_help.txt
+}
+
+function h_dbg() {
+    cat ${HOME}/reditor/bash/bash_help/bash_dbg_cmd_help.txt
+}
+
+function h_core() {
+    cat ${HOME}/reditor/bash/bash_help/bash_core_help.txt
+}
+
+function h_rdebug() {
+    cat ${HOME}/reditor/bash/bash_help/bash_rdebug_cmd_help.txt
+}
+
+function h_alias() {
+    cat ${HOME}/reditor/bash/bash_help/bash_alias_help.txt
+}
