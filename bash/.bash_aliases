@@ -736,7 +736,7 @@ alias cpv='rsync -ah --info=progress2'
 #mounted points
 alias mntpt='mount | grep -E ^/dev | column -t'
 #list size of directory content
-alias listdir='du -sh * | sort -h'
+alias listdiruse='du -sh * | sort -h'
 alias diruse="du -sh"
 
 # list the name of the process matched with pgrep

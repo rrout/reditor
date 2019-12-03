@@ -10,7 +10,7 @@
     alias disksize="df -Th --total"                     Disk Size
     alias cpv='rsync -ah --info=progress2'              copy with progress bar
     alias mntpt='mount | grep -E ^/dev | column -t'     mounted points
-    alias listdir='du -sh * | sort -h'                  list size of directory content
+    alias listdiruse='du -sh * | sort -h'                  list size of directory content
     alias diruse="du -sh"                               Directory size
     alias pgrep='pgrep -l'                              list the name of the process matched with pgrep
     alias path='echo -e ${PATH//:/\\n}'                 Print PATH

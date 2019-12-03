@@ -26,7 +26,9 @@ function rptask()
         #ps -eo pid,tid,class,rtprio,ni,pri,psr,pcpu,stat,wchan:14,comm
         #ps axo stat,euid,ruid,tty,tpgid,sess,pgrp,ppid,pid,pcpu,comm
         #ps -Ao pid,tt,user,fname,tmout,f,wchan
-        ps -To pid,ppid,tid,tgid,tty,time,pcpu,comm -p 3896
+        ps -To pid,ppid,tid,tgid,tty,time,pcpu,comm -p $1
+        echo "-------------------- == TOTAL == ---------------------------"
+        ps -o pid,ppid,tid,tgid,tty,time,pcpu,comm -p $1
     else
         ps -T -p $1
     fi
