@@ -79,6 +79,7 @@ echo  \n\033[33m % [set breakpoint pending on]\033[0m
 #https://github.com/dholm/dotgdb
 #https://gist.githubusercontent.com/rrout/7cbe2e1aa090e566c87d3f2e327ffe03/raw/1ac839c7d82dcefe0ec8adb764609a162b61044a/.gdbinit
 #https://sourceware.org/gdb/onlinedocs/gdb/Core-File-Generation.html#Core-File-Generation
+#http://www.brendangregg.com/blog/2016-08-09/gdb-example-ncurses.html
 #
 
 

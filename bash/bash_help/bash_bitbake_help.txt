@@ -10,4 +10,7 @@
     bitbake -g -u taskexp <recipe-or-image-name> Show dependency information in a graphical interface
                             bitbake -g <package-name|recipe-name> -u taskexp
 
+    
+    head documentation/poky.ent Read Yocto Version
+
 

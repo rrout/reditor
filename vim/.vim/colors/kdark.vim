@@ -18,7 +18,7 @@ if exists("syntax_on")
 endif
 
 set background=dark
-let g:colors_name="kalimuthu"
+let g:colors_name="kdark"
 
 
 if v:version > 700

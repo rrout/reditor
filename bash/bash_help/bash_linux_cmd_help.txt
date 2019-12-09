@@ -21,5 +21,20 @@
                                     - https://simpleit.rocks/linux/detect-mount-usb-devices-in-linux-console-terminal/
                                     - https://linuxconfig.org/howto-mount-usb-drive-in-linux
     --------------------------------------------------- ------------------------------------------
-    =  =
+    = Systenctl/Journalctl =
     --------------------------------------------------- ------------------------------------------
+    systemctl start|stop|restart                        Systemctl start/stop/restart
+    systemctl list-unit-files
+    systemctl list-units --all
+    systemctl list-units --state=failed
+    systemctl --failed --no-pager
+    sudo systemctl daemon-reload
+    systemctl list-dependencies
+
+    journalctl -u <unit-name> --no-pager                Read journal for an Unit
+    journalctl -n 20                                    Same as  tail  -n
+    journalctl -f                                       Same as  tail  -f
+                                                            Ex. journalctl -u <unit-name> -f |  grep Something
+    journalctl --disk-usage                             You can find out the amount of space that the journal
+                                                        is currently occupying on disk by using the --disk-usage flag
+

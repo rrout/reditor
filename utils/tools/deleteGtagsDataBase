@@ -1,18 +1,69 @@
 #!/bin/bash
 
-if [ -f GTAGS ];then
-    echo "Deleting Gtags Databases from  path ${PWD}"
-    echo "Deleting GTAGS"
-    rm -rf GTAGS
-    echo "Deleting GRTAGS"
-    rm -rf GRTAGS
-    echo "Deleting GPATH"
-    rm -rf GPATH
-    echo "Deleting GRPATH"
-    rm -rf GRPATH
-    echo "Deleting GLOG"
-    rm -rf GLOG
+function usage() {
+    echo "Usage : `basename $0` <-h|-f|-a|-i>"
+    echo "        `basename $0` :Delete Gtags From Current Directory"
+    echo "      Options:"
+    echo "           -h : help"
+    echo "           -f : Find and List"
+    echo "           -a : Delete Recurssively - Non Intreractive"
+    echo "           -i : Delete Recurssively - Intreractive"
+}
+
+if [ $# == 0 ]; then
+    if [ -f GTAGS ];then
+        echo "Deleting Gtags Databases from  path ${PWD}"
+        echo "Deleting GTAGS"
+        rm -rf GTAGS
+        echo "Deleting GRTAGS"
+        rm -rf GRTAGS
+        echo "Deleting GPATH"
+        rm -rf GPATH
+        echo "Deleting GRPATH"
+        rm -rf GRPATH
+        echo "Deleting GLOG"
+        rm -rf GLOG
+    else
+        echo "No GTAGS in the current path ${PWD}"
+    fi
+fi
+
+if [ "$1" == "-h" ] || [ "$1" == "-f" ] || [ "$1" == "-a" ] || [ "$1" == "-i" ];then
+    if [ "$1" == "-h" ];then
+        usage
+        exit
+    fi
+    if [ "$1" == "-a" ];then
+        find . -type f -name GTAGS -exec rm {} \;
+        find . -type f -name GRTAGS -exec rm {} \;
+        find . -type f -name GPATH -exec rm {} \;
+        find . -type f -name GRPATH -exec rm {} \;
+        find . -type f -name GLOG -exec rm {} \;
+        echo "Recurssively Deleted all GTAGS files from path ${PWD}"
+    fi
+    if [ "$1" == "-i" ];then
+        find . -type f -name GTAGS -exec rm -i {} \;
+        find . -type f -name GRTAGS -exec rm -i {} \;
+        find . -type f -name GPATH -exec rm -i {} \;
+        find . -type f -name GRPATH -exec rm -i {} \;
+        find . -type f -name GLOG -exec rm -i {} \;
+        echo "Recurssively Deleted all GTAGS files of your choice from path ${PWD}"
+    fi
+    if [ "$1" == "-f" ];then
+        echo "Searching files recurssively"
+        echo "GTAGS :"
+        find . -type f -name GTAGS
+        echo "GRTAGS :"
+        find . -type f -name GRTAGS
+        echo "GPATH :"
+        find . -type f -name GPATH
+        echo "GRPATH :"
+        find . -type f -name GRPATH
+        echo "GLOG :"
+        find . -type f -name GLOG
+    fi
 else
-    echo "No GTAGS in the current path ${PWD}"
+    echo "Invalid Options"
+    usage
 fi
 
