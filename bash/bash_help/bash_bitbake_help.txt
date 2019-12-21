@@ -12,5 +12,8 @@
 
     
     head documentation/poky.ent Read Yocto Version
+    
+    yocto-bsp     yocto-kernel  yocto-layer
+    yocto-layer         Command to create a new Yocto layer
 
 

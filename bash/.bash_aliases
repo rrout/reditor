@@ -443,6 +443,7 @@ LIGHTPURPLE='\e[1;35m'
 YELLOW='\e[1;33m'
 WHITE='\e[1;37m'
 NC='\e[0m'              # No Color
+source ${HOME}/reditor/bash/.bashrc_color_module
 fi
 
 if [ "$BASH_LSCOLOR_SETTINGS" == "yes" ];then
@@ -467,6 +468,8 @@ if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting LSCOLOR_SETTINGS=$BASH
 #or = symbolic link pointing to a non-existent file (orphan)
 #mi = non-existent file pointed to by a symbolic link (visible when you type ls -l)
 #ex = file which is executable (ie. has 'x' set in permissions). ex = file which is executable (ie. has 'x' set in permissions).
+
+source ${HOME}/reditor/bash/.bashrc_ls_color
 fi
 
 if [ "$BASH_COMPLETION_SETTINGS" == "yes" ];then

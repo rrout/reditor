@@ -37,4 +37,5 @@
                                                             Ex. journalctl -u <unit-name> -f |  grep Something
     journalctl --disk-usage                             You can find out the amount of space that the journal
                                                         is currently occupying on disk by using the --disk-usage flag
+    journalctl _PID=588                                 Show journal of a PID you get from systemctl status
 

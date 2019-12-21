@@ -1,11 +1,12 @@
 #!/bin/bash
 
 function usage() {
-    echo "Usage : `basename $0` <-h|-f|-a|-i>"
+    echo "Usage : `basename $0` <-h|-c|-f|-a|-i>"
     echo "        `basename $0` :Delete Gtags From Current Directory"
     echo "      Options:"
     echo "           -h : help"
     echo "           -f : Find and List"
+    echo "           -c : Delete Gtags From Current Directory"
     echo "           -a : Delete Recurssively - Non Intreractive"
     echo "           -i : Delete Recurssively - Intreractive"
 }
@@ -26,9 +27,11 @@ if [ $# == 0 ]; then
     else
         echo "No GTAGS in the current path ${PWD}"
     fi
+    usage
+    exit
 fi
 
-if [ "$1" == "-h" ] || [ "$1" == "-f" ] || [ "$1" == "-a" ] || [ "$1" == "-i" ];then
+if [ "$1" == "-h" ] || [ "$1" == "-f" ] || [ "$1" == "-c" ] || [ "$1" == "-a" ] || [ "$1" == "-i" ];then
     if [ "$1" == "-h" ];then
         usage
         exit
@@ -61,6 +64,19 @@ if [ "$1" == "-h" ] || [ "$1" == "-f" ] || [ "$1" == "-a" ] || [ "$1" == "-i" ];
         find . -type f -name GRPATH
         echo "GLOG :"
         find . -type f -name GLOG
+    fi
+    if [ "$1" == "-c" ];then
+        echo "Deleting GTAGS"
+        rm -rf GTAGS
+        echo "Deleting GRTAGS"
+        rm -rf GRTAGS
+        echo "Deleting GPATH"
+        rm -rf GPATH
+        echo "Deleting GRPATH"
+        rm -rf GRPATH
+        echo "Deleting GLOG"
+        rm -rf GLOG
+        echo "Deleted all GTAGS files from current path ${PWD}"
     fi
 else
     echo "Invalid Options"
