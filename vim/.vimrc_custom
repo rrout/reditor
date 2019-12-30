@@ -1,7 +1,10 @@
+
+
+let g:tagging_gtags     = 1
+let g:tagging_cscope    = 1
 "==================================================================
 "					GTAGS KEY BINDINGS
 "==================================================================
-let g:tagging_gtags = 1
 if g:tagging_gtags == 1
 
 let g:No_Gtags_Multi_Window_Auto_Map = 0
@@ -25,26 +28,37 @@ let	g:gtags_cmd_sub_string_search	= '<C-S><C-S>'
 let	g:gtags_cmd_search_and_replace	= '<C-F><C-R>'
 let	g:gtags_cmd_view_cursor_file	= '<C-F><C-L>'
 
-else
+endif
+
+"==================================================================
+"                    CSCOPE/CTAGS KEY BINDINGS
+"==================================================================
+if g:tagging_cscope == 1
 
 set tags=./tags,tags;
+nmap <C-[> :cstag <C-R>=expand("<cword>")<CR><CR>
+nmap <C-B> :pop <CR><CR>
+nmap <C-B><C-B> :tag <CR><CR>
+"nnoremap <C-B><C-B> :tag<CR>
 
-nmap <C-\> <plug>(quickr_cscope_global)
+"CSCOPE
+nmap <C-.> <plug>(quickr_cscope_global)
 "let g:cscope_open_definition              = '<C-\>'
-nmap <C-R> <plug>(quickr_cscope_symbols)
+nmap <C-Q> <plug>(quickr_cscope_symbols)
+ "let g:cscope_open_synbols                = '<C-Q'
+nmap <C-Q><C-Q> <plug>(quickr_cscope_reference)
 "let g:cscope_open_reference               = '<C-R>'
-nmap <C-S> <plug>(quickr_cscope_callers)
+nmap <C-,> <plug>(quickr_cscope_callers)
 "let g:cscope_find_caller                  = '<C-S>'
-nmap <C-G> <plug>(quickr_cscope_pattern)
+nmap <C-U> <plug>(quickr_cscope_pattern)
 "let g:cscope_cmd_open_reference           = '<C-G>'
-nmap <C-G><C-G> <plug>(quickr_cscope_iegrep_pattern)
+nmap <C-U><C-U> <plug>(quickr_cscope_egrep_pattern)
 "let g:cscope_cmd_open_reference           = '<C-G>'
 
 endif
 
 "==================================================================
 "					VIMRC KEY BINDINGS
-
 "==================================================================
 let g:toggle_paste_mode 			= '<F4>'
 let g:insert_cfile_header_directive = '<C-F><C-H>'

@@ -1,34 +1,23 @@
         ----------------------
-        GTAGS COMMANDS
+        CTAGS/CSCOPE COMMANDS
+        ----------------------
+        Command     Descreption
+        ----------- --------------------------------------------------------------------
+        ctags -R .  Create GRATS Database in current Directory
+                     ctags --langmap=C++:+.inc --c++-kinds=+p --fields=+iaS --extra=+fq --sort=foldcase -R .
+                     ctags --langmap=C++:+.inc --c++-kinds=+p --fields=+iaS --extra=+fq --sort=foldcase -R -L <file.txt>
+        cscope -bRq Create Cscope
+        ----------------------
+        CTAGS/CSCOPE VIM COMMANDS
         ----------------------
         Command    Descreption
         ---------- --------------------------------------------------------------------
-        gtags      Create GRATS Database in current Directory
+        <C-[>      Go to Ctags Defination
+        <C-Q>      Lookup Reference
+        <C-Q><C-Q> Search Parten Reference
+        <C-U>      Search String Parten
+        <C-U><C-U> Search Egrep Parten
+        <C-B>      Go Back in Tag Stack [:pop]
+        <C-B><C-B> Go Forward in Tag Stack [:tags]
+        :tag <TAB><TAB> Tab complete symbols
 
-        ----------------------
-        GTAGS VIM COMMANDS
-        ----------------------
-        Command    Descreption
-        ---------- --------------------------------------------------------------------
-        <C-|>      Go to Defination
-        <C-R>      Lookup Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference

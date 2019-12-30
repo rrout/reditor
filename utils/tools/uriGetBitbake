@@ -1,0 +1,108 @@
+#!/bin/bash
+TMP_FILE="___x__2242230p.txt"
+SRCH_FILE="log.do_fetch"
+TIME=$(date +%Y-%m-%d-%H-%M)
+OUT_FILE="Project-$TIME.txt"
+USER_OUT_FILE="Project-USER-Only-$TIME.txt"
+USER_STR="7999"
+DEF_BRANCH="master"
+BRANCH=""
+SRC_URI=""
+
+function usage {
+    echo "Usage : $0 < -f | -g > <Component-List-file>"
+    echo "Options :"
+    echo "        -f    : Run bitbake fetch and collect URI"
+    echo "        -g    : Get URI from Already fetched Project"
+}
+
+if [ $# -eq 0 ]
+then
+    usage
+    exit
+fi
+
+if [ "$1" == "-f" ] || [ "$1" == "-g" ];then
+    if [ "$1" == "-f" ] && [  -z "$2" ];then
+        echo "Should pass Project-Name after -f Option"
+        exit
+    fi
+else
+    echo "Unknown Option"
+    usage
+    exit
+fi
+
+POKYROOTDIR=`basename "$PWD"`
+#echo $POKYROOTDIR
+if [[ $POKYROOTDIR != "build" ]];then
+    echo "You are not on poky/build (Sourced Poky) Directory"
+    exit 0
+fi
+POKYROOTDIR=$PWD
+
+if [ "$1" == "-f" ];then
+    echo "Running === bitbake -c fetchall $2 -f --no-setscene =="
+     bitbake -c fetchall $2 -f --no-setscene
+fi
+
+if [ "$1" == "-g" ];then
+    if [ ! -d tmp/work ];then
+        echo " Please run == bitbake -c fetchall <image> -f --no-setscene == before this"
+        usage
+        exit
+    fi
+fi
+
+echo "Looking for URIs --- It may take couple of minuites!"
+
+rm -rf $OUT_FILE
+cd tmp/work
+find . -name $SRCH_FILE -exec grep -i 'DEBUG: For url git' {} \; -print > $POKYROOTDIR/$TMP_FILE
+cd $POKYROOTDIR
+
+while IFS= read -r line
+do
+      #echo "$line"
+    BRANCH=$(echo $line | awk -F"branch=" '/branch=/{print $2}' | sed -e 's/;/ /' | awk '{print $1}')
+    SRC_URI=$(echo $line | cut -d';' -f1-1 | awk -F"url" '/url/{print $2}' | awk '{print $1}' | sed -e 's/git:/ssh:/')
+    COMPONENT=$(echo $SRC_URI | awk -F'/' '{print $NF}' | awk -F"." '{print $1}')
+
+    if [ ! -z "$BRANCH" ] && [ ! -z "$SRC_URI" ];then
+        echo "$BRANCH  $SRC_URI" >> $OUT_FILE
+    elif [ ! -z "$SRC_URI" ];then
+        echo "$DEF_BRANCH  $SRC_URI" >> $OUT_FILE
+    fi
+
+    if [ ! -z "$BRANCH" ];then
+        echo "Found Component:$COMPONENT Branch:$BRANCH Repository:$SRC_URI"
+    elif [ ! -z "$SRC_URI" ];then
+        echo "Found Component:$COMPONENT Branch:Default Repository:$SRC_URI"
+    fi
+    #echo "$BRANCH  $SRC_URI" >> $OUT_FILE
+done < "$TMP_FILE"
+
+#echo "=================== OUT PUT ==========================="
+#cat $OUT_FILE
+
+rm -rf $TMP_FILE
+
+rm -rf $USER_OUT_FILE
+cat $OUT_FILE | grep $USER_STR > $USER_OUT_FILE
+
+echo "----------------INFO-----------------"
+echo "Project Creation: Success"
+echo "Project Path      : $POKYROOTDIR"
+echo "Project file      : $OUT_FILE"
+echo "Project file(USER): $USER_OUT_FILE"
+echo "-------------------------------------"
+
+#cat x.txt | cut -d';' -f1-1 | awk -F"url" '/url/{print $2}'
+#cat x.txt | cut -d';' -f1-1 | awk -F"url" '/url/{print $2}' | awk '{print $1}'
+#find . -name 'log.do_fetch' -exec grep -i 'DEBUG: For url git' {} \; -print > x.txt
+#find . -name 'log.do_fetch' -exec grep -i 'DEBUG: For url git' {} \; -print > x.txt
+#cat x.txt | cut -d';' -f1-1 | awk -F"url" '/url/{print $2}' | awk '{print $1}' | sed -e 's/git:/ssh:/'
+#cat x.txt | awk -F"branch=" '/branch=/{print $2}' | sed -e 's/;/ /' | awk '{print $1}'
+#cat x.txt | awk -F'/' '{print $NF}' | awk -F"." '{print $1}'
+
+

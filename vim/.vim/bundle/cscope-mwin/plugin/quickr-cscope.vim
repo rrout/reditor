@@ -166,6 +166,7 @@ nnoremap <silent> <plug>(quickr_cscope_includes)        :call <SID>quickr_cscope
 nnoremap <silent> <plug>(quickr_cscope_text)            :call <SID>quickr_cscope(expand("<cword>"), "t", "", "cs")<CR>
 nnoremap <silent> <plug>(quickr_cscope_functions)       :call <SID>quickr_cscope(expand("<cword>"), "d", "", "cs")<CR>
 nnoremap <silent> <plug>(quickr_cscope_egrep)           :call <SID>quickr_cscope(input('Enter egrep pattern: '), "e", "", "cs")<CR>
+nnoremap <silent> <plug>(quickr_cscope_reference)       :call <SID>quickr_cscope(input('CS-R-PATTERN: '), "s", "", "cs")<CR>
 nnoremap <silent> <plug>(quickr_cscope_pattern)         :call <SID>quickr_cscope(input('CS-STRING-PATTERN: '), "t", "", "cs")<CR>
 nnoremap <silent> <plug>(quickr_cscope_egrep_pattern)   :call <SID>quickr_cscope(input('CS-EGREP-PATTERN: '), "e", "", "cs")<CR>
 nnoremap <silent> <plug>(quickr_cscope_assignments)     :call <SID>quickr_cscope(expand("<cword>"), "a", "", "cs")<CR>
@@ -207,7 +208,7 @@ endif
 " Use quickfix window for cscope results. Clear previous results before the search.
 if empty(&cscopequickfix)
     if g:quickr_cscope_use_qf_g
-        set cscopequickfix=g-,s-,c-,f-,i-,t-,d-,e-,a-
+        set cscopequickfix=g-,s-,c-,f-,i-,t-,d-,e-
     else
         set cscopequickfix=s-,c-,f-,i-,t-,d-,e-,a-
     endif

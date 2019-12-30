@@ -79,6 +79,10 @@ set tags+=~/.vim/tags/qt4
 "map <M-Up> [s
 "endif
 
+"Vim QuickFix cursor jumo stop
+autocmd FileType qf nnoremap <buffer> <CR> <CR><C-W>p
+
+
 "set runtimepath+=~/reditor/vim/.vim
 set runtimepath^=~/reditor/vim/.vim
 

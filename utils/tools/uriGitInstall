@@ -1,0 +1,41 @@
+#!/bin/bash
+
+function usage {
+    echo "Usage : $0 <Component-List-file>"
+}
+
+if [ $# -eq 0 ]
+then
+    usage
+    exit
+fi
+
+if [ -z "$1" ];then
+    usage
+    exit
+fi
+
+
+if [ ! -z "$(ls -A $PWD)" ]; then
+    echo "Directory ($PWD) must be Empty.... else it will mess up project creation"
+    exit
+fi
+
+if [ ! -f $1 ];then
+    echo "Component list file ($1) not found"
+    usage
+    exit
+fi
+
+filename=$1
+while read -r line; do
+    name="$line"
+    echo "Fetching Projects"
+    git clone -b $line
+done < "$filename"
+
+echo "----------------INFO-----------------"
+echo "Project Creation: Success"
+echo "Project Path    : $PWD"
+echo "-------------------------------------"
+

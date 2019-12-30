@@ -40,6 +40,18 @@ Issues:
 search : General - Color syntax for local variables and user defined
 
 
+QuickFix:
+https://stackoverflow.com/questions/21838975/vim-quickfix-avoid-buffer-change
+http://andrewradev.com/2011/06/08/vim-and-ctags/
+https://vi.stackexchange.com/questions/2904/how-to-show-search-results-for-all-open-buffers
+https://github.com/kiteco/vim-plugin/pull/216/files
+
+
+
+CTAGS:
+https://gist.github.com/bsdcpp/4653660
+https://stackoverflow.com/questions/11921446/cscope-and-ctag-cannot-find-a-function-definition-which-is-located-in-class-decl
+https://stackoverflow.com/questions/17783539/tag-navigation-in-vim
 
 Install Ctags/Cscope in ubuntu:
 https://superuser.com/questions/66367/is-it-possible-to-install-ctags-without-root-privs

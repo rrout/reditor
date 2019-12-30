@@ -513,12 +513,24 @@ alias getc="global -c "
 alias getr="global -rx "
 alias gets="global -s "
 alias getg="global -gx "
+
+#Gtags treats .h file as C and .hh/.hpp for C++, so do not refer classes in .h file
+export GTAGSFORCECPP=   #This makes Gtags treat .h file as C++
+#Gtags support C,CPP, to support Python and all install "pygments" and enable below 2 lines
+#export GTAGSCONF=/usr/local/share/gtags/gtags.conf
+#export GTAGSLABEL=pygments
+
 fi
 
 if [ "$BASH_CTAGS_SETTINGS" == "yes" ];then
 if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting CTAGS_SETTINGS=$BASH_CTAGS_SETTINGS ........"; fi
 alias tags='ctags -R -f tags '
 alias atags='ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f atags '
+
+#Cscope
+#Enable velow for cscope open VIM (by default cscope uses VI not VIM)
+export CSCOPE_EDITOR=`which vim`
+
 function utags(){
     if  [[ -n $1  ]] ; then (cd $1; ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f atags;);  return ; fi
 }
@@ -1080,42 +1092,6 @@ EOF
 
 function h_ctags() {
     cat ${HOME}/reditor/bash/bash_help/bash_ctags_help.txt
-cat<<-EOF
-        ----------------------
-        GTAGS COMMANDS
-        ----------------------
-        Command    Descreption
-        ---------- --------------------------------------------------------------------
-        gtags      Create GRATS Database in current Directory
-
-        ----------------------
-        GTAGS VIM COMMANDS
-        ----------------------
-        Command    Descreption
-        ---------- --------------------------------------------------------------------
-        <C-|>      Go to Defination
-        <C-R>      Lookup Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-        <C-X><C-X> Search Parten Reference
-EOF
 }
 
 function h_myvim() {
