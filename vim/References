@@ -52,6 +52,36 @@ CTAGS:
 https://gist.github.com/bsdcpp/4653660
 https://stackoverflow.com/questions/11921446/cscope-and-ctag-cannot-find-a-function-definition-which-is-located-in-class-decl
 https://stackoverflow.com/questions/17783539/tag-navigation-in-vim
+https://andrew.stwrt.ca/posts/vim-ctags/
+:tag /^asserts_* would find all tags that start with ‘asserts_’. By default vim will jump to the first result, but a number of 
+
+commands can be used to sort through the list of tags:
+
+:ts or :tselect shows the list
+:tn or :tnext goes to the next tag in that list
+:tp or :tprev goes to the previous tag in that list
+:tf or :tfirst goes to the first tag of the list
+:tl or :tlast goes to the last tag of the list
+To show the tags you’ve traversed since you opened vim, run :tags.
+
+https://www.oreilly.com/library/view/learning-the-vi/9780596529833/ch14s04.html
+https://stackoverflow.com/questions/15906029/how-to-display-all-results-of-a-search-in-vim
+
+TODO:
+https://stackoverflow.com/questions/15906029/how-to-display-all-results-of-a-search-in-vim
+https://learnvimscriptthehardway.stevelosh.com/chapters/28.html
+https://stackoverflow.com/questions/18178768/vimscript-call-vs-execute
+https://vi.stackexchange.com/questions/13509/use-only-closest-tagfile-to-working-directory-of-buffer-or-of-vim-process
+
+https://superuser.com/questions/815416/hitting-enter-in-the-quickfix-window-doesnt-work
+https://stackoverflow.com/questions/17783539/tag-navigation-in-vim
+https://stackoverflow.com/questions/21838975/vim-quickfix-avoid-buffer-change
+https://superuser.com/questions/775723/cw-command-in-vim-how-to-avoid-auto-jumping-to-first-error
+http://vimdoc.sourceforge.net/htmldoc/version6.html
+
+
+
+
 
 Install Ctags/Cscope in ubuntu:
 https://superuser.com/questions/66367/is-it-possible-to-install-ctags-without-root-privs

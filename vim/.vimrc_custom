@@ -50,9 +50,9 @@ nmap <C-Q><C-Q> <plug>(quickr_cscope_reference)
 "let g:cscope_open_reference               = '<C-R>'
 nmap <C-,> <plug>(quickr_cscope_callers)
 "let g:cscope_find_caller                  = '<C-S>'
-nmap <C-U> <plug>(quickr_cscope_pattern)
+nmap <C-M> <plug>(quickr_cscope_pattern)
 "let g:cscope_cmd_open_reference           = '<C-G>'
-nmap <C-U><C-U> <plug>(quickr_cscope_egrep_pattern)
+nmap <C-M><C-M> <plug>(quickr_cscope_egrep_pattern)
 "let g:cscope_cmd_open_reference           = '<C-G>'
 
 endif

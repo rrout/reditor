@@ -15,9 +15,17 @@
         <C-[>      Go to Ctags Defination
         <C-Q>      Lookup Reference
         <C-Q><C-Q> Search Parten Reference
-        <C-U>      Search String Parten
-        <C-U><C-U> Search Egrep Parten
+        <C-M>      Search String Parten
+        <C-M><C-M> Search Egrep Parten
         <C-B>      Go Back in Tag Stack [:pop]
         <C-B><C-B> Go Forward in Tag Stack [:tags]
         :tag <TAB><TAB> Tab complete symbols
+        :tselect <TAB><TAB> Tab complete symbols
+        :tjump <tag> Go to tag
+        :ts or :tselect shows the list
+        :tn or :tnext goes to the next tag in that list
+        :tp or :tprev goes to the previous tag in that list
+        :tf or :tfirst goes to the first tag of the list
+        :tl or :tlast goes to the last tag of the list
+        To show the tags you’ve traversed since you opened vim, run :tags
 
