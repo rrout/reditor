@@ -20,7 +20,14 @@ VimBuffer Programming reference:1
 
 
 
+VERY GOOD
+https://alex.dzyoba.com/blog/vim-revamp/
+https://stackoverflow.com/questions/36364132/cscope-does-not-save-jumps-to-the-tag-stack-when-cscopequickfix-is-set-to-use-qu
 
+
+Making Alt Work in vim:
+https://vim.fandom.com/wiki/Fix_meta-keys_that_break_out_of_Insert_mode
+https://unix.stackexchange.com/questions/14765/how-to-map-alt-key-in-vimrc
 
 
 

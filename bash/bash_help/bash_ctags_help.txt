@@ -12,13 +12,14 @@
         ----------------------
         Command    Descreption
         ---------- --------------------------------------------------------------------
-        <C-[>      Go to Ctags Defination
-        <C-Q>      Lookup Reference
-        <C-Q><C-Q> Search Parten Reference
-        <C-M>      Search String Parten
-        <C-M><C-M> Search Egrep Parten
-        <C-B>      Go Back in Tag Stack [:pop]
-        <C-B><C-B> Go Forward in Tag Stack [:tags]
+        <C-B>      Go to Ctags Defination
+        <M-s>      Go to Cscope Symbol Defination 
+        <M-q>      Lookup Reference
+        <M-q><M-q> Search Parten Reference
+        <M-g>      Search String Parten
+        <M-g><M-g> Search Egrep Parten
+        <M-t>      Go Back in Tag Stack [:pop]
+        <M-t><M-t> Go Forward in Tag Stack [:tags]
         :tag <TAB><TAB> Tab complete symbols
         :tselect <TAB><TAB> Tab complete symbols
         :tjump <tag> Go to tag

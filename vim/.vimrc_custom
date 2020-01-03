@@ -36,25 +36,54 @@ endif
 if g:tagging_cscope == 1
 
 set tags=./tags,tags;
-nmap <C-[> :cstag <C-R>=expand("<cword>")<CR><CR>
-nmap <C-B> :pop <CR><CR>
-nmap <C-B><C-B> :tag <CR><CR>
-"nnoremap <C-B><C-B> :tag<CR>
 
+let g:dont_need_alt_mappings = 1
+if has("cscope")
+    let g:dont_need_alt_mappings = 0
+    if filereadable("cscope.out")
+        nmap <M-s> <plug>(quickr_cscope_global)
+        nmap <M-q> <plug>(quickr_cscope_symbols)
+        nmap <M-q><M-q> <plug>(quickr_cscope_reference)
+        nmap <C-,> <plug>(quickr_cscope_callers)
+        nmap <M-g> <plug>(quickr_cscope_pattern)
+        nmap <M-g><M-g> <plug>(quickr_cscope_egrep_pattern)
+    endif
+endif
+"CTAGS
+nmap <C-B> :cstag <C-R>=expand("<cword>")<CR><CR>
+nmap <M-t> :pop <CR><CR>
+nnoremap <M-d> :tag<CR>
 "CSCOPE
-nmap <C-.> <plug>(quickr_cscope_global)
+if has("cscope")
+    "https://vimhelp.org/if_cscop.txt.html
+    "set csprg=/usr/local/bin/cscope
+    set csto=0
+    set cst
+    set nocsverb
+    " add any database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out
+    " else add database pointed to by environment
+    elseif $CSCOPE_DB != ""
+        "cs add $CSCOPE_DB
+    endif
+    "set csverb
+endif
+"nmap <M-s> <plug>(quickr_cscope_global)
 "let g:cscope_open_definition              = '<C-\>'
-nmap <C-Q> <plug>(quickr_cscope_symbols)
- "let g:cscope_open_synbols                = '<C-Q'
-nmap <C-Q><C-Q> <plug>(quickr_cscope_reference)
+"nmap <M-q> <plug>(quickr_cscope_symbols)
+"let g:cscope_open_synbols                = '<C-Q'
+"nmap <M-q><M-q> <plug>(quickr_cscope_reference)
 "let g:cscope_open_reference               = '<C-R>'
-nmap <C-,> <plug>(quickr_cscope_callers)
+"nmap <C-,> <plug>(quickr_cscope_callers)
 "let g:cscope_find_caller                  = '<C-S>'
-nmap <C-M> <plug>(quickr_cscope_pattern)
+"nmap <M-g> <plug>(quickr_cscope_pattern)
 "let g:cscope_cmd_open_reference           = '<C-G>'
-nmap <C-M><C-M> <plug>(quickr_cscope_egrep_pattern)
+"nmap <M-g><M-g> <plug>(quickr_cscope_egrep_pattern)
 "let g:cscope_cmd_open_reference           = '<C-G>'
 
+"Test
+"map <M-p> :echo "You just pressed Alt-a!"<CR>
 endif
 
 "==================================================================
