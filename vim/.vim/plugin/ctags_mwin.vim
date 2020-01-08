@@ -158,9 +158,13 @@ endfunction
 
 function! ExecCscopeSubCmd(option, val)
     call ExecCscopeCmd(a:option, a:val)
+
+    "if (s:results == '') && (a:option=='1')
+    "    call ExecCscopeCmd('0', a:val)
+
 endfunction
 
-function! HandleCsKeyPress(option)
+function! CsHandleCsOption(option)
     if((a:option=='f') || (a:option=='i'))
         let ident=expand("<cfile>:t")
     else
@@ -170,22 +174,22 @@ function! HandleCsKeyPress(option)
     call ExecCscopeSubCmd(a:option,ident)
 endfunction
 
-function! HandleCsKeyPressInteract(option)
+function! CsHandleCsOptionInteract(option)
     let l:str = "CS-PATTERN(".a:option."):"
     if (a:option=='s') || (a:option=='0')
         let l:str = "CS-SYMBOL :"
-    elseif (a:option=='s') || (a:option=='1')
+    elseif (a:option=='g') || (a:option=='1')
         let l:str = "CS-DEFINATION :"
-    elseif (a:option=='s') || (a:option=='2')
+    elseif (a:option=='d') || (a:option=='2')
         let l:str = "CS-CALL-SEARCH :"
-    elseif (a:option=='s') || (a:option=='3')
+    elseif (a:option=='c') || (a:option=='3')
         let l:str = "CS-CALLER-SEARCH :"
-    elseif (a:option=='s') || (a:option=='4')
+    elseif (a:option=='t') || (a:option=='4')
         let l:str = "CS-STRING-SEARCH :"
-    elseif (a:option=='s') || (a:option=='6')
+    elseif (a:option=='e') || (a:option=='6')
         let l:str = "CS-PATTERN-SEARCH :"
-    elseif (a:option=='s') || (a:option=='7')
-        let l:str = "CS-CALLER-SEARCH :"
+    elseif (a:option=='f') || (a:option=='7')
+        let l:str = "CS-FILE-SEARCH :"
     endif
     let l:input = input(l:str)
 	if(l:input == '')
@@ -195,6 +199,40 @@ function! HandleCsKeyPressInteract(option)
     call ExecCscopeSubCmd(a:option,l:input)
 endfunction
 
+function! Cs_s(arg)
+    let l:pattern = a:arg
+    call ExecCscopeSubCmd('0',l:pattern)
+endfunction
+
+function! Cs_g(arg)
+    let l:pattern = a:arg
+    call ExecCscopeSubCmd('1',l:pattern)
+endfunction
+
+function! Cs_c(arg)
+    let l:pattern = a:arg
+    call ExecCscopeSubCmd('2',l:pattern)
+endfunction
+
+function! Cs_d(arg)
+    let l:pattern = a:arg
+    call ExecCscopeSubCmd('3',l:pattern)
+endfunction
+
+function! Cs_t(arg)
+    let l:pattern = a:arg
+    call ExecCscopeSubCmd('4',l:pattern)
+endfunction
+
+function! Cs_e(arg)
+    let l:pattern = a:arg
+    call ExecCscopeSubCmd('6',l:pattern)
+endfunction
+
+function! Cs_f(arg)
+    let l:pattern = a:arg
+    call ExecCscopeSubCmd('7',l:pattern)
+endfunction
 
 if !exists("g:cscope_mappings")
     let g:ctags_mwin_mappings = 1
@@ -213,36 +251,37 @@ if !exists("g:cs_cmd_sym_search")
 let g:cs_cmd_sym_search = "<leader>s <cr>"
 endif
 if !exists("g:cs_cmd_called_search")
-let g:cs_cmd_called_search = "<leader>g <cr>"
+let g:cs_cmd_called_search = "<leader>c <cr>"
 endif
 if !exists("g:cs_cmd_calling_search")
-let g:cs_cmd_calling_search = "<leader>g <cr>"
+let g:cs_cmd_calling_search = "<leader>d <cr>"
 endif
 if !exists("g:cs_cmd_text_search")
 let g:cs_cmd_text_search = "<leader>t <cr>"
 endif
 if !exists("g:cs_cmd_egrep_search")
-let g:cs_cmd_egrep_search = "<leader>g <cr>"
+let g:cs_cmd_egrep_search = "<leader>e <cr>"
 endif
 if !exists("g:cs_cmd_file_search")
-let g:cs_cmd_file_search = "<leader>g <cr>"
+let g:cs_cmd_file_search = "<leader>f <cr>"
 endif
 if !exists("g:cs_cmd_ref_search")
-let g:cs_cmd_ref_search = "<leader>s <cr>"
+let g:cs_cmd_ref_search = "<leader>ss <cr>"
 endif
 
-exec " noremap " . g:cs_cmd_def_search . " :call HandleCsKeyPress('1')<cr>"
-exec " noremap " . g:cs_cmd_sym_search . " :call HandleCsKeyPress('0') <CR>"
-exec " noremap " . g:cs_cmd_called_search . " :call <SID>HandleCsKeyPress('2') <CR>"
-exec " noremap " . g:cs_cmd_calling_search . " :call <SID>HandleCsKeyPress('3') <CR>"
-exec " noremap " . g:cs_cmd_text_search . " :call HandleCsKeyPressInteract('4') <CR>"
-exec " noremap " . g:cs_cmd_egrep_search . " :call HandleCsKeyPressInteract('6') <CR>"
-exec " noremap " . g:cs_cmd_file_search . " :call HandleCsKeyPressInteract('7') <CR>"
-exec " noremap " . g:cs_cmd_ref_search . " :call HandleCsKeyPressInteract('0') <CR>"
+exec " noremap " . g:cs_cmd_def_search . " :call CsHandleCsOption('1')<cr>"
+exec " noremap " . g:cs_cmd_sym_search . " :call CsHandleCsOption('0') <CR>"
+exec " noremap " . g:cs_cmd_called_search . " :call CsHandleCsOption('2') <CR>"
+exec " noremap " . g:cs_cmd_calling_search . " :call CsHandleCsOption('3') <CR>"
+exec " noremap " . g:cs_cmd_text_search . " :call CsHandleCsOptionInteract('4') <CR>"
+exec " noremap " . g:cs_cmd_egrep_search . " :call CsHandleCsOptionInteract('6') <CR>"
+exec " noremap " . g:cs_cmd_file_search . " :call CsHandleCsOptionInteract('7') <CR>"
+exec " noremap " . g:cs_cmd_ref_search . " :call CsHandleCsOptionInteract('0') <CR>"
 
 
 
-function SetTags()
+
+function CtagsSetTags()
     let curdir = getcwd()
 
     while !filereadable("tags") && getcwd() != "/"
@@ -256,7 +295,7 @@ function SetTags()
     execute "cd " . curdir
 endfunction
 
-function SetCscope()
+function CsSetCscope()
     let curdir = getcwd()
 
     while !filereadable("cscope.out") && getcwd() != "/"
@@ -270,7 +309,7 @@ function SetCscope()
     execute "cd " . curdir
 endfunction
 
-function s:FindFile(file)
+function s:CsFindFile(file)
     let curdir = getcwd()
     let found = curdir
     while !filereadable(a:file) && found != "/"
@@ -286,7 +325,7 @@ if has('cscope')
     set cst
     set nocsverb
 
-    let $CSCOPE_DIR=s:FindFile("cscope.out")
+    let $CSCOPE_DIR=s:CsFindFile("cscope.out")
     let $CSCOPE_DB=$CSCOPE_DIR."/cscope.out"
     if filereadable($CSCOPE_DB)
         cscope add $CSCOPE_DB $CSCOPE_DIR

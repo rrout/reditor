@@ -224,6 +224,25 @@ user_cd(){
 	echo "${PWD}" > ${HOME}/.screen_pwd_${STY#*.}
 }
 
+function VCs()
+{
+	#echo vim -c ":Cs $1 $2"
+	if [[ $# -le  1 ]]
+	then
+		return
+	fi
+	file=$2
+	if [[ $1 = "p" ]]
+	then
+		declare -a filename_lineno=($(echo $2 | tr "[: ]" " "))
+		file="${filename_lineno[0]}"
+	fi
+
+	:> ~/.vim/tmp/cfiles.txt
+	vim -c ":call Cs_$1(\"$file\")"
+	. ~/.vim/tmp/cfiles.txt
+}
+
 
 function cgrep(){
     if  [[ -n $1  && -n $2 ]]; then  find $2 -name "*.c" |xargs grep -sE --color $1 ; return ;fi

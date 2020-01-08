@@ -531,6 +531,12 @@ alias atags='ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f atags '
 #Enable velow for cscope open VIM (by default cscope uses VI not VIM)
 export CSCOPE_EDITOR=`which vim`
 
+alias csp="VCs f"
+alias csx="VCs g"
+alias csr="VCs s"
+alias csc="VCs c"
+alias cse="VCs e"
+
 function utags(){
     if  [[ -n $1  ]] ; then (cd $1; ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f atags;);  return ; fi
 }

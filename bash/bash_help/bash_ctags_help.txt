@@ -18,6 +18,8 @@
         <M-q><M-q> Search Parten Reference
         <M-g>      Search String Parten
         <M-g><M-g> Search Egrep Parten
+        <M-p>      Search File Parten
+        <M-h>      Search Functions calling this Symbol
         <M-t>      Go Back in Tag Stack [:pop]
         <M-t><M-t> Go Forward in Tag Stack [:tags]
         :tag <TAB><TAB> Tab complete symbols
@@ -29,4 +31,15 @@
         :tf or :tfirst goes to the first tag of the list
         :tl or :tlast goes to the last tag of the list
         To show the tags you’ve traversed since you opened vim, run :tags
+        ----------------------
+        Command Line
+        ----------------------
+        Command    Descreption
+        ---------- --------------------------------------------------------------------
+        csx="VCs g"Lookup Global Defination
+        csr="VCs s"Lookup Symbol
+        csc="VCs c"Lookup Callers
+        cse="VCs e"Lookup Egrep Partten
+        csp="VCs f"Lookup File Partten
+        csfind     Commandline Lookuo Cscope
 

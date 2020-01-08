@@ -19,9 +19,9 @@ function! s:printable_characters()
   " leaving out problematic characters: 'O', double quote, pipe and '['
   "let ascii_nums = [33] + range(35, 61) + range(63, 78) + range(80, 90) + range(92, 123) + [125, 126]
 
-  "Mapp only keys [d, g, q, s, t] : refer Asscii table @
+  "Mapp only keys [d, g, h, p, q, s, t] : refer Asscii table @
   "https://theasciicode.com.ar/ascii-printable-characters/capital-letter-t-uppercase-ascii-code-84.html
-  let ascii_nums = [100, 103, 113, 115, 116]
+  let ascii_nums = [100, 103, 104, 112, 113, 115, 116]
   return map(ascii_nums, 'nr2char(v:val)')
 endfunction
 
