@@ -1,7 +1,11 @@
 #!/bin/bash
 
+INSTALLFILE=""
+
 function usage {
-    echo "Usage : $0 <Component-List-file>"
+    echo "Usage : $0 < -u | -f > <Component-List-file>"
+    echo "          -u : Update the project"
+    echo "          -f : Install project from Uri List"
 }
 
 if [ $# -eq 0 ]
@@ -15,19 +19,46 @@ if [ -z "$1" ];then
     exit
 fi
 
-
-if [ ! -z "$(ls -A $PWD)" ]; then
-    echo "Directory ($PWD) must be Empty.... else it will mess up project creation"
-    exit
-fi
-
-if [ ! -f $1 ];then
-    echo "Component list file ($1) not found"
+if [ "$1" == "-u" ] || [ "$1" == "-f" ];then
+    if [ "$1" == "-f" ] && [  -z "$2" ];then
+        echo "Must specify installation File List"
+        usage
+        exit
+    fi
+else
+    echo "Unknown Option"
     usage
     exit
 fi
 
-filename=$1
+if [ "$1" == "-f" ];then
+    if [ ! -z "$(ls -A $PWD)" ]; then
+        echo "Directory ($PWD) must be Empty.... else it will mess up project creation"
+        exit
+    fi
+
+    if [ ! -f $2 ];then
+        echo "Component list file ($1) not found"
+        usage
+        exit
+    fi
+    INSTALLFILE=$2
+fi
+
+if [ "$1" == "-u" ];then
+    find . -maxdepth 1 -type d -print -execdir git --git-dir={}/.git --work-tree=$PWD/{} pull \;
+    echo ""
+    echo "Update Successful"
+    echo ""
+    exit
+fi
+
+#Proceed for Installation
+if [ "$INSTALLFILE" == "" ];then
+    exit
+fi
+
+filename=$INSTALLFILE
 while read -r line; do
     name="$line"
     echo "Fetching Projects"
