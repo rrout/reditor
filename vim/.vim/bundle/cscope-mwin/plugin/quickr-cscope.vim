@@ -10,6 +10,14 @@ endif
 let g:quickr_cscope_loaded = 1
 " }}
 
+"Rashmi
+if !exists("g:quicker_cscope")
+    g:quicker_cscope = 1
+endif
+if g:quicker_cscope == 0
+    finish
+endif
+
 " s:debug_echo {{
 function! s:debug_echo(str)
     if g:quickr_cscope_debug_mode

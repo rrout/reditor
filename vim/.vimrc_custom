@@ -1,7 +1,6 @@
 
 
 let g:tagging_gtags     = 1
-let g:tagging_cscope    = 1
 "==================================================================
 "					GTAGS KEY BINDINGS
 "==================================================================
@@ -27,9 +26,11 @@ let	g:gtags_cmd_open_file_path		= '<C-P><C-P>'
 let	g:gtags_cmd_sub_string_search	= '<C-S><C-S>'
 let	g:gtags_cmd_search_and_replace	= '<C-F><C-R>'
 let	g:gtags_cmd_view_cursor_file	= '<C-F><C-L>'
+let g:gtags_cmd_open_ak_search      = '<C-Y><C-Y>'
 
 endif
 
+let g:tagging_cscope    = 1
 "==================================================================
 "                    CSCOPE/CTAGS KEY BINDINGS
 "==================================================================
@@ -52,7 +53,7 @@ if g:quicker_cscope == 1
     nmap <M-s> <plug>(quickr_cscope_global)
     nmap <M-q> <plug>(quickr_cscope_symbols)
     nmap <M-q><M-q> <plug>(quickr_cscope_reference)
-    nmap <C-,> <plug>(quickr_cscope_callers)
+    nmap <M-t> <plug>(quickr_cscope_callers)
     nmap <M-g> <plug>(quickr_cscope_pattern)
     nmap <M-g><M-g> <plug>(quickr_cscope_egrep_pattern)
 elseif g:ctags_mwin_cscope == 1
@@ -70,12 +71,14 @@ elseif g:ctags_mwin_cscope == 1
 endif
 
 "CTAGS
+noremap ] :cstag <C-R>=expand("<cword>")<CR><CR>
+noremap t :pop <CR><CR>
+nnoremap <M-d> :tag<CR>
 nmap <C-B> :cstag <C-R>=expand("<cword>")<CR><CR>
 nmap <M-t> :pop <CR><CR>
-nnoremap <M-d> :tag<CR>
-
 "Test
 "map <M-p> :echo "You just pressed Alt-a!"<CR>
+"noremap o :echo "You just pressed Alt-a!"<CR>
 endif
 
 "==================================================================
@@ -139,18 +142,15 @@ endif
 "                   GENERALSETTINGS
 "==================================================================
 set nocompatible " explicitly get out of vi-compatible mode
+set path+=.,$HOME/reditor/utils/bin,** "set path for vim, (** is to search recursively)(like fzf)(:find ..)
+set ts=8 "tabstop 8 charectors
 set laststatus=1
-set scrolloff=2
 set ic
-":set mouse=nv
-set shiftwidth=4
-":set expandtab
-set smartindent
 set incsearch
+"set expandtab
+set smartindent
 set autoindent
-":colorscheme evening
 set tabstop=4
-set nowrap
 ":set ruler
 "set rulerformat=%15(%c%V\ %p%%%)
 set backspace=2
@@ -162,16 +162,16 @@ set hidden
 ":set matchpairs
 ":set nocp
 ":set fo=cql
-":au FileType c,cpp,h setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,f://
-":au FileType c,cpp,h setlocal comments-=://
-"au FileType * setl fo-=cro
+
 "set completeopt=menu,preview,longest
 "set completeopt=menu
 "set completeopt-=menu
 set completeopt=menuone
 set completeopt+=menu
 set completeopt+=longest
-:set noexrc " don't use local version of .(g)vimrc, .exrc
+set complete+=k
+
+set noexrc " don't use local version of .(g)vimrc, .exrc
 ":set background=dark " we plan to use a dark background
 :set cpoptions=aABceFsmq
 			"             |||||||||
@@ -192,15 +192,6 @@ set completeopt+=longest
 			" }
 
 "set autochdir " always switch to the current file directory
-set backspace=indent,eol,start " make backspace a more flexible
-"set backup " make backup files
-set backupdir=~/.vim/backup " where to put backup files
-set clipboard+=unnamed " share windows clipboard
-set directory=~/.vim/tmp " directory to place swap files in
-":set fileformats=unix,dos,mac " support all three, in this order
-set hidden " you can change buffers without saving
-set iskeyword+=_,$,@,%,# " none of these are word dividers
-"set "mouse=a " use mouse everywhere
 set noerrorbells " don't make noise
 			"set whichwrap=b,s,h,l,<,>,~,[,] " everything wraps
 			"             | | | | | | | | |
@@ -213,6 +204,7 @@ set noerrorbells " don't make noise
 			"             | | +-- "h" Normal and Visual (not recommended)
 			"             | +-- <Space> Normal and Visual
 			"             +-- <BS> Normal and Visual
+
 set wildmenu " turn on command line completion wild style " ignore these list file extensions
 set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.jpg,*.gif,*.png
 set wildmode=list:longest " turn on wild mode huge list
@@ -221,6 +213,7 @@ set backup " make backup files
 set clipboard+=unnamed " share windows clipboard
 set backupdir=~/.vim/backup " where to put backup files
 set directory=~/.vim/tmp " directory to place swap files in
+set dictionary=~/.vim/dictionary "/dictionary for spell check ":set spell
 set fileformats=unix,dos,mac " support all three, in this order
 set hidden " you can change buffers without saving
 " (XXX: #VIM/tpope warns the line below could break things)
@@ -237,24 +230,18 @@ set report=0 " tell us when anything is changed via :...
 "set ruler " Always show current positions along the bottom
 set scrolloff=2 " Keep 10 lines (top/bottom) for scope
 "set shortmess=aOstT " shortens messages to avoid 'press a key' prompt
-""set showcmd " show the command being typed
+"set showcmd " show the command being typed
 set showmatch " show matching brackets
 "set sidescrolloff=10 " Keep 5 lines at the size
 set nowrap " do not wrap line
 "set shiftround " when at 3 spaces, and I hit > ... go to 4, not 5
-" set smartcase " if there are caps, go case-sensitive
+"set smartcase " if there are caps, go case-sensitive
 set shiftwidth=4 " auto-indent amount when using cindent, " >>, << and stuff like that
 set softtabstop=4 " when hitting tab or backspace, how many spaces "should a tab be (see expandtab)
 set tabstop=4 " real tabs should be 8, and they will show with " set list on
 "ignore white space in vimdiff
 set diffopt+=iwhite
 
-
-
-
-"set path for vim, (** is to search recursively)(like fzf)(:find ..)
-set path+=.,$HOME/reditor/utils/bin,**
-set ts=8
 " Tell vim to remember certain things when we exit
     "  '10  :  marks will be remembered for up to 10 previously edited files
     "  "100 :  will save up to 100 lines for each register
@@ -264,36 +251,40 @@ set ts=8
 set viminfo='1000,\"10000,:200000,n~/.viminfo
 "Vim Session Settings
 set ssop=blank,sesdir,folds,localoptions,tabpages,winpos,winsize
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8
-set noeb vb t_vb=
+
 " Color scheme
 "":set t_AB=[48;5;%dm
 ":set t_AF=[38;5;%dm
 set t_Co=256
 " Cursor goes beyond last character
 set virtualedit=onemore,block
+
 hi folded guifg=red "wrap the cursor
-set dictionary=~/.vim/dictionary
-set complete+=k
 set noerrorbells visualbell t_vb=
 if has('autocmd')
-	autocmd GUIEnter * set visualbell t_vb=
+    autocmd GUIEnter * set visualbell t_vb=
 endif
+
+set noeb vb t_vb=
 set visualbell
 set noerrorbells
 set encoding=utf-8
+set fileencodings=ucs-bom,utf-8
 scriptencoding utf-8
 "colorscheme desert
+"colorscheme evening
 set guifont=Monospace\ 12
 "Hightlight current char
 "match ErrorMsg '\%#'
 "set swap(.swp),backup(.bak),undo(.udf)
+
+
 "TAB coloring
 silent hi SpecialKey guifg=black guibg=magenta cterm=bold ctermfg=231 ctermbg=255
 set list
 set listchars=tab:\ \
 set nolist
+
 " Odds n Ends
 "set ttymouse=xterm2 " makes it work in everything
 
@@ -306,7 +297,6 @@ set nolist
 "Highlighting can be enabled on Vim startup
 ":set viminfo^=h
 ":noremap <ESC><ESC>  <ESC><C-w><C-w><ESC>
-"set sidescrolloff=10 " Keep 5 lines at the size
 
 " hit f11 to paste
 "set pastetoggle=<F4>
@@ -379,13 +369,6 @@ exe "set tags+=". './atags'
 "silent inoremap k <C-O>k
 "silent inoremap l <C-O>l
 
-"Command mode map
-exec "cmap ". g:cmd_load_current_word_find ." <C-R><C-W>"
-exec "cmap ". g:cmd_load_current_word_gtags ." <C-R><C-W>"
-exec "cmap <C-S> <C-R><C-W>"
-exec "cmap <C-X> <C-R><C-W>"
-exec "cmap <C-R><C-R> <C-R><C-W>"
-
 ":noremap   <ESC>:'<,'>!column -t<CR>
 ":noremap!  <ESC>:'<,'>!column -t<CR>
 
@@ -427,10 +410,23 @@ exec "cmap <C-R><C-R> <C-R><C-W>"
 
 noremap  wq <ESC>:wq<CR>
 ":map <ESC>q  <ESC>:q!<CR>
-map U <ESC>:redo<CR>
 ":noremap <ESC><ESC>  <ESC><C-w><C-w><ESC>
 :vnoremap <Tab> >gv
 :vnoremap <S-Tab> <gv
+
+"Redo
+inoremap U <ESC>:redo<CR>
+noremap U <ESC>:redo<CR>
+
+"==================================================================
+"                   COMMAND MODE MAPS
+"==================================================================
+"Command mode map
+exec "cmap ". g:cmd_load_current_word_find ." <C-R><C-W>"
+exec "cmap ". g:cmd_load_current_word_gtags ." <C-R><C-W>"
+exec "cmap <C-S> <C-R><C-W>"
+exec "cmap <C-X> <C-R><C-W>"
+exec "cmap <C-R><C-R> <C-R><C-W>"
 
 "==================================================================
 "                   GENERAL FUNCTIONS
@@ -535,6 +531,8 @@ let g:autoclose_on = 0
 let g:kgprg=$HOME."/reditor/utils/bin/kg --column"
 "ack search program - install ack
 let g:akprg="/usr/bin/ack --column"
+"ag search program - install ag(silver seatcher)
+let g:agprg="/usr/bin/ag --column"
 
 "==================================================================
 "                   HIGHLIGHT SETTINGS
