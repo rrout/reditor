@@ -24,6 +24,9 @@ if [ $# == 0 ]; then
         rm -rf GRPATH
         echo "Deleting GLOG"
         rm -rf GLOG
+        echo "Deleting GFILE and GFILES"
+        rm -rf GFILE
+        rm -rf GFILES
     else
         echo "No GTAGS in the current path ${PWD}"
     fi
@@ -42,6 +45,8 @@ if [ "$1" == "-h" ] || [ "$1" == "-f" ] || [ "$1" == "-c" ] || [ "$1" == "-a" ] 
         find . -type f -name GPATH -exec rm {} \;
         find . -type f -name GRPATH -exec rm {} \;
         find . -type f -name GLOG -exec rm {} \;
+        find . -type f -name GFILE -exec rm {} \;
+        find . -type f -name GFILES -exec rm {} \;
         echo "Recurssively Deleted all GTAGS files from path ${PWD}"
     fi
     if [ "$1" == "-i" ];then
@@ -50,6 +55,8 @@ if [ "$1" == "-h" ] || [ "$1" == "-f" ] || [ "$1" == "-c" ] || [ "$1" == "-a" ] 
         find . -type f -name GPATH -exec rm -i {} \;
         find . -type f -name GRPATH -exec rm -i {} \;
         find . -type f -name GLOG -exec rm -i {} \;
+        find . -type f -name GFILE -exec rm -i {} \;
+        find . -type f -name GFILES -exec rm -i {} \;
         echo "Recurssively Deleted all GTAGS files of your choice from path ${PWD}"
     fi
     if [ "$1" == "-f" ];then
@@ -64,6 +71,9 @@ if [ "$1" == "-h" ] || [ "$1" == "-f" ] || [ "$1" == "-c" ] || [ "$1" == "-a" ] 
         find . -type f -name GRPATH
         echo "GLOG :"
         find . -type f -name GLOG
+        echo "GFILE/GFILES :"
+        find . -type f -name GFILE
+        find . -type f -name GFILES
     fi
     if [ "$1" == "-c" ];then
         echo "Deleting GTAGS"
@@ -76,6 +86,10 @@ if [ "$1" == "-h" ] || [ "$1" == "-f" ] || [ "$1" == "-c" ] || [ "$1" == "-a" ] 
         rm -rf GRPATH
         echo "Deleting GLOG"
         rm -rf GLOG
+        echo "Deleting GFILE and GFILES"
+        rm -rf GFILE
+        rm -rf GFILES
+
         echo "Deleted all GTAGS files from current path ${PWD}"
     fi
 else

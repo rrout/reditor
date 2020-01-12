@@ -1,5 +1,19 @@
+#!/bin/bash
+echo "Looking Up Sourse Files Recurssively"
 find . -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.h" -o -name "*.hpp" > cscope.files
+
+echo "Creating Cscope Database"
 cscope -q -R -b -i cscope.files
+
 #Generate ctags also
-ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ -V .
+echo "Creating Ctags Database"
+#ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ -V .
+ctags --langmap=C++:+.inc --c++-kinds=+p --fields=+iaS --extra=+fq --sort=foldcase -R -L cscope.files
+
+echo "Cleanup File List"
+rm -rf cscope.files
+
+ls -lh cscope* tags*
+echo "Ctags And Cscope Database Creation Successful"
+
 

@@ -1,10 +1,13 @@
 "----------------------------------------
 "             CTAGS/CSCOPE SEARCH 
 "             Inspired by:
+"
 "             https://github.com/vim-scripts/cscope_win/blob/master/plugin/cscope_win.vim
+"             https://github.com/vim-scripts/acsb/blob/master/README.orig
+"             https://github.com/jlanzarotta/bufexplorer/blob/master/plugin/bufexplorer.vim
+"
 "             https://searchcode.com/codesearch/view/77464705/
 "             https://stackoverflow.com/questions/14915971/cscope-how-to-use-cscope-to-search-for-a-symbol-using-command-line
-"             file:///C:/Users/rrout/Downloads/cscope.htmla
 "             https://www.vim.org/scripts/script.php?script_id=1076
 "----------------------------------------
 if exists("g:loaded_cscope_mappings") || v:version < 700 || &cp
@@ -338,80 +341,4 @@ endif
 "call SetCscope()
 
 
-"if has("cscope")
-    "https://vimhelp.org/if_cscop.txt.html
-    "https://stackoverflow.com/questions/30087730/cscope-ctrl-does-not-work?rq=1a
-    "http://cscope.sourceforge.net/cscope_maps.vim
-    "set csprg=/usr/local/bin/cscope
-    "set csto=0
-    "set cst
-    "set nocsverb
-    " add any database in current directory
-    "if filereadable("cscope.out")
-    "    cs add cscope.out
-    " else add database pointed to by environment
-    "elseif $CSCOPE_DB != ""
-        "cs add $CSCOPE_DB
-    "endif
-    "set csverb
-"endif
-
-let s:result=[]
-function! UpdateBuf( file, no, pattern, search)
-	
-	let tag = GetStackTopTag()
-    if tag.TagType == "TAG" 
-		let data = a:search
-	else
-		"let data = a:file. "\t".a:no."\t". a:search
-		let data = substitute(a:search, '^[ \t]*', '', "g")
-		let data = printf("%-30s  |%4d|  %s", a:file, a:no, data)
-	endif
-	call add(s:result, data)
-endfunc
-
-function! s:SearchCmd(search_type, pattern)
-	let s:result=[]
-	"let tag = GetStackTopTag()
-	let l:line_no = getpos(".")
-
-   
-    echo a:search_type a:pattern." call UpdateBuf( bufname(\"%\") ,  line(\".\") ,  \"".a:pattern."\", getline(\".\") )"
-	execute  a:search_type." ".a:pattern." call UpdateBuf( bufname(\"%\") ,  line(\".\") ,  \"".a:pattern."\", getline(\".\") )"
-    call setpos(".", l:line_no)
-
-	if len(s:result)>0
-		"call CopyCurrentToStackTop()
-		"call PushTag(a:pattern, a:pattern, bufname("%"))
-		call SetStackTopTag("SEARCH", "SEARCH", bufname("%"), "FILE", l:line_no)
-		call OpenTag("SEARCH", a:pattern, s:result)
-	endif
-endfunc
-
-
-
-function! GtagsAutoComplete_ctags()
-    call inputsave()
-        let l:input = input('Enter pattern:')
-            call inputrestore()
-	"let l:input = input("CS-DEF-PATTERN:","", "custom,GtagsComplete_subsearch")
-	if(l:input == '') 
-		return 
-	endif
-
-	let l:pattern = l:input
-
-	let l:pattern = substitute(l:pattern, '^.', '', "g")
-
-	let search_type = l:input[0]
-
-	if search_type == '~'
-		call s:SearchCmd("cscope find s", l:pattern)
-	else
-		call s:SearchCmd("cscope find s", l:input)
-	endif
-
-endfunc
-"exec " noremap	" . g:gtags_cmd_ctags_def_search . " :call GtagsAutoComplete_ctags() <CR>"
-"exec " inoremap " . g:gtags_cmd_ctags_def_search . " <ESC> :call GtagsAutoComplete_ctags() <CR>"
 
