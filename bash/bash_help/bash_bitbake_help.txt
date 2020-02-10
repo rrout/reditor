@@ -16,4 +16,13 @@
     yocto-bsp     yocto-kernel  yocto-layer
     yocto-layer         Command to create a new Yocto layer
 
+    LOCAL CONFIGURATIONS
+    ------------------- ------------------------------------------------------------
+    INHERIT += "externalsrc"        : https://wiki.koansoftware.com/index.php/Building_Software_from_an_External_Source
+    EXTERNALSRC_pn-<recipename> = "/path/to/sources"
+
+    SANITY DISABLE:                 : http://git.yoctoproject.org/cgit.cgi/poky/plain/meta/conf/sanity.conf?h=clyde
+    touch conf/sanity.conf          : Create a emppty file sanity.conf to disable sanity check in../build, it will not talk to server
+
+
 

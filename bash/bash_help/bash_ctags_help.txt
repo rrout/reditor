@@ -41,5 +41,5 @@
         csc="VCs c"Lookup Callers
         cse="VCs e"Lookup Egrep Partten
         csp="VCs f"Lookup File Partten
-        csfind     Commandline Lookuo Cscope
+        csfind     Commandline Lookup Cscope
 

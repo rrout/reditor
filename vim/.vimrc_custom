@@ -415,7 +415,6 @@ noremap  wq <ESC>:wq<CR>
 :vnoremap <S-Tab> <gv
 
 "Redo
-inoremap U <ESC>:redo<CR>
 noremap U <ESC>:redo<CR>
 
 "==================================================================

@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Looking Up Sourse Files Recurssively"
-find . -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.h" -o -name "*.hpp" > cscope.files
+#find . -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.h" -o -name "*.hpp" > cscope.files
+find . -name "*.c" -o -name "*.cc" -o -name "*.cpp" -o -name "*.h" -o -name "*.hh" -o -name "*.hpp" -o -name "*.py" > cscope.files
 
 echo "Creating Cscope Database"
 cscope -q -R -b -i cscope.files

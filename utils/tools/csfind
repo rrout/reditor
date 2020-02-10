@@ -40,21 +40,26 @@ if [ "$1" == "-g" ];then
 elif [ "$1" == "-s" ];then
     cscope  -d -L -f cscope.out -0 $2
 elif [ "$1" == "-c" ];then
-    cscope  -d -L -f cscope.out -0 $2
+    cscope  -d -L -f cscope.out -3 $2
 elif [ "$1" == "-e" ];then
-    cscope  -d -L -f cscope.out -0 $2
+    cscope  -d -L -f cscope.out -6 $2
 elif [ "$1" == "-f" ];then
-    cscope  -d -L -f cscope.out -0 $2
+    cscope  -d -L -f cscope.out -7 $2
 elif [ "$1" == "-vg" ];then
-    VCs $1 $2
+    #VCs g $2
+    vim -c ":call Cs_g(\"$2\")";
 elif [ "$1" == "-vs" ];then
-    VCs $1 $2
+    #VCs s $2
+    vim -c ":call Cs_s(\"$2\")";
 elif [ "$1" == "-vc" ];then
-    VCs $1 $2
+    #VCs c $2
+    vim -c ":call Cs_c(\"$2\")";
 elif [ "$1" == "-ve" ];then
-    VCs $1 $2
+    #VCs e $2
+    vim -c ":call Cs_e(\"$2\")";
 elif [ "$1" == "-vf" ];then
-    VCs $1 $2
+    #VCs f $2
+    vim -c ":call Cs_f(\"$2\")";
 fi
 
 
@@ -66,16 +71,15 @@ fi
 
 
 
-
-
-
-
-
-
-
-
-
-
+#0 or s: Find this C symbol
+#1 or g: Find this definition
+#2 or d: Find functions called by this function
+#3 or c: Find functions calling this function
+#4 or t: Find this text string
+#6 or e: Find this egrep pattern
+#7 or f: Find this file
+#8 or i: Find files #including this file
+#9 or a: Find places where this symbol is assigned a value
 
 
 

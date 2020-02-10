@@ -20,6 +20,8 @@
                                     - https://docs.kali.org/faq/how-do-i-tell-what-drive-path-my-usb-drive-is-on
                                     - https://simpleit.rocks/linux/detect-mount-usb-devices-in-linux-console-terminal/
                                     - https://linuxconfig.org/howto-mount-usb-drive-in-linux
+    scp <userid>@<host>:</absolutepath/file> <.|path>  Scp command to get file to destination
+    scp <file> <userid>@<host>:</absolutepath/file>    Scp command to send file to remote
     --------------------------------------------------- ------------------------------------------
     = Systenctl/Journalctl =
     --------------------------------------------------- ------------------------------------------
