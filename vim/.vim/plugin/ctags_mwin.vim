@@ -212,12 +212,12 @@ function! Cs_g(arg)
     call ExecCscopeSubCmd('1',l:pattern)
 endfunction
 
-function! Cs_c(arg)
+function! Cs_d(arg)
     let l:pattern = a:arg
     call ExecCscopeSubCmd('2',l:pattern)
 endfunction
 
-function! Cs_d(arg)
+function! Cs_c(arg)
     let l:pattern = a:arg
     call ExecCscopeSubCmd('3',l:pattern)
 endfunction
@@ -253,11 +253,11 @@ endif
 if !exists("g:cs_cmd_sym_search")
 let g:cs_cmd_sym_search = "<leader>s <cr>"
 endif
-if !exists("g:cs_cmd_called_search")
-let g:cs_cmd_called_search = "<leader>c <cr>"
-endif
 if !exists("g:cs_cmd_calling_search")
 let g:cs_cmd_calling_search = "<leader>d <cr>"
+endif
+if !exists("g:cs_cmd_called_search")
+let g:cs_cmd_calledby_search = "<leader>c <cr>"
 endif
 if !exists("g:cs_cmd_text_search")
 let g:cs_cmd_text_search = "<leader>t <cr>"
@@ -274,8 +274,8 @@ endif
 
 exec " noremap " . g:cs_cmd_def_search . " :call CsHandleCsOption('1')<cr>"
 exec " noremap " . g:cs_cmd_sym_search . " :call CsHandleCsOption('0') <CR>"
-exec " noremap " . g:cs_cmd_called_search . " :call CsHandleCsOption('2') <CR>"
-exec " noremap " . g:cs_cmd_calling_search . " :call CsHandleCsOption('3') <CR>"
+exec " noremap " . g:cs_cmd_calling_search . " :call CsHandleCsOption('2') <CR>"
+exec " noremap " . g:cs_cmd_calledby_search . " :call CsHandleCsOption('3') <CR>"
 exec " noremap " . g:cs_cmd_text_search . " :call CsHandleCsOptionInteract('4') <CR>"
 exec " noremap " . g:cs_cmd_egrep_search . " :call CsHandleCsOptionInteract('6') <CR>"
 exec " noremap " . g:cs_cmd_file_search . " :call CsHandleCsOptionInteract('7') <CR>"

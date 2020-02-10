@@ -62,8 +62,8 @@ elseif g:ctags_mwin_cscope == 1
     let g:ctags_mwin_mappings = 1
     let g:cs_cmd_def_search         = '<M-s>'
     let g:cs_cmd_sym_search         = '<M-q>'
-    let g:cs_cmd_called_search      = '<M-h><M-h>'
-    let g:cs_cmd_calling_search     = '<M-h>'
+    let g:cs_cmd_calling_search     = '<M-h><M-h>'
+    let g:cs_cmd_calledby_search    = '<M-h>'
     let g:cs_cmd_text_search        = '<M-g>'
     let g:cs_cmd_egrep_search       = '<M-g><M-g>'
     let g:cs_cmd_file_search        = '<M-p>'
