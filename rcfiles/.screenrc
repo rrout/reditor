@@ -126,6 +126,7 @@ backtick 2 1 0 uname -o
 backtick 3 1 0 cat ${HOME}/.screen_pwd_${STY}
 #hardstatus string '%{= wk}%-w %{wk} [ %n %t ] %{Kd}%+w %-=%{KW}| %D %M %d %Y% | %C %A %{-} '
 hardstatus string "%{= wk}%-w %{BW}[ %n %t ]%{wk}%+w   %{KW}  %S  | %H |  %1` |  %2` |  %3` %-=%{wk} %D %M %d %Y% | %C %A "
+#hardstatus string "%{= gW}%S %{= wk}%-w %{BW}[ %n %t ]%{wk}%+w   %{KW} %1`@%H|%C %A%{= ck}%D %M %d %Y"
 
 #bindkey "^[Od" prev  # ctrl-left
 #bindkey "^[Oc" next  # ctrl-right
@@ -143,7 +144,9 @@ hardstatus string "%{= wk}%-w %{BW}[ %n %t ]%{wk}%+w   %{KW}  %S  | %H |  %1` | 
 #hardstatus lastline
 
 
-
+#LOG always at $HOME directory
+logfile $HOME/screenlog.%n
+#logfile $HOME/tmuxlog/screen-%S-%n.lo
 
 
 
