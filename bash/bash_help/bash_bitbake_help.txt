@@ -24,5 +24,12 @@
     SANITY DISABLE:                 : http://git.yoctoproject.org/cgit.cgi/poky/plain/meta/conf/sanity.conf?h=clyde
     touch conf/sanity.conf          : Create a emppty file sanity.conf to disable sanity check in../build, it will not talk to server
 
+    DEBUG BUILD
+    INHIBIT_PACKAGE_DEBUG_SPLIT = "1" : inside recipe
+    INHIBIT_PACKAGE_STRIP = "1"       : inside recipe - Dont Strip
+
+    INHIBIT_PACKAGE_DEBUG_SPLIT_pn-<recipename> = "1"  : in build/conf/local.conf
+    INHIBIT_PACKAGE_STRIP_pn-<recipename> = "1"
+
 
 

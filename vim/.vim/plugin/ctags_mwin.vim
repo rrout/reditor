@@ -23,8 +23,11 @@ function! ExecCscopeCmd(option,var)
     let l:srch = '"'.a:var.'"'
 
     "check the cscope program
-    "
     "check for cscope.out file in the path
+    let db = findfile("cscope.out", '.;')
+    if empty(db)
+        echo " Error:Cscope Database Not Found....."
+    endif
 
     "If no pattern is provided, return
     if empty(a:var)

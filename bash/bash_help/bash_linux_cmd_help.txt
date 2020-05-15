@@ -14,6 +14,8 @@
     --------------------------------------------------- ------------------------------------------
     df -h                                               Print all mounted device
     lsblk                                               List block devices attached to your system (USB/DISK etc..)
+        lsblk -o name,mountpoint,label,size,uuid
+        lsblk -f
     fdisk -l                                            List partition table on all your block devices, a USB drive inclusive
     lsusb                                               List all the connected USB devices in Linux
     usb-devices                                         List Details of all USB devices in Linux
