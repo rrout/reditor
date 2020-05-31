@@ -5,7 +5,8 @@
     = PROCESS AND THREADS =
     --------------------------------------------------- ------------------------------------------
     ps -T -p <PID>                                      Print process thread info (reditor: ptask)
-    ps -To pid,ppid,tid,tgid,tty,time,pcpu,comm -p <PID>Print process thread info Vorbose ((reditor: ptask -v)
+    ps -To pid,ppid,tid,tgid,tty,time,pcpu,comm -p <PID>Print process thread info Verbose ((reditor: ptask -v)
+    ps -To pid,ppid,tid,tgid,pcpu,psr,comm -p <PID>     Print process CPU and CPU Core Info Verbose
     = TOP =
     --------------------------------------------------- ------------------------------------------
     top -n 1 -H -p  <PID>                               Print process thread info (reditor: rptop)
@@ -22,8 +23,19 @@
                                     - https://docs.kali.org/faq/how-do-i-tell-what-drive-path-my-usb-drive-is-on
                                     - https://simpleit.rocks/linux/detect-mount-usb-devices-in-linux-console-terminal/
                                     - https://linuxconfig.org/howto-mount-usb-drive-in-linux
-    scp <userid>@<host>:</absolutepath/file> <.|path>  Scp command to get file to destination
-    scp <file> <userid>@<host>:</absolutepath/file>    Scp command to send file to remote
+    --------------------------------------------------- ------------------------------------------
+    = SCP =
+    --------------------------------------------------- ------------------------------------------
+    scp <userid>@<host>:</absolutepath/file> <.|path>   Scp command to get file to destination
+    scp <file> <userid>@<host>:</absolutepath/file>     Scp command to send file to remote
+    --------------------------------------------------- ------------------------------------------
+    = LINUX ROUTING =
+    --------------------------------------------------- ------------------------------------------
+    route -n                                            Show Kernel Routes
+    ip addr add <1.1.1.1/24> dev <eth1>                 Add IP to an interface
+    ip addr del <1.1.1.1/24> dev <eth1>                 Delete an IPfrom an interface
+    ip route add 0.0.0.0/0 via 1.1.1.1                  Add a default Statis Route
+    ethtool <eth1>                                      Check interface properties viz. ethtool
     --------------------------------------------------- ------------------------------------------
     = Systenctl/Journalctl =
     --------------------------------------------------- ------------------------------------------

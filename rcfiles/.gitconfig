@@ -1,0 +1,40 @@
+[user]
+	email = rashmiranjan.rout@us.fujitsu.com
+	name = Rashmi Ranjan Rout
+[color]
+	ui = auto
+	interactive = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = blue bold    #yellow bold
+    frag = magenta      #magenta bold
+    old = red           #red bold
+    new = green         #green bold
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = red
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+	log = true
+[difftool]
+	prompt = true
+[core]
+	editor = vim
+[push]
+	default = simple
+[alias]
+	lsco = status -s
+    out = log @{u}..
+    #out = log --pretty=oneline --abbrev-commit --graph @{u}..
+    in = !git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}
+    lg = log --pretty=format:'%Cred%H%Creset%Creset - %C(yellow)%s%Creset %C(bold blue)<%aN>%Creset'
+	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit

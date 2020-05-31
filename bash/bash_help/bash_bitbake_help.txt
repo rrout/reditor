@@ -9,12 +9,15 @@
                             bitbake -g <package-name|recipe-name> && less task-depends.dot
     bitbake -g -u taskexp <recipe-or-image-name> Show dependency information in a graphical interface
                             bitbake -g <package-name|recipe-name> -u taskexp
-
-    
+    DISPLAY YOCTO VERSION
     head documentation/poky.ent Read Yocto Version
-    
+
     yocto-bsp     yocto-kernel  yocto-layer
     yocto-layer         Command to create a new Yocto layer
+    bitbake-layers <>   Command for Bitbake Layer inspection
+             add-layer    Add a new layer
+             show-recipes Show all recipe to be built
+             show-appends Show all append recipe for all recipes of the project
 
     LOCAL CONFIGURATIONS
     ------------------- ------------------------------------------------------------
