@@ -13,9 +13,6 @@
 
 # Make sure only root can run our script
 
-########
-export OSPL_URI=file:///etc/config/ospl.xml
-########
 
 if [ "$(id -u)" != "0" ]; then
    echo "This script must be run as root" 1>&2
