@@ -15,7 +15,7 @@ if [ $# == 0 ]; then
 fi
 
 if [ "$2" == "-v" ];then
-    ps -To pid,tid,tgid,tty,time,comm -p $1
+    ps -To pid,tid,tgid,tty,time,psr,comm -p $1
 else
     ps -T -p $1
 fi
