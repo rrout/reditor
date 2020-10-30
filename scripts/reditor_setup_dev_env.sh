@@ -164,7 +164,7 @@ fi
 
 
 
-echo -e "\nInstalled the reditor configurations configuration successfully! Enjoy :-)"
+echo -e "\nInstalled the reditor configuration successfully! Enjoy :-)"
 
 
 

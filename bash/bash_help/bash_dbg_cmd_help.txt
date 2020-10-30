@@ -20,5 +20,7 @@
                                     READ: https://www.linuxjournal.com/article/7330
     ldd
     readelf
+    stty -a                         stty command in Linux is used to change and print terminal line settings
+                                        #stty column 511
 
 

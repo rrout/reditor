@@ -54,4 +54,6 @@
     journalctl --disk-usage                             You can find out the amount of space that the journal
                                                         is currently occupying on disk by using the --disk-usage flag
     journalctl _PID=588                                 Show journal of a PID you get from systemctl status
+    journalctl --file <system.journal>                  Read the journal file saved on the disk
+    journalctl --file system.journal -u <unit>          Read the journal file saved on the disk per unit
 

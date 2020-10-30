@@ -23,3 +23,23 @@
         tcpdump 'src 10.0.2.4 and (dst port 3389 or 22)'
         tcpdump 'tcp[tcpflags] == tcp-syn'
         tcpdump 'ip[8] < 10' :- PACKETS WITH A TTL LESS THAN 10
+    ------------------------------------------ --------------------------------------------------------------------
+    tcpdump -i eth0                             Get the network packets from a single interface
+    tcpdump -i eth0 inbound                     Get the INBOUND network packets from a single interface
+    tcpdump -i eth0 outbound                    Get the OUTBOUND network packets from a single interface
+    tcpdump -i eth0 <-v|-vv|-vvv>               Get the network packets VERBOSE <more v is more verbose>
+    tcpdump -i eth0 <-X|-XX|-XXX>               Get the network packets HEX DUMP <more X is more verbose>
+    tcpdump -i eth1 -w <file>                   Write all the captured packets to a file, use the ‘-w’ option
+    tcpdump -r <file>                           Read an already created, old tcpdump file
+    tcpdump -ttttnnvvS                          Get more information regarding the packets along with readable timestamp
+    tcpdump net 192.168.1.0/24                  Get the packets for whole network 192.168.1.0/24
+    tcpdump host|src|dst 192.168.1.100          Get packets based on source or destination of an IP address
+    tcpdump ssh|icmp|ip6|arp                    Get the packets used based on the protocol
+    tcpdump <src|dst> port 22                   Get packets for a single port ot for a range of ports
+    tcpdump <src|dst> portrange 22-125          Get packets for a range of ports
+    tcpdump src 192.168.1.100 <&& | or> port 22 Using AND OR
+    tcpdump -i eth0 src port not 22             Using EXCEPT,<monitor all the traffic on eth0 but will not capture port 22>
+    tcpdump -D                                  Dump all interface where TCPDUMP will work <UP and RUNNING>
+
+    tcpdump -nei eth0 -vvv -XXX                 Good command to use
+

@@ -1,0 +1,52 @@
+    --------------------------------------------------- ------------------------------------------
+     = LINUX IF =
+    --------------------------------------------------- ------------------------------------------
+     ifconfig
+     ifconfig eth0 hw ether 02:01:02:03:04:08            Set MAC Address of interface
+     ifconfig eth0:0                                     Create at emporary virtual network interface <alias intf>
+    --------------------------------------------------- ------------------------------------------
+     = LINUX BRIDGE =
+    --------------------------------------------------- ------------------------------------------
+     brctl show                                          Show linux bridge details
+    --------------------------------------------------- ------------------------------------------
+     = LINUX IP COMMANDS =
+    --------------------------------------------------- ------------------------------------------
+     ip help                                             Help of ip command
+     ip link help                                        Help of "ip link" command
+     ip address help                                     Help of "ip addr" command
+     ip link show <intf>                                 Show Link
+     ip -d link show <intf>                              Show Detailed Link
+     ip link set eth0 address 02:01:02:03:04:08          Set MAC Address of interface
+     ip link add link eth0 name eth0.8 type vlan id 8    Create a vlan intf derived fron eth with vlan 8
+     ip link add veth0 type veth peer name veth1         Create VETH pair<veth veth1>Think of them as 2 ends of a pipe
+     ip link delete eth0.8                               Delete interface
+     ip addr show <intf>                                 Show interface ip binding
+     ip addr add <1.1.1.1/24> dev <eth1>                 Add IP to an interface
+     ip addr del <1.1.1.1/24> dev <eth1>                 Delete an IPfrom an interface
+    --------------------------------------------------- ------------------------------------------
+     = LINUX  =
+    --------------------------------------------------- ------------------------------------------
+     netstat / ss                                        A command-line tool that displays network connections,
+                                                         routing tables, and a number of network interface statistics.
+     fuser                                               A command line tool to identify processes using files or sockets.
+     lsof                                                A command line tool to list open files under Linux / UNIX to report
+                                                         a list of all open files and the processes that opened them.
+     /proc/$pid/                                         Under Linux /proc includes a directory for each running process
+                                                         (including kernel processes) at /proc/PID, containing information about
+                                                         that process, notably including the processes name that opened port.
+     netstat -i                                          Show a table of all network interfaces
+     arp < -a | -e| -n >                                 Show arp cache
+    --------------------------------------------------- ------------------------------------------
+     = LINUX TCP/UDP PORT =
+    --------------------------------------------------- ------------------------------------------
+    netstat -tulpn                                       List all tcp PORT state/usage <Print Process name using PORT>
+    lsof -i                                              List all tcp PORT state/usage <Print Process name using PORT>
+    lsof -i <:80|tcp:80|udp:80>                          List of "lsof" command option
+    --------------------------------------------------- ------------------------------------------
+     = LINUX ROUTING =
+    --------------------------------------------------- ------------------------------------------
+     route -n                                            Show Kernel Routes
+     ip route show                                       Show Kernel Routes
+     ip route add 0.0.0.0/0 via 1.1.1.1                  Add a default Statis Route
+     ethtool <eth1>                                      Check interface properties viz. ethtool
+     --------------------------------------------------- ------------------------------------------

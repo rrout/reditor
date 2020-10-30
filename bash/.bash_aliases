@@ -1194,3 +1194,9 @@ function h_rdebug() {
 function h_alias() {
     cat ${HOME}/reditor/bash/bash_help/bash_alias_help.txt
 }
+function h_net() {
+    cat ${HOME}/reditor/bash/bash_help/bash_net_cmd_help.txt
+}
+
+
+

@@ -31,4 +31,10 @@
 
 
 
-
+Attach gdb to a process
+        #gdb <Binary absloute path> <Process PID>
+        #gdb <Binary absloute path>
+            gdb)attach --pid <Process PID>
+        #gdb --pid <Process PID>
+Attach gdb to a core
+        #gdb <Binary absloute path> <Absloute path of core file>
