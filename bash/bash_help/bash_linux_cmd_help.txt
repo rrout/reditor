@@ -23,6 +23,8 @@
                                     - https://docs.kali.org/faq/how-do-i-tell-what-drive-path-my-usb-drive-is-on
                                     - https://simpleit.rocks/linux/detect-mount-usb-devices-in-linux-console-terminal/
                                     - https://linuxconfig.org/howto-mount-usb-drive-in-linux
+    lspci                                               List PCI devices and PCI endpoint
+    lspci -k                                            List PCI devices and List Kernel driver for each pci devices
     --------------------------------------------------- ------------------------------------------
     = SCP =
     --------------------------------------------------- ------------------------------------------

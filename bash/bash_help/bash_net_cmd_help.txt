@@ -16,6 +16,8 @@
      ip address help                                     Help of "ip addr" command
      ip link show <intf>                                 Show Link
      ip -d link show <intf>                              Show Detailed Link
+     ip -s link show <intf>                              Show Link statistics
+     ip -d -s link show <intf>                           Show Detailed Link And Statistics
      ip link set eth0 address 02:01:02:03:04:08          Set MAC Address of interface
      ip link add link eth0 name eth0.8 type vlan id 8    Create a vlan intf derived fron eth with vlan 8
      ip link add veth0 type veth peer name veth1         Create VETH pair<veth veth1>Think of them as 2 ends of a pipe
@@ -23,6 +25,10 @@
      ip addr show <intf>                                 Show interface ip binding
      ip addr add <1.1.1.1/24> dev <eth1>                 Add IP to an interface
      ip addr del <1.1.1.1/24> dev <eth1>                 Delete an IPfrom an interface
+     ip -6 addr show <intf>                              Show IPv6 address
+     ip -6 addr <add|del> 2001:5c0:9168::2/64 dev <eth1> Add IPv6 to an interface
+     ip -f inet6 addr add 2001:5c0:9168::2/64 dev eth0   Add IPv6 address
+
     --------------------------------------------------- ------------------------------------------
      = LINUX  =
     --------------------------------------------------- ------------------------------------------
@@ -36,6 +42,7 @@
                                                          that process, notably including the processes name that opened port.
      netstat -i                                          Show a table of all network interfaces
      arp < -a | -e| -n >                                 Show arp cache
+     ls -l /sys/class/net/ | grep -v virtual             Shows the PHYSICAL interfaces only
     --------------------------------------------------- ------------------------------------------
      = LINUX TCP/UDP PORT =
     --------------------------------------------------- ------------------------------------------
@@ -47,6 +54,15 @@
     --------------------------------------------------- ------------------------------------------
      route -n                                            Show Kernel Routes
      ip route show                                       Show Kernel Routes
-     ip route add 0.0.0.0/0 via 1.1.1.1                  Add a default Statis Route
+     ip route add default <via 1.1.1.1> <dev eth0>       Add a default route
+     ip route add 0.0.0.0/0 via 1.1.1.1                  Add a default Statis Route with NH address []
+     ip route add 0.0.0.0/0 dev eth4                     Add a default Statis Route with NH interface
+     ip route add 1.1.1.1/24 viz 1.1.1.2                 Add a Route with NH address [Same Subnet]
+     ip route del 0.0.0.0/0 via 1.1.1.1                  Delete Route with NH/Gateway Address
+     ip route del 0.0.0.0/0 dev eth4                     Delete Route with NH/Gateway Interface
+     ip route get to 11.1..12.12                         Get the route for an ip address
+     ip -6 route get to ::1                              Get IPv6 route for an IPv6 address
+     ip <-6> neigh show [dev <device>]                   Show IP neighbours
+     ip neigh show                                       Show ARP and ND info
      ethtool <eth1>                                      Check interface properties viz. ethtool
      --------------------------------------------------- ------------------------------------------

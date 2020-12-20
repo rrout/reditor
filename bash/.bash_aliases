@@ -917,6 +917,14 @@ elif [ "$BASH_ORG_SETTINGS" == "fnc" ];then
 source ${HOME}/reditor/bash/.bashrc_custom_profile_user_fnc
 fi
 
+if [ "$BASH_DEBUG_SETTINGS" == "yes" ];then echo "Setting Vim color scheme ........"; fi
+export VIMCOLOR=LIGHT
+if [ ! -z $STY ];then
+    export VIMCOLOR=DARK
+elif [ "$TERM_PROGRAM" == "vscode" ];then
+    export VIMCOLOR=DARK
+fi
+
 function h_tmux()
 {
     echo "usage"

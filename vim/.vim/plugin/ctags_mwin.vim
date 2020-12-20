@@ -114,6 +114,8 @@ function! ExecCscopeCmd(option,var)
 
     if l:results != ''
         call OpenTag("SEARCH_CSCOPE", a:var, s:results )
+        "call OpenTag(a:var, a:option, s:results )
+        "call OpenTag(a:var, "SEARCH_CSCOPE", s:results )
     else
         echom 'No matches for "'.a:var.'"'
     endif

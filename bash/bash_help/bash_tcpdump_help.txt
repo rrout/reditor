@@ -29,6 +29,7 @@
     tcpdump -i eth0 outbound                    Get the OUTBOUND network packets from a single interface
     tcpdump -i eth0 <-v|-vv|-vvv>               Get the network packets VERBOSE <more v is more verbose>
     tcpdump -i eth0 <-X|-XX|-XXX>               Get the network packets HEX DUMP <more X is more verbose>
+    tcpdump -i eth0 -e                          Get Link level info such as VLAN Header and Ethertype [ -e option ]
     tcpdump -i eth1 -w <file>                   Write all the captured packets to a file, use the ‘-w’ option
     tcpdump -r <file>                           Read an already created, old tcpdump file
     tcpdump -ttttnnvvS                          Get more information regarding the packets along with readable timestamp
