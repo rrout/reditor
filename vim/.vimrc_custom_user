@@ -98,3 +98,14 @@ let g:airline_section_n = '%{hostname()}'
 "let g:airline_extensions = ['tabline', 'tagbar', 'fugitiveline']
 "au VimEnter * AirlineRefresh
 
+
+"CLANG VIM SETTINGS
+let g:clang_close_preview = 1
+let g:clang_verbose_pmenu = 1
+let g:clang_diagsopt = ""
+let g:clang_c_completeopt = 'longest,menuone,preview'
+
+"AutoComplPop Settings
+"https://stackoverflow.com/questions/14824351/making-autocomplpop-search-entire-project-or-open-buffers
+"https://stackoverflow.com/questions/741542/show-function-parameters-in-vim
+let g:acp_behaviorKeywordCommand = "\<C-x>\<C-o>"

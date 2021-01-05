@@ -10,5 +10,6 @@ git clone git://github.com/ntpeters/vim-better-whitespace.git
 git clone https://github.com/mhinz/vim-signify.git
 git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/vim-airline/vim-airline.git
+#git clone https://github.com/justmao945/vim-clang.git
 git clone git://github.com/airblade/vim-gitgutter.git
 
