@@ -98,14 +98,48 @@ let g:airline_section_n = '%{hostname()}'
 "let g:airline_extensions = ['tabline', 'tagbar', 'fugitiveline']
 "au VimEnter * AirlineRefresh
 
-
 "CLANG VIM SETTINGS
-let g:clang_close_preview = 1
-let g:clang_verbose_pmenu = 1
-let g:clang_diagsopt = ""
-let g:clang_c_completeopt = 'longest,menuone,preview'
+let g:clang_auto = 0 "Disable vim-clang at init
 
 "AutoComplPop Settings
+let g:acp_enableAtStartup = 1
+let g:acp_ignorecaseOption = 0
+let g:acp_behaviorKeywordCommand = "\<C-x>\<C-o>"
+
+"https://vim.fandom.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+":inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 "https://stackoverflow.com/questions/14824351/making-autocomplpop-search-entire-project-or-open-buffers
 "https://stackoverflow.com/questions/741542/show-function-parameters-in-vim
-let g:acp_behaviorKeywordCommand = "\<C-x>\<C-o>"
+"let g:acp_behaviorKeywordCommand = "\<C-x>\<C-o>"
+"https://vi.stackexchange.com/questions/7599/how-to-set-commands-for-unrecognised-file-type
+"set shortmess+=c   " Shut off completion messages
+function! SetACPBehavior()
+  let l:filetype = &filetype
+  if l:filetype == 'c' || l:filetype == 'cpp'
+    "Enable vim-clang and its Settings
+    let g:clang_auto = 1
+    let g:clang_close_preview = 1
+    let g:clang_verbose_pmenu = 1
+    let g:clang_diagsopt = ""
+    let g:clang_c_completeopt = 'longest,menuone,preview'
+
+    "Enable ACP settings
+    let g:acp_enableAtStartup = 1
+    let g:acp_ignorecaseOption = 0
+    let g:acp_behaviorKeywordCommand = "\<C-x>\<C-o>"
+    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    "https://unix.stackexchange.com/questions/162528/select-an-item-in-vim-autocomplete-list-without-inserting-line-break
+    "inoremap <expr> <Tab> pumvisible() ? "\<C-x>\<C-u>" : "\<CR>"
+    "inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+    inoremap <expr> <Tab> pumvisible() ? "\<C-e>"
+  else
+    let g:acp_behaviorKeywordCommand = "\<C-n>"
+    :AcpDisable
+  endif
+endfunction
+autocmd FileType * call SetACPBehavior()
+":autocmd FileType c let g:acp_behaviorKeywordCommand = "\<C-x>\<C-o>"
+"autocmd FileType cpp let g:acp_behaviorKeywordCommand = "\<C-x>\<C-u>"
+"au BufNewFile,BufRead *.c,*.h,*,hh,*.cc,*.cpp,*.hpp call SetACPBehavior()
+
