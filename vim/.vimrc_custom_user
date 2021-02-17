@@ -117,6 +117,7 @@ let g:acp_behaviorKeywordCommand = "\<C-x>\<C-o>"
 function! SetACPBehavior()
   let l:filetype = &filetype
   if l:filetype == 'c' || l:filetype == 'cpp'
+    "echo "Enable vim-clang and AutoCompletePop settings"
     "Enable vim-clang and its Settings
     let g:clang_auto = 1
     let g:clang_close_preview = 1
@@ -135,10 +136,12 @@ function! SetACPBehavior()
     inoremap <expr> <Tab> pumvisible() ? "\<C-e>"
   else
     let g:acp_behaviorKeywordCommand = "\<C-n>"
+    "echo "Disable AutoCompletePop"
     :AcpDisable
   endif
 endfunction
 autocmd FileType * call SetACPBehavior()
+autocmd BufNewFile,BufRead * call SetACPBehavior()
 ":autocmd FileType c let g:acp_behaviorKeywordCommand = "\<C-x>\<C-o>"
 "autocmd FileType cpp let g:acp_behaviorKeywordCommand = "\<C-x>\<C-u>"
 "au BufNewFile,BufRead *.c,*.h,*,hh,*.cc,*.cpp,*.hpp call SetACPBehavior()

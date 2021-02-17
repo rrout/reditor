@@ -4,13 +4,17 @@ HN=`hostname`
 DN=`/usr/bin/domainname`
 
 PROG=`basename "$0"`
+
+VSCODEINSTALLPATH="/data/users/rrout/VSCODE/"
+
 function usage {
-    echo "Usage : $PROG -option < -vnc | -novnc | -wetty | -jupyter | -all >"
+    echo "Usage : $PROG -option < -vnc | -novnc | -wetty | -jupyter | -vscodeserver | -all >"
     echo "Example"
     echo "        : $PROG -vnc"
     echo "        : $PROG -wetty"
     echo "        : $PROG -jupyter"
     echo "        : $PROG -novnc"
+    echo "        : $PROG -vscodeserver"
     echo "        : $PROG -all (This excludes -vnc)"
 }
 
@@ -21,7 +25,7 @@ if [ $# != 1 ]; then
 fi
 
 if [ "$1" == "-vnc" ] || [ "$1" == "-wetty" ] || [ "$1" == "-novnc" ] ||
-    [ "$1" == "-jupyter" ]  || [ "$1" == "-all" ]; then
+    [ "$1" == "-jupyter" ] || [ "$1" ==  "-vscodeserver" ] || [ "$1" == "-all" ]; then
     echo $1
 else
     echo "Unknown option --- $1"
@@ -161,6 +165,29 @@ cat<<EOF
 EOF
     fi
 fi
+
+if [ "$1" == "-vscodeserver" ] || [ "$1" == "-all" ];then
+    echo -e "\n=====> Checking VscodeServer In path ${HOME}"
+    if [ -d ${VSCODEINSTALLPATH}/VSCODE/code-server-3.8.0-linux-amd64 ]; then
+        echo 'VscodeServer Doesnt Exist.' >&2
+        cd ${VSCODEINSTALLPATH}/VSCODE/code-server-3.8.0-linux-amd64
+        echo 'Starting VscodeServer......' >&2
+        ./code-server &
+        echo -e "\n=====> VscodeServer is Started: You can log in to: http://$HN.$DN:6085" >&2
+    else
+cat<<EOF
+    Install VscodeServer
+        cd ${VSCODEINSTALLPATH}
+        wget https://github.com/cdr/code-server/releases/download/v3.8.0/code-server-3.8.0-linux-amd64.tar.gz
+        tar -xvzf code-server-3.8.0-linux-amd64.tar.gz
+        cd ${VSCODEINSTALLPATH}/VSCODE/code-server-3.8.0-linux-amd64
+
+    Start Vscode Server
+        ./code-server &
+EOF
+    fi
+fi
+
 
 
 
