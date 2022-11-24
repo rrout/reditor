@@ -8,7 +8,7 @@ mkdir -p ~/.vim/backup
 mkdir -p ~/.vim/tmp
 mkdir -p ~/.vim/syntax
 
-cp ~/.vim/syntax/c.vim ~/.vim/syntax/c.vim.bkp
+[[ -e ~/.vim/syntax/c.vim ]] && cp ~/.vim/syntax/c.vim ~/.vim/syntax/c.vim.bkp
 cp -r ~/reditor/vim/.vim/syntax/c.vim ~/.vim/syntax/c.vim
 
 echo 'set runtimepath+=~/reditor/vim/.vim

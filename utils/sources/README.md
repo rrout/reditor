@@ -14,7 +14,7 @@ Step 2:
 
 Step 3:
     Download the sources
-        Note : this will Download and extrace sources to the Directory written in "DownloadUrlList.txt"
+        Note : this will Download and extract sources to the Directory written in "DownloadUrlList.txt"
 
     Usage : install.sh option < -get | -del | -install | -uninstall | -clean>
 
