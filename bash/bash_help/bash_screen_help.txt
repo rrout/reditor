@@ -13,6 +13,11 @@
     C-a z       Suspend Session
     C-a H       Log screen Sessions
     C-a A       Rename windows title
+    C-a ESC     Enter copy mode
+    ESC         Exit copy mode
+    C-a [       Enter copy mode
+    SPACE       Select copy using Up/Down arrow. Press SPACE again to select
+    C-a ]       Paste buffer in another screen
     Ctrl+a ”    List all sessions
     Ctrl+a 0    Switch to session number 0
     Ctrl+a n    Switch to next session
