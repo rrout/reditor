@@ -613,7 +613,7 @@ function! SelectTag()
         return 
     endif
     let tag = GetStackTopTag()
-    let words = split(getline("."), '[\t|]')
+    let words = split(getline("."), '[\t|:]')
 	if len(words) < 2
 		return 
 	endif

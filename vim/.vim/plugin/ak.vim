@@ -20,7 +20,11 @@ function! GtagsAckSearch()
 		return 
 	endif
 	"echoerr "[".l:input. "]"
-	call ak#GtagsAck( 'ack', l:input)
+    "Rashmi
+    if !executable(g:akprg)
+        echoe "Ack Program '" . g:akprg . "' was not found. Check as this come from as veriable g:akprg from VIMRC"
+    endif
+	call ak#GtagsAck( g:akprg, l:input)
 endfunction
 
 if !exists('gtags_cmd_open_ak_search')

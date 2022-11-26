@@ -25,8 +25,12 @@ endif
 
 let g:gtags_cmd_open_ak_search      = '<C-Y><C-Y>'
 
+if executable('ack')
+    let g:akprg="ack"
+else
+    let g:akprg=$HOME."/reditor/utils/bin/ack-grep"
+endif
 
-let g:akprg="/usr/bin/ack --column"
 let g:signify_vcs_list = [ 'git', 'hg' ]
 
 let g:Gtags_OpenQuickfixWindow = 1

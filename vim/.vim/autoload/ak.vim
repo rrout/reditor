@@ -60,9 +60,9 @@ function! ak#AckBuffer(cmd, args)
 endfunction
 
 function! ak#GtagsAck(cmd, args)
-	    "echoe "Ack command rashmi"
-	call ak#Ack(a:cmd . " --column --nogroup --noheading ", a:args)
-		"echoe " ". a:cmd ." ".a:args.""
+	"echoe "Ack command rashmi"
+	call ak#Ack(a:cmd . " --nocolumn --nogroup --noheading ", a:args)
+	"echoe " ". a:cmd ." ".a:args.""
 endfunc
 
 function! ak#Ack(cmd, args)
